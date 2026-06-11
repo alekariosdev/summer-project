@@ -1,0 +1,153 @@
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  strapi-network:
+    driver: bridge
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  mysql-data:
+    driver: local
+  strapi-uploads:
+    driver: local
+
+# =============================================================================
+# Shared Strapi environment block
+# =============================================================================
+x-strapi-env: &strapi-env
+  env_file: .env
+  environment:
+    # --- Database ---
+    DATABASE_CLIENT: ${DATABASE_CLIENT}
+    DATABASE_HOST: mysql
+    DATABASE_PORT: ${DATABASE_PORT}
+    DATABASE_NAME: ${DATABASE_NAME}
+    DATABASE_USERNAME: ${DATABASE_USERNAME}
+    DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    # --- Database Pool ---
+    DATABASE_POOL_MIN: ${DATABASE_POOL_MIN}
+    DATABASE_POOL_MAX: ${DATABASE_POOL_MAX}
+    # --- Database Misc ---
+    DATABASE_CONNECTION_TIMEOUT: ${DATABASE_CONNECTION_TIMEOUT}
+    # --- Strapi Secrets ---
+    APP_KEYS: ${APP_KEYS}
+    API_TOKEN_SALT: ${API_TOKEN_SALT}
+    ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+    JWT_SECRET: ${JWT_SECRET}
+
+
+# =============================================================================
+# Services
+# =============================================================================
+services:
+
+  # ---------------------------------------------------------------------------
+  # MySQL Database Service
+  # ---------------------------------------------------------------------------
+  mysql:
+    image: mysql:latest
+    container_name: strapi_mysql
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USERNAME}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - strapi-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${DATABASE_ROOT_PASSWORD}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ---------------------------------------------------------------------------
+  # Strapi CMS - Development
+  # ---------------------------------------------------------------------------
+  strapi-dev:
+    build:
+      context: ./cms-api
+      dockerfile: Dockerfile
+      target: development                   # Target the dev stage
+    container_name: strapi_dev
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: development
+      DATABASE_CLIENT: mysql
+      DATABASE_HOST: mysql                  # Service name as host
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./cms-api:/opt/app            # Mount source for hot-reload
+      - /opt/app/node_modules         # Prevent host node_modules override
+      - strapi-uploads:/opt/app/public/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy    # Wait for DB to be ready
+    networks:
+      - strapi-network
+    profiles:
+      - dev                           # Only starts with --profile dev
+
+# ---------------------------------------------------------------------------
+  # Strapi CMS - Production
+  # ---------------------------------------------------------------------------
+  strapi-prod:
+    build:
+      context: ./cms-api
+      dockerfile: Dockerfile
+      target: production                    # Target the prod stage
+    container_name: strapi_prod
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      DATABASE_CLIENT: mysql
+      DATABASE_HOST: mysql
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+    ports:
+      - "1337:1337"
+    volumes:
+      - strapi-uploads:/opt/app/public/uploads   # Persist uploads only
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - strapi-network
+    profiles:
+      - prod                          # Only starts with --profile prod
