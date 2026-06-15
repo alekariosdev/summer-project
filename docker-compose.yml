@@ -20,6 +20,11 @@ volumes:
 x-strapi-env: &strapi-env
   env_file: .env
   environment:
+    # --- Node Environment ---
+    NODE_ENV: ${NODE_ENV}
+    # --- Strapi Server ---
+    HOST: ${STRAPI_HOST}
+    PORT: ${STRAPI_PORT}
     # --- Database ---
     DATABASE_CLIENT: ${DATABASE_CLIENT}
     DATABASE_HOST: mysql
@@ -38,6 +43,24 @@ x-strapi-env: &strapi-env
     ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
     JWT_SECRET: ${JWT_SECRET}
 
+# =============================================================================
+# Shared Frontend environment block
+# =============================================================================
+x-front-env: &front-env
+  env_file: .env
+  environment:
+    # --- Node Environment ---
+    NODE_ENV: ${NODE_ENV}
+    # --- Frontend Server ---
+    HOST: ${FRONTEND_HOST}
+    PORT: ${FRONTEND_PORT}
+    # --- Strapi connection (server-side, container-to-container) ---
+    STRAPI_INTERNAL_URL: ${STRAPI_INTERNAL_URL}
+    # --- Public vars (exposed to the browser) ---
+    NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
+    NEXT_PUBLIC_STRAPI_API_TOKEN: ${NEXT_PUBLIC_STRAPI_API_TOKEN}
+    # --- App config ---
+    NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
 
 # =============================================================================
 # Services
@@ -90,19 +113,7 @@ services:
       target: development                   # Target the dev stage
     container_name: strapi_dev
     restart: unless-stopped
-    env_file: .env
-    environment:
-      NODE_ENV: development
-      DATABASE_CLIENT: mysql
-      DATABASE_HOST: mysql                  # Service name as host
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      APP_KEYS: ${APP_KEYS}
-      API_TOKEN_SALT: ${API_TOKEN_SALT}
+    <<: *strapi-env
     ports:
       - "1337:1337"
     volumes:
@@ -117,7 +128,7 @@ services:
     profiles:
       - dev                           # Only starts with --profile dev
 
-# ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
   # Strapi CMS - Production
   # ---------------------------------------------------------------------------
   strapi-prod:
@@ -127,19 +138,7 @@ services:
       target: production                    # Target the prod stage
     container_name: strapi_prod
     restart: unless-stopped
-    env_file: .env
-    environment:
-      NODE_ENV: production
-      DATABASE_CLIENT: mysql
-      DATABASE_HOST: mysql
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET}
-      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      APP_KEYS: ${APP_KEYS}
-      API_TOKEN_SALT: ${API_TOKEN_SALT}
+    <<: *strapi-env
     ports:
       - "1337:1337"
     volumes:
@@ -147,6 +146,55 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    networks:
+      - strapi-network
+    profiles:
+      - prod                          # Only starts with --profile prod
+
+# ---------------------------------------------------------------------------
+  # Frontend - Development
+  # ---------------------------------------------------------------------------
+  front-dev:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      target: development                   # Target the dev stage
+    container_name: front_dev
+    restart: unless-stopped
+    <<: *front-env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/opt/app              # Mount source for hot-reload
+      - /opt/app/node_modules         # Prevent host node_modules override
+      - /opt/app/.next                # Keep build cache inside container
+    depends_on:
+      - strapi-dev
+    networks:
+      - strapi-network
+    profiles:
+      - dev                           # Only starts with --profile dev
+
+  # ---------------------------------------------------------------------------
+  # Frontend - Production
+  # ---------------------------------------------------------------------------
+  front-prod:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      target: production                    # Target the prod stage
+      args:
+        # NEXT_PUBLIC_* are inlined at BUILD time, so they must be passed here too
+        NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
+        NEXT_PUBLIC_STRAPI_API_TOKEN: ${NEXT_PUBLIC_STRAPI_API_TOKEN}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+    container_name: front_prod
+    restart: unless-stopped
+    <<: *front-env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - strapi-prod
     networks:
       - strapi-network
     profiles:
