@@ -21,6 +21,8 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/app
 
 COPY package.json package-lock.json ./
+COPY scripts ./scripts
+COPY patches ./patches
 
 # =============================================================================
 # Development Stage
@@ -68,8 +70,10 @@ ENV NODE_ENV=production
 
 WORKDIR /opt/app
 
-# Copy package files
+# Copy package files and postinstall assets
 COPY package.json package-lock.json ./
+COPY scripts ./scripts
+COPY patches ./patches
 
 # Install only production dependencies
 RUN npm install --omit=dev

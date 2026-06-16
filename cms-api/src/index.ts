@@ -10,17 +10,17 @@ export default {
       async beforeCreate(event) {
         const { data } = event.params;
         const email = (data.email || '').toLowerCase();
-        const domain = email.split('@')[1];
+        // const domain = email.split('@')[1];
 
-        const ALLOWED_DOMAINS = ['yourcompany.com'];
+        // const ALLOWED_DOMAINS = ['yourcompany.com'];
 
-        if (!ALLOWED_DOMAINS.includes(domain)) {
-          throw new Error(`Domain not allowed: ${domain}`);
-        }
+        // if (!ALLOWED_DOMAINS.includes(domain)) {
+        //   throw new Error(`Domain not allowed: ${domain}`);
+        // }
 
         data.confirmed = true;
-        data.provider   = data.provider || 'microsoft';
-        data.username   = data.username || email;
+        data.provider = data.provider || 'microsoft';
+        data.username = data.username || email;
       },
     });
   },
@@ -39,13 +39,13 @@ export default {
 
     grantConfig.microsoft = {
       ...(grantConfig.microsoft || {}),
-      enabled:       true,
-      key:           process.env.MICROSOFT_CLIENT_ID,
-      secret:        process.env.MICROSOFT_CLIENT_SECRET,
-      callback:      `${process.env.STRAPI_URL}/api/auth/microsoft/callback`,
-      scope:         ['openid', 'profile', 'email', 'User.Read'],
+      enabled: true,
+      key: process.env.MICROSOFT_CLIENT_ID,
+      secret: process.env.MICROSOFT_CLIENT_SECRET,
+      callback: `${process.env.STRAPI_URL}/api/auth/microsoft/callback`,
+      scope: ['openid', 'profile', 'email', 'User.Read'],
       authorize_url: `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize`,
-      access_url:    `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
+      access_url: `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
     };
 
     await pluginStore.set({ value: grantConfig });
