@@ -1,22 +1,16 @@
-import { cookies }      from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
-  const { jwt } = await req.json();
-  if (!jwt) return NextResponse.json({ error: 'No JWT' }, { status: 400 });
+const COOKIE_NAME = 'session_token';
 
-  (await cookies()).set('strapi_jwt', jwt, {
+export async function DELETE(): Promise<NextResponse> {
+  const response = NextResponse.json({ success: true });
+  response.cookies.set(COOKIE_NAME, '', {
     httpOnly: true,
-    secure:   process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    path:     '/',
-    maxAge:   60 * 60 * 24 * 7,
+    maxAge: 0,
+    expires: new Date(0),
+    path: '/',
   });
-
-  return NextResponse.json({ ok: true });
-}
-
-export async function DELETE() {
-  (await cookies()).delete('strapi_jwt');
-  return NextResponse.json({ ok: true });
+  return response;
 }

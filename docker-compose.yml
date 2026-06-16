@@ -55,6 +55,7 @@ x-front-env: &front-env
     HOST: ${FRONTEND_HOST}
     PORT: ${FRONTEND_PORT}
     # --- Strapi connection (server-side, container-to-container) ---
+    STRAPI_URL: ${STRAPI_URL}
     STRAPI_INTERNAL_URL: ${STRAPI_INTERNAL_URL}
     # --- Public vars (exposed to the browser) ---
     NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
@@ -66,7 +67,6 @@ x-front-env: &front-env
 # Services
 # =============================================================================
 services:
-
   # ---------------------------------------------------------------------------
   # MySQL Database Service
   # ---------------------------------------------------------------------------
@@ -81,7 +81,7 @@ services:
       MYSQL_USER: ${DATABASE_USERNAME}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -89,14 +89,14 @@ services:
     healthcheck:
       test:
         [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p${DATABASE_ROOT_PASSWORD}",
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '-h',
+          'localhost',
+          '-u',
+          'root',
+          '-p${DATABASE_ROOT_PASSWORD}',
         ]
       interval: 10s
       timeout: 5s
@@ -110,23 +110,23 @@ services:
     build:
       context: ./cms-api
       dockerfile: Dockerfile
-      target: development                   # Target the dev stage
+      target: development # Target the dev stage
     container_name: strapi_dev
     restart: unless-stopped
     <<: *strapi-env
     ports:
-      - "1337:1337"
+      - '1337:1337'
     volumes:
-      - ./cms-api:/opt/app            # Mount source for hot-reload
-      - /opt/app/node_modules         # Prevent host node_modules override
+      - ./cms-api:/opt/app # Mount source for hot-reload
+      - /opt/app/node_modules # Prevent host node_modules override
       - strapi-uploads:/opt/app/public/uploads
     depends_on:
       mysql:
-        condition: service_healthy    # Wait for DB to be ready
+        condition: service_healthy # Wait for DB to be ready
     networks:
       - strapi-network
     profiles:
-      - dev                           # Only starts with --profile dev
+      - dev # Only starts with --profile dev
 
   # ---------------------------------------------------------------------------
   # Strapi CMS - Production
@@ -135,45 +135,45 @@ services:
     build:
       context: ./cms-api
       dockerfile: Dockerfile
-      target: production                    # Target the prod stage
+      target: production # Target the prod stage
     container_name: strapi_prod
     restart: unless-stopped
     <<: *strapi-env
     ports:
-      - "1337:1337"
+      - '1337:1337'
     volumes:
-      - strapi-uploads:/opt/app/public/uploads   # Persist uploads only
+      - strapi-uploads:/opt/app/public/uploads # Persist uploads only
     depends_on:
       mysql:
         condition: service_healthy
     networks:
       - strapi-network
     profiles:
-      - prod                          # Only starts with --profile prod
+      - prod # Only starts with --profile prod
 
-# ---------------------------------------------------------------------------
+  # ---------------------------------------------------------------------------
   # Frontend - Development
   # ---------------------------------------------------------------------------
   front-dev:
     build:
       context: ./front
       dockerfile: Dockerfile
-      target: development                   # Target the dev stage
+      target: development # Target the dev stage
     container_name: front_dev
     restart: unless-stopped
     <<: *front-env
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
-      - ./front:/opt/app              # Mount source for hot-reload
-      - /opt/app/node_modules         # Prevent host node_modules override
-      - /opt/app/.next                # Keep build cache inside container
+      - ./front:/opt/app # Mount source for hot-reload
+      - /opt/app/node_modules # Prevent host node_modules override
+      - /opt/app/.next # Keep build cache inside container
     depends_on:
       - strapi-dev
     networks:
       - strapi-network
     profiles:
-      - dev                           # Only starts with --profile dev
+      - dev # Only starts with --profile dev
 
   # ---------------------------------------------------------------------------
   # Frontend - Production
@@ -182,7 +182,7 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
-      target: production                    # Target the prod stage
+      target: production # Target the prod stage
       args:
         # NEXT_PUBLIC_* are inlined at BUILD time, so they must be passed here too
         NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
@@ -192,10 +192,10 @@ services:
     restart: unless-stopped
     <<: *front-env
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - strapi-prod
     networks:
       - strapi-network
     profiles:
-      - prod                          # Only starts with --profile prod
+      - prod # Only starts with --profile prod

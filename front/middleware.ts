@@ -1,57 +1,80 @@
-import createMiddleware from 'next-intl/middleware';
-import { NextRequest, NextResponse } from 'next/server';
-import { routing } from './i18n/routing';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { jwtVerify } from 'jose';
+import createIntlMiddleware from 'next-intl/middleware';
+import { routing } from '@/i18n/routing';
 
-const intlMiddleware = createMiddleware(routing);
+const COOKIE_NAME = 'session_token';
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
-const PUBLIC_PATHS = ['/login', '/connect'];
+// Logical (locale-stripped) public paths
+const PUBLIC_PATHS = new Set<string>(['/login']);
 
-function getPathnameWithoutLocale(pathname: string): string {
-  for (const locale of routing.locales) {
-    if (pathname === `/${locale}`) return '/';
-    if (pathname.startsWith(`/${locale}/`)) {
-      return pathname.slice(locale.length + 1);
-    }
+const intlMiddleware = createIntlMiddleware(routing);
+
+// ── JWT verification at the edge ────────────────────────────────────────────
+async function isValidToken(token: string): Promise<boolean> {
+  try {
+    await jwtVerify(token, JWT_SECRET);
+    return true;
+  } catch {
+    return false;
   }
-
-  return pathname;
 }
 
-function getLocaleFromPathname(pathname: string): string {
-  for (const locale of routing.locales) {
-    if (pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)) {
-      return locale;
-    }
-  }
+// ── Split "/de/dashboard" → { locale: 'de', rest: '/dashboard' } ────────────
+function splitLocale(pathname: string): { locale: string; rest: string } {
+  const segments = pathname.split('/');
+  const first = segments[1];
 
-  return routing.defaultLocale;
+  if (routing.locales.includes(first as never)) {
+    const rest = '/' + segments.slice(2).join('/');
+    return { locale: first, rest: rest === '/' ? '/' : rest.replace(/\/$/, '') };
+  }
+  return { locale: routing.defaultLocale, rest: pathname };
 }
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-  const pathnameWithoutLocale = getPathnameWithoutLocale(pathname);
-  const locale = getLocaleFromPathname(pathname);
+// ── Rebuild a path WITH the correct locale prefix ──────────────────────────
+// (default locale has no prefix because localePrefix = 'as-needed')
+function withLocale(locale: string, path: string): string {
+  return locale === routing.defaultLocale ? path : `/${locale}${path}`;
+}
 
-  const isPublic = PUBLIC_PATHS.some((path) =>
-    pathnameWithoutLocale.startsWith(path),
-  );
+export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get(COOKIE_NAME)?.value;
 
-  if (!isPublic) {
-    const jwt = req.cookies.get('strapi_jwt')?.value;
+  const { locale, rest } = splitLocale(pathname);
 
-    if (!jwt) {
-      const loginUrl = new URL(`/${locale}/login`, req.url);
-      return NextResponse.redirect(loginUrl);
+  // ── PUBLIC: /login (any locale) ──────────────────────────────────────────
+  if (PUBLIC_PATHS.has(rest)) {
+    // Already authenticated → bounce to dashboard (same locale)
+    if (token && (await isValidToken(token))) {
+      const url = request.nextUrl.clone();
+      url.pathname = withLocale(locale, '/');
+      return NextResponse.redirect(url);
     }
+
+    // Let next-intl handle locale; clear stale cookie if present
+    const res = intlMiddleware(request);
+    if (token) res.cookies.delete(COOKIE_NAME);
+    return res;
   }
 
-  return intlMiddleware(req);
+  // ── PROTECTED: everything else ───────────────────────────────────────────
+  if (!token || !(await isValidToken(token))) {
+    const url = request.nextUrl.clone();
+    url.pathname = withLocale(locale, '/login');
+    const res = NextResponse.redirect(url);
+    res.cookies.delete(COOKIE_NAME);
+    return res;
+  }
+
+  // Authenticated → hand off to next-intl for locale finalization
+  return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: [
-    '/',
-    '/(el|en)/:path*',
-    '/((?!_next/static|_next/image|favicon.ico|api/|.*\\..*).*)',
-  ],
+  // Run on pages only — exclude /api, Next internals, and files with extensions.
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 };
