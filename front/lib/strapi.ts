@@ -5,6 +5,7 @@ export async function getJwt() {
 }
 
 export async function getCurrentUser() {
+  try {
   const jwt = await getJwt();
   if (!jwt) return null;
 
@@ -16,18 +17,27 @@ export async function getCurrentUser() {
     }
   );
 
-  if (!res.ok) return null;
-  return res.json();
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export async function strapiFetch(path: string, init: RequestInit = {}) {
+  try {
   const jwt = await getJwt();
   return fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}${path}`, {
     ...init,
     headers: {
       ...(init.headers || {}),
       ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}),
-    },
-    cache: 'no-store',
-  });
+      },
+      cache: 'no-store',
+    });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }

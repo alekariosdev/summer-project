@@ -1,0 +1,8 @@
+{
+  "login-page": {
+    "title": "Σύνδεση",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "buttonPrefix": "Σύνδεση με",
+    "buttonSuffix": "Microsoft"
+  }
+}

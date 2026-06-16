@@ -12,7 +12,8 @@
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "postinstall": "patch-package && node scripts/patch-elliptic-version.js"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "^5.48.0",
@@ -22,12 +23,14 @@
     "mysql2": "3.20.0",
     "passport-azure-ad-oauth2": "^0.0.4",
     "passport-microsoft": "^2.1.0",
+    "prettier": "^3.8.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
+    "patch-package": "^8.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -36,6 +39,24 @@
   "engines": {
     "node": ">=20.0.0 <=24.x.x",
     "npm": ">=6.0.0"
+  },
+  "overrides": {
+    "@ai-sdk/gateway": "^3.0.132",
+    "@ai-sdk/provider-utils": "^4.0.29",
+    "@ai-sdk/react": "^3.0.208",
+    "ai": "^6.0.206",
+    "ajv": "^8.17.2",
+    "esbuild": "^0.28.1",
+    "form-data": "^4.0.6",
+    "js-yaml": "^4.1.2",
+    "lodash": "^4.17.24",
+    "markdown-it": "^14.1.2",
+    "nodemailer": "^8.0.9",
+    "tar": "^7.5.16",
+    "uuid": "^11.1.1",
+    "vite": "^6.4.3",
+    "@vitejs/plugin-react-swc": "^4.3.1",
+    "ws": "^8.21.0"
   },
   "strapi": {
     "uuid": "c2435aa4-587c-402d-a3d6-f1d3be0ed3f7",
