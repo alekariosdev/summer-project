@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -21,7 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} h-full overflow-hidden`}
+      className={cn("h-full", "overflow-hidden", manrope.variable, "font-sans", geist.variable)}
     >
       <body className="h-full overflow-hidden">
         <main className="h-full min-h-dvh not-only:overflow-hidden">
