@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_shared_person_cards",
+  "info": {
+    "displayName": "person-card"
+  },
+  "options": {},
+  "attributes": {
+    "full_name": {
+      "type": "string",
+      "required": true
+    },
+    "job_title": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "bio": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

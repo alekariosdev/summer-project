@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_hero_videos",
+  "info": {
+    "displayName": "hero-video"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "videoProvider": {
+      "type": "enumeration",
+      "enum": [
+        "youtube",
+        "vimeo",
+        "upload"
+      ]
+    }
+  },
+  "config": {}
+}

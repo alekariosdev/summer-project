@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_badges",
+  "info": {
+    "displayName": "badge"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "hex_color": {
+      "type": "string",
+      "required": true
+    },
+    "alignment": {
+      "type": "enumeration",
+      "default": "top-left",
+      "enum": [
+        "top-center",
+        "top-left",
+        "top-right",
+        "center-left",
+        "center",
+        "center-right",
+        "bottom-left",
+        "bottom-center",
+        "bottom-right"
+      ]
+    }
+  },
+  "config": {}
+}

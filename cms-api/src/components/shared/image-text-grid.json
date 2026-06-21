@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_image_text_grids",
+  "info": {
+    "displayName": "image-text-grid"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "alignment": {
+      "type": "enumeration",
+      "default": "row-left-image-right-text",
+      "enum": [
+        "row-left-image-right-text",
+        "row-left-text-right-image",
+        "column-top-image-bottom-text",
+        "column-top-text-bottom-image"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_maps",
+  "info": {
+    "displayName": "map"
+  },
+  "options": {},
+  "attributes": {
+    "address": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "decimal",
+      "required": true
+    },
+    "longitude": {
+      "type": "decimal",
+      "required": true
+    },
+    "marker_label": {
+      "type": "string"
+    },
+    "zoom": {
+      "type": "integer",
+      "default": 16
+    },
+    "embedUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

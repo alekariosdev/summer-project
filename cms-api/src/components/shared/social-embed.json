@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_social_embeds",
+  "info": {
+    "displayName": "social-embed"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "twitter",
+        "linkedin",
+        "instagram",
+        "facebook",
+        "youtube"
+      ]
+    },
+    "embedUrl": {
+      "type": "string",
+      "required": true
+    },
+    "embedCode": {
+      "type": "string"
+    },
+    "fallbackImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_full_images",
+  "info": {
+    "displayName": "full-image"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "caption": {
+      "type": "string",
+      "required": true
+    },
+    "aspectRatio": {
+      "type": "enumeration",
+      "enum": [
+        "ratio_16_9",
+        "ratio_4_3",
+        "ratio_1_1",
+        "ratio_21_9"
+      ]
+    }
+  },
+  "config": {}
+}
