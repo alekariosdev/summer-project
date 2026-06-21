@@ -11,19 +11,12 @@
     "orientation": {
       "type": "enumeration",
       "default": "horizontal",
-      "enum": [
-        "horizontal",
-        "vertical"
-      ]
+      "enum": ["horizontal", "vertical"]
     },
     "align": {
       "type": "enumeration",
       "default": "start",
-      "enum": [
-        "start",
-        "center",
-        "end"
-      ]
+      "enum": ["start", "center", "end"]
     },
     "loop": {
       "type": "boolean",

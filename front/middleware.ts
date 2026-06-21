@@ -10,6 +10,10 @@ const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 // Logical (locale-stripped) public paths
 const PUBLIC_PATHS = new Set<string>(['/login']);
 
+function isPublicPath(rest: string): boolean {
+  return PUBLIC_PATHS.has(rest);
+}
+
 const intlMiddleware = createIntlMiddleware(routing);
 
 // ── JWT verification at the edge ────────────────────────────────────────────
@@ -46,8 +50,8 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   const { locale, rest } = splitLocale(pathname);
 
-  // ── PUBLIC: /login (any locale) ──────────────────────────────────────────
-  if (PUBLIC_PATHS.has(rest)) {
+  // ── PUBLIC: /login, /test/* (any locale) ─────────────────────────────────
+  if (isPublicPath(rest)) {
     // Already authenticated → bounce to dashboard (same locale)
     if (token && (await isValidToken(token))) {
       const url = request.nextUrl.clone();
