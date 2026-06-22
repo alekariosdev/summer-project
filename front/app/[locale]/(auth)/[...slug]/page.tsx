@@ -1,4 +1,5 @@
-import { HeroSlide, HeroSlider } from '@/components/shared/HeroSlider';
+import { HeroSlide, HeroSlider } from '@/components/strapi-shared/HeroSlider';
+import { SectionHeader } from '@/components/strapi-shared/SectionHeader';
 
 export const HERO_SLIDER_SAMPLE_DATA: HeroSlide[] = [
   {
@@ -59,6 +60,7 @@ const DynamicPage = async ({ params }: { params: Promise<{ slug: string[] }> }) 
   return (
     <div>
       <HeroSlider slides={HERO_SLIDER_SAMPLE_DATA} />
+      {/* <SectionHeader /> */}
     </div>
   );
 };

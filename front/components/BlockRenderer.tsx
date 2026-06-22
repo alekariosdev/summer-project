@@ -1,4 +1,4 @@
-import Carousel from '@/components/shared/Carousel';
+import Carousel from '@/components/strapi-shared/Carousel';
 import type { CarouselData, SectionData } from '@/lib/types';
 
 const BLOCK_MAP = {
