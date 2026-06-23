@@ -6,15 +6,20 @@
   "options": {},
   "attributes": {
     "label": {
-      "type": "string",
-      "required": true
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": [
+        "_self",
+        "_blank"
+      ]
     },
     "url": {
       "type": "string"
-    },
-    "openInNewTab": {
-      "type": "boolean",
-      "default": false
     }
   },
   "config": {}

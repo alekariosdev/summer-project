@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_article_masonry_lists",
+  "info": {
+    "displayName": "masonry-list"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "component": "shared.block-header",
+      "repeatable": false
+    },
+    "articles": {
+      "type": "customField",
+      "customField": "plugin::filtered-articles.filtered-articles"
+    }
+  },
+  "config": {}
+}

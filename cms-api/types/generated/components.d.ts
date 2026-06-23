@@ -11,6 +11,17 @@ export interface ArticleAuthor extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleMasonryList extends Struct.ComponentSchema {
+  collectionName: 'components_article_masonry_lists';
+  info: {
+    displayName: 'masonry-list';
+  };
+  attributes: {
+    articles: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    header: Schema.Attribute.Component<'shared.block-header', false>;
+  };
+}
+
 export interface SharedBadge extends Struct.ComponentSchema {
   collectionName: 'components_shared_badges';
   info: {
@@ -26,42 +37,15 @@ export interface SharedBadge extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedCarousel extends Struct.ComponentSchema {
-  collectionName: 'components_shared_carousels';
+export interface SharedBlockHeader extends Struct.ComponentSchema {
+  collectionName: 'components_shared_block_headers';
   info: {
-    displayName: 'carousel';
+    displayName: 'block-header';
   };
   attributes: {
-    align: Schema.Attribute.Enumeration<['start', 'center', 'end']> & Schema.Attribute.DefaultTo<'start'>;
-    autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    dragFree: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    items: Schema.Attribute.Component<'shared.carousel-item', false>;
-    loop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    orientation: Schema.Attribute.Enumeration<['horizontal', 'vertical']> & Schema.Attribute.DefaultTo<'horizontal'>;
-    showDots: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    showNavigation: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    slidesToScroll: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 10;
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface SharedCarouselItem extends Struct.ComponentSchema {
-  collectionName: 'components_shared_carousel_items';
-  info: {
-    displayName: 'carousel-item';
-  };
-  attributes: {
-    badge: Schema.Attribute.Component<'shared.badge', false>;
+    ctaButton: Schema.Attribute.Component<'shared.cta-button', false>;
     image: Schema.Attribute.Media<'images'>;
-    subtitle: Schema.Attribute.Text;
+    subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -72,8 +56,9 @@ export interface SharedCtaButton extends Struct.ComponentSchema {
     displayName: 'cta-button';
   };
   attributes: {
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    openInNewTab: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    icon: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+    target: Schema.Attribute.Enumeration<['_self', '_blank']>;
     url: Schema.Attribute.String;
   };
 }
@@ -102,32 +87,6 @@ export interface SharedHero extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
-  };
-}
-
-export interface SharedHeroVideo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_hero_videos';
-  info: {
-    displayName: 'hero-video';
-  };
-  attributes: {
-    subtitle: Schema.Attribute.Text;
-    thumbnail: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String;
-    videoProvider: Schema.Attribute.Enumeration<['youtube', 'vimeo', 'upload']>;
-    videoUrl: Schema.Attribute.String;
-  };
-}
-
-export interface SharedImageGrid extends Struct.ComponentSchema {
-  collectionName: 'components_shared_image_grids';
-  info: {
-    displayName: 'image-grid';
-  };
-  attributes: {
-    columns: Schema.Attribute.Enumeration<['two', 'three', 'four']> & Schema.Attribute.DefaultTo<'three'>;
-    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
-    layout: Schema.Attribute.Enumeration<['equal', 'masonry']> & Schema.Attribute.DefaultTo<'equal'>;
   };
 }
 
@@ -173,20 +132,6 @@ export interface SharedMap extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedPersonCard extends Struct.ComponentSchema {
-  collectionName: 'components_shared_person_cards';
-  info: {
-    displayName: 'person-card';
-  };
-  attributes: {
-    bio: Schema.Attribute.Text;
-    department: Schema.Attribute.String;
-    full_name: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images'>;
-    job_title: Schema.Attribute.String;
-  };
-}
-
 export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
@@ -223,18 +168,15 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'article.author': ArticleAuthor;
+      'article.masonry-list': ArticleMasonryList;
       'shared.badge': SharedBadge;
-      'shared.carousel': SharedCarousel;
-      'shared.carousel-item': SharedCarouselItem;
+      'shared.block-header': SharedBlockHeader;
       'shared.cta-button': SharedCtaButton;
       'shared.full-image': SharedFullImage;
       'shared.hero': SharedHero;
-      'shared.hero-video': SharedHeroVideo;
-      'shared.image-grid': SharedImageGrid;
       'shared.image-text-grid': SharedImageTextGrid;
       'shared.link': SharedLink;
       'shared.map': SharedMap;
-      'shared.person-card': SharedPersonCard;
       'shared.seo': SharedSeo;
       'shared.social-embed': SharedSocialEmbed;
     }

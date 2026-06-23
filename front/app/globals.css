@@ -9,6 +9,26 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
+  /* Company palettes */
+  --color-metlen-primary: #0b1929;
+  --color-metlen-text: #1a1f4e;
+  --color-metlen-accent: #6b5ecd;
+  --color-metlen-secondary: #00b4e6;
+  --color-protergia-primary: #f05a00;
+  --color-protergia-text: #000000;
+  --color-protergia-accent: #3d1f6e;
+  --color-protergia-secondary: #f5e6d8;
+  --color-metka-primary: #0b1929;
+  --color-metka-text: #0b1929;
+  --color-metka-accent: #8b2e2e;
+  --color-metka-secondary: #d4c4a8;
+
+  /* Active brand (resolved via data-company or :root default) */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-text: var(--brand-text);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-secondary: var(--brand-secondary);
+
   /* Font weights */
   --font-weight-normal: 300;
   --font-weight-semibold: 400;
@@ -73,6 +93,10 @@
 }
 
 :root {
+  --brand-primary: var(--color-metlen-primary);
+  --brand-text: var(--color-metlen-text);
+  --brand-accent: var(--color-metlen-accent);
+  --brand-secondary: var(--color-metlen-secondary);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -139,4 +163,25 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+[data-company='metlen'] {
+  --brand-primary: var(--color-metlen-primary);
+  --brand-text: var(--color-metlen-text);
+  --brand-accent: var(--color-metlen-accent);
+  --brand-secondary: var(--color-metlen-secondary);
+}
+
+[data-company='protergia'] {
+  --brand-primary: var(--color-protergia-primary);
+  --brand-text: var(--color-protergia-text);
+  --brand-accent: var(--color-protergia-accent);
+  --brand-secondary: var(--color-protergia-secondary);
+}
+
+[data-company='metka'] {
+  --brand-primary: var(--color-metka-primary);
+  --brand-text: var(--color-metka-text);
+  --brand-accent: var(--color-metka-accent);
+  --brand-secondary: var(--color-metka-secondary);
 }

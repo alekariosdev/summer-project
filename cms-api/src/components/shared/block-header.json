@@ -1,18 +1,15 @@
 {
-  "collectionName": "components_shared_person_cards",
+  "collectionName": "components_shared_block_headers",
   "info": {
-    "displayName": "person-card"
+    "displayName": "block-header"
   },
   "options": {},
   "attributes": {
-    "full_name": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "job_title": {
-      "type": "string"
-    },
-    "department": {
+    "subtitle": {
       "type": "string"
     },
     "image": {
@@ -22,8 +19,10 @@
         "images"
       ]
     },
-    "bio": {
-      "type": "text"
+    "ctaButton": {
+      "type": "component",
+      "component": "shared.cta-button",
+      "repeatable": false
     }
   },
   "config": {}

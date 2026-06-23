@@ -101,6 +101,8 @@ public/uploads/*
 
 dist
 build
+server/src/**/*.js
+admin/src/**/*.js
 
 
 ############################

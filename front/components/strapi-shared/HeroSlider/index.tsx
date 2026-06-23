@@ -74,7 +74,7 @@ export const HeroSlider = ({
         )}
       >
         {/* ── Left – Content ───────────────────────────────────── */}
-        <div className="h-full bg-[#0B1929] flex flex-col justify-between gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden">
+        <div className="h-full bg-metlen-primary flex flex-col justify-between gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden">
 
           {/* Animated content */}
           <div
@@ -137,7 +137,7 @@ export const HeroSlider = ({
                   className={cn(
                     "rounded-full outline-none transition-all duration-300",
                     "focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2",
-                    "focus-visible:ring-offset-[#0B1929]",
+                    "focus-visible:ring-offset-metlen-primary",
                     i === active
                       ? "h-2.5 w-2.5 bg-white"
                       : "h-2 w-2 bg-white/30 hover:bg-white/55"
@@ -149,7 +149,7 @@ export const HeroSlider = ({
         </div>
         <div
           className={cn(
-            "relative h-full overflow-hidden bg-[#0B1929]",
+            "relative h-full overflow-hidden bg-metlen-primary",
             "transition-opacity ease-in-out",
             fading ? "opacity-0" : "opacity-100"
           )}

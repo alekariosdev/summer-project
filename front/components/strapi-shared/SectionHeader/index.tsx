@@ -90,15 +90,15 @@ export const SectionHeader = () => {
         </div>
         <div className="w-px h-16 bg-gray-200 shrink-0" />
         <div>
-          <h2 className="font-normal text-[#1a1f4e]">Our News</h2>
-          <h2 className="font-normal text-[#1a1f4e]">Across the World</h2>
+          <h2 className="font-normal text-metlen-text">Our News</h2>
+          <h2 className="font-normal text-metlen-text">Across the World</h2>
         </div>
       </div>
       <Button
         variant="outline"
-        className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-[#6B5ECD] 
-             text-[#6B5ECD] text-sm font-medium bg-white 
-             hover:bg-[#6B5ECD]! hover:text-white! 
+        className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-metlen-accent
+             text-metlen-accent text-sm font-medium bg-white
+             hover:bg-metlen-accent! hover:text-white!
              transition-all duration-300 shrink-0 cursor-pointer"
       >
         <ArrowUpRight />
