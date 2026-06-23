@@ -90,6 +90,30 @@ export interface SharedHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHeroSlider extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_sliders';
+  info: {
+    displayName: 'hero-slider';
+  };
+  attributes: {
+    slides: Schema.Attribute.Component<'shared.hero-slider-item', true>;
+  };
+}
+
+export interface SharedHeroSliderItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_slider_items';
+  info: {
+    displayName: 'hero-slider-item';
+  };
+  attributes: {
+    badgeLabel: Schema.Attribute.String;
+    ctaButton: Schema.Attribute.Component<'shared.cta-button', false>;
+    image: Schema.Attribute.Media<'images'>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedImageTextGrid extends Struct.ComponentSchema {
   collectionName: 'components_shared_image_text_grids';
   info: {
@@ -174,6 +198,8 @@ declare module '@strapi/strapi' {
       'shared.cta-button': SharedCtaButton;
       'shared.full-image': SharedFullImage;
       'shared.hero': SharedHero;
+      'shared.hero-slider': SharedHeroSlider;
+      'shared.hero-slider-item': SharedHeroSliderItem;
       'shared.image-text-grid': SharedImageTextGrid;
       'shared.link': SharedLink;
       'shared.map': SharedMap;

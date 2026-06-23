@@ -53,34 +53,62 @@ export const createQuery = () => new StrapiQuery();
 
 // ─── Populate presets ─────────────────────────────────────────────────────────
 
-// Granular populate for shared.carousel (Strapi v5 "on" syntax)
-export const CAROUSEL_POPULATE = {
-  'shared.carousel': {
+// Granular populate for article.masonry-list blocks
+export const MASONRY_LIST_POPULATE = {
+  'article.masonry-list': {
     populate: {
-      items: {
+      header: {
         populate: {
           image: {
             fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
           },
-          badge: true,
+          ctaButton: true,
         },
       },
     },
   },
 };
 
-// Dynamic zone populate — add more components to `on` as needed
-export const SECTIONS_POPULATE = {
-  sections: {
-    on: {
-      ...CAROUSEL_POPULATE,
-      // "shared.hero": { populate: { ... } },
+// Granular populate for shared.hero-slider blocks
+export const HERO_SLIDER_POPULATE = {
+  'shared.hero-slider': {
+    populate: {
+      slides: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+          ctaButton: true,
+        },
+      },
     },
   },
 };
 
-// Full test entry populate
-export const TEST_POPULATE = createQuery()
+export const BLOCKS_POPULATE = {
+  blocks: {
+    on: {
+      ...MASONRY_LIST_POPULATE,
+      ...HERO_SLIDER_POPULATE,
+    },
+  },
+};
+
+export const SEO_POPULATE = {
+  seo: {
+    populate: {
+      og_image: {
+        fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+      },
+    },
+  },
+};
+
+// Full dynamic-page entry populate
+export const DYNAMIC_PAGE_POPULATE = createQuery()
   .fields(['title', 'slug', 'createdAt', 'updatedAt', 'publishedAt'])
-  .populate(SECTIONS_POPULATE)
+  .populate({
+    ...BLOCKS_POPULATE,
+    ...SEO_POPULATE,
+  })
   .build();

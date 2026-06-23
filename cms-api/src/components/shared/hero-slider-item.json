@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_hero_slider_items",
+  "info": {
+    "displayName": "hero-slider-item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "badgeLabel": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "ctaButton": {
+      "type": "component",
+      "component": "shared.cta-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

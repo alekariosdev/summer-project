@@ -40,7 +40,8 @@
         }
       },
       "components": [
-        "article.masonry-list"
+        "article.masonry-list",
+        "shared.hero-slider"
       ]
     },
     "seo": {

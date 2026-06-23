@@ -6,11 +6,14 @@ import { unstable_cache } from 'next/cache';
 export const CACHE_TAGS = {
   // Collection-level
   test: 'test',
+  dynamicPage: 'dynamic-page',
   global: 'global',
 
   // Entry-level
   testBySlug: (slug: string) => `test-slug-${slug}`,
   testById: (id: string) => `test-id-${id}`,
+  dynamicPageBySlug: (slug: string) => `dynamic-page-slug-${slug}`,
+  dynamicPageById: (id: string) => `dynamic-page-id-${id}`,
 
   // Component-level
   carousel: 'carousel',
