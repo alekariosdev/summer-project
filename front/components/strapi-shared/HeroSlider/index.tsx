@@ -89,7 +89,7 @@ const HeroSlider = (data: HeroSliderData) => {
               )}
               <h1
                 className={cn(
-                  "text-h3 md:text-h1 font-semibold leading-[1.15]",
+                  "txt-h3 md:txt-h1 font-semibold leading-[1.15]",
                   theme.heading
                 )}
               >
@@ -98,7 +98,7 @@ const HeroSlider = (data: HeroSliderData) => {
               {slide.subtitle && (
                 <p
                   className={cn(
-                    "text-xs md:text-medium font-normal leading-relaxed max-w-[440px] wrap-break-word",
+                    "text-xs md:txt-medium font-normal leading-relaxed max-w-[440px] wrap-break-word",
                     theme.subtitle
                   )}
                 >

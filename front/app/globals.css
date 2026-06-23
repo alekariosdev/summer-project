@@ -35,20 +35,20 @@
   --font-weight-bold: 700;
 
   /* Semantic type scale */
-  --text-h1: 3rem; /* 48px */
-  --text-h1--line-height: 1.2;
-  --text-h2: 2.5rem; /* 40px */
-  --text-h2--line-height: 1.2;
-  --text-h3: 2rem; /* 32px */
-  --text-h3--line-height: 1.25;
-  --text-h5: 1.125rem; /* 18px */
-  --text-h5--line-height: 1.5;
-  --text-large: 1rem; /* 16px */
-  --text-large--line-height: 1.5;
-  --text-medium: 0.875rem; /* 14px */
-  --text-medium--line-height: 1.25;
-  --text-small: 0.75rem; /* 12px */
-  --text-small--line-height: 1;
+  --txt-h1: 3rem; /* 48px */
+  --txt-h1--line-height: 1.2;
+  --txt-h2: 2.5rem; /* 40px */
+  --txt-h2--line-height: 1.2;
+  --txt-h3: 2rem; /* 32px */
+  --txt-h3--line-height: 1.25;
+  --txt-h5: 1.125rem; /* 18px */
+  --txt-h5--line-height: 1.5;
+  --txt-large: 1rem; /* 16px */
+  --txt-large--line-height: 1.5;
+  --txt-medium: 0.875rem; /* 14px */
+  --txt-medium--line-height: 1.25;
+  --txt-small: 0.75rem; /* 12px */
+  --txt-small--line-height: 1;
 
   /* Type scale: 12 / 14 / 16 / 24 / 32 / 42 / 48 px */
   --text-xs: 0.75rem / 1rem; /* 12px */
@@ -95,6 +95,41 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@utility txt-h1 {
+  font-size: var(--txt-h1);
+  line-height: var(--txt-h1--line-height);
+}
+
+@utility txt-h2 {
+  font-size: var(--txt-h2);
+  line-height: var(--txt-h2--line-height);
+}
+
+@utility txt-h3 {
+  font-size: var(--txt-h3);
+  line-height: var(--txt-h3--line-height);
+}
+
+@utility txt-h5 {
+  font-size: var(--txt-h5);
+  line-height: var(--txt-h5--line-height);
+}
+
+@utility txt-large {
+  font-size: var(--txt-large);
+  line-height: var(--txt-large--line-height);
+}
+
+@utility txt-medium {
+  font-size: var(--txt-medium);
+  line-height: var(--txt-medium--line-height);
+}
+
+@utility txt-small {
+  font-size: var(--txt-small);
+  line-height: var(--txt-small--line-height);
 }
 
 @layer base {
