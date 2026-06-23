@@ -74,6 +74,13 @@ export interface BadgeData {
   alignment?: string;
 }
 
+// ─── company.company ────────────────────────────────────────────────────────
+
+export interface CompanyData {
+  id: number;
+  name: 'Metlen' | 'Protergia' | 'Metka';
+}
+
 // ─── shared.carousel-item ───────────────────────────────────────────────────
 
 export interface CarouselItemData {
@@ -114,6 +121,7 @@ export interface HeroSliderItemData {
 export interface HeroSliderData extends DynamicZoneBase {
   __component: 'shared.hero-slider';
   slides: HeroSliderItemData[];
+  theme?: CompanyData | null;
 }
 
 // ─── Sections union — extend as you add more components ─────────────────────

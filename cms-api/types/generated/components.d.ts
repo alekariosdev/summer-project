@@ -97,6 +97,7 @@ export interface SharedHeroSlider extends Struct.ComponentSchema {
   };
   attributes: {
     slides: Schema.Attribute.Component<'shared.hero-slider-item', true>;
+    theme: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
   };
 }
 

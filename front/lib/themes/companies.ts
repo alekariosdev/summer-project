@@ -4,21 +4,21 @@ export type ThemeRole = 'primary' | 'text' | 'accent' | 'secondary';
 
 export const companyThemes = {
   metlen: {
-    primary: '#0B1929',
-    text: '#1A1F4E',
-    accent: '#6B5ECD',
-    secondary: '#00B4E6',
+    primary: '#0A2240',
+    text: '#0A2240',
+    accent: '#795AFD',
+    secondary: '#00E1FF',
   },
   protergia: {
-    primary: '#F05A00',
+    primary: '#00E1FF',
     text: '#000000',
-    accent: '#3D1F6E',
-    secondary: '#F5E6D8',
+    accent: '#47008F',
+    secondary: '#FFEDCC',
   },
   metka: {
-    primary: '#0B1929',
-    text: '#0B1929',
-    accent: '#8B2E2E',
-    secondary: '#D4C4A8',
+    primary: '#002A47',
+    text: '#002A47',
+    accent: '#406680',
+    secondary: '#D7CDB4',
   },
 } as const satisfies Record<CompanySlug, Record<ThemeRole, string>>;

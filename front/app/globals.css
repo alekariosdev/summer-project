@@ -10,18 +10,18 @@
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Company palettes */
-  --color-metlen-primary: #0b1929;
-  --color-metlen-text: #1a1f4e;
-  --color-metlen-accent: #6b5ecd;
-  --color-metlen-secondary: #00b4e6;
-  --color-protergia-primary: #f05a00;
+  --color-metlen-primary: #0a2240;
+  --color-metlen-text: #0a2240;
+  --color-metlen-accent: #0a2240;
+  --color-metlen-secondary: #0a2240;
+  --color-protergia-primary: #ff9800;
   --color-protergia-text: #000000;
-  --color-protergia-accent: #3d1f6e;
-  --color-protergia-secondary: #f5e6d8;
-  --color-metka-primary: #0b1929;
-  --color-metka-text: #0b1929;
-  --color-metka-accent: #8b2e2e;
-  --color-metka-secondary: #d4c4a8;
+  --color-protergia-accent: #47008f;
+  --color-protergia-secondary: #47008f;
+  --color-metka-primary: #002a47;
+  --color-metka-text: #002a47;
+  --color-metka-accent: #406680;
+  --color-metka-secondary: #d7cdb4;
 
   /* Active brand (resolved via data-company or :root default) */
   --color-brand-primary: var(--brand-primary);

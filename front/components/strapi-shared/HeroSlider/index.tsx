@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import CtaBtn from "@/components/common/CtaBtn";
 import { HeroSliderData } from "@/lib/types";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
+import { getHeroSliderTheme } from "@/lib/themes/hero-slider";
 
 const FADE_MS = 400;
 
@@ -15,6 +16,7 @@ const AUTO_PLAY_INTERVAL = 5000;
 const HeroSlider = (data: HeroSliderData) => {
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
+  const theme = getHeroSliderTheme(data.theme);
 
   const goto = useCallback(
     (index: number) => {
@@ -42,14 +44,22 @@ const HeroSlider = (data: HeroSliderData) => {
   const slide = data.slides[active];
 
   return (
-    <section className="relative left-1/2 -translate-x-1/2 w-screen">
+    <section
+      className="relative left-1/2 -translate-x-1/2 w-screen"
+      data-company={theme.companyAttr}
+    >
       <div
         className={cn(
           "grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_650px]",
           "h-[500px] md:h-[560px] lg:h-[640px]"
         )}
       >
-        <div className="h-full bg-metlen-primary flex flex-col justify-center gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden">
+        <div
+          className={cn(
+            "h-full flex flex-col justify-center gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden",
+            theme.panel
+          )}
+        >
           <div
             className={cn(
               "flex gap-0 md:gap-4 max-w-xl min-w-0 transition-all ease-in-out",
@@ -61,24 +71,42 @@ const HeroSlider = (data: HeroSliderData) => {
           >
             <span
               aria-hidden
-              className="hidden md:block w-[2px] shrink-0 self-stretch rounded-full bg-[#FFFFFF]"
+              className={cn(
+                "hidden md:block w-[2px] shrink-0 self-stretch rounded-full",
+                theme.accentLine
+              )}
             />
             <div className="flex min-w-0 flex-1 flex-col gap-4 md:gap-7">
               {slide.badgeLabel && (
-                <span className="inline-flex w-fit items-center rounded-md border border-white/20 bg-white/5 px-3 py-1 text-xs md:text-sm text-white/80">
+                <span
+                  className={cn(
+                    "inline-flex w-fit items-center rounded-md border px-3 py-1 text-xs md:text-sm",
+                    theme.badge
+                  )}
+                >
                   {slide.badgeLabel}
                 </span>
               )}
-              <h1 className="text-h3 md:text-h1 font-semibold leading-[1.15] text-white">
+              <h1
+                className={cn(
+                  "text-h3 md:text-h1 font-semibold leading-[1.15]",
+                  theme.heading
+                )}
+              >
                 {slide.title}
               </h1>
               {slide.subtitle && (
-                <p className="text-xs md:text-medium font-normal leading-relaxed text-white/60 max-w-[440px] wrap-break-word">
+                <p
+                  className={cn(
+                    "text-xs md:text-medium font-normal leading-relaxed max-w-[440px] wrap-break-word",
+                    theme.subtitle
+                  )}
+                >
                   {slide.subtitle}
                 </p>
               )}
               {slide.ctaButton && (
-                <CtaBtn {...slide.ctaButton} />
+                <CtaBtn {...slide.ctaButton} className={theme.cta} />
               )}
             </div>
           </div>
@@ -93,11 +121,12 @@ const HeroSlider = (data: HeroSliderData) => {
                   aria-label={`Go to slide ${i + 1}`}
                   className={cn(
                     "rounded-full outline-none transition-all duration-300",
-                    "focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2",
-                    "focus-visible:ring-offset-metlen-primary",
+                    "focus-visible:ring-2 focus-visible:ring-offset-2",
+                    theme.dotFocus,
+                    theme.ringOffset,
                     i === active
-                      ? "h-2.5 w-2.5 bg-white"
-                      : "h-2 w-2 bg-white/30 hover:bg-white/55"
+                      ? cn("h-2.5 w-2.5", theme.dotActive)
+                      : cn("h-2 w-2", theme.dotInactive)
                   )}
                 />
               ))}
@@ -106,7 +135,8 @@ const HeroSlider = (data: HeroSliderData) => {
         </div>
         <div
           className={cn(
-            "relative h-full overflow-hidden bg-metlen-primary",
+            "relative h-full overflow-hidden",
+            theme.panel,
             "transition-opacity ease-in-out",
             fading ? "opacity-0" : "opacity-100"
           )}

@@ -9,6 +9,11 @@
       "type": "component",
       "component": "shared.hero-slider-item",
       "repeatable": true
+    },
+    "theme": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
     }
   },
   "config": {}

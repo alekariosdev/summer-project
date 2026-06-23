@@ -7,7 +7,6 @@ const DynamicPage = async ({ params }: { params: Promise<{ slug: string[] }> }) 
   const dynamicPage = await getDynamicPageBySlug(slug[0]);
   if (!dynamicPage) return notFound();
 
-
   return (
     <div>
       <BlockRenderer blocks={dynamicPage.blocks} />
