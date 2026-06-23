@@ -82,9 +82,7 @@ RUN npm install --omit=dev
 COPY --from=build /opt/app/dist ./dist
 COPY --from=build /opt/app/.strapi ./.strapi
 COPY --from=build /opt/app/public ./public
-COPY --from=build /opt/app/config ./config
-COPY --from=build /opt/app/database ./database
-COPY --from=build /opt/app/src ./src
+COPY --from=build /opt/app/server.js ./server.js
 COPY --from=build /opt/app/favicon.png ./favicon.png
 
 # Create a non-root user for security
@@ -96,4 +94,4 @@ USER strapi
 
 EXPOSE 1337
 
-CMD ["npm", "run", "start"]
+CMD ["node", "server.js"]
