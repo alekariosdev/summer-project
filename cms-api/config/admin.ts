@@ -70,21 +70,6 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => 
     promoteEE: env.bool('FLAG_PROMOTE_EE', true),
     docLinks: env.bool('FLAG_DOC_LINKS', true),
   },
-  ...(process.env.NODE_ENV === 'development' && {
-    vite: {
-      server: {
-        server: {
-          host: '0.0.0.0',
-          port: 5173,
-          hmr: {
-            host: 'localhost',
-            port: 5173,
-            protocol: 'ws',
-          },
-        },
-      }
-    }
-  }),
   url: env('ADMIN_URL', '/admin'),
   };
 };

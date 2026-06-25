@@ -55,16 +55,6 @@
         "images"
       ]
     },
-    "badge": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.badge",
-      "repeatable": false
-    },
     "featured": {
       "type": "boolean",
       "pluginOptions": {

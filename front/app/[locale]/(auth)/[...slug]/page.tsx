@@ -10,8 +10,9 @@ const DynamicPage = async ({ params }: { params: Promise<{ slug: string[] }> }) 
 
   return (
     <div>
+      {JSON.stringify(dynamicPage.blocks)}
       {/* <BlockRenderer blocks={dynamicPage.blocks} /> */}
-      <MasonryArticleList />
+      {/* <MasonryArticleList /> */}
     </div>
   );
 };

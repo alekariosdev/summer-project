@@ -27,9 +27,25 @@ export default (config: UserConfig) => {
       alias: singletonAliases,
       dedupe: [...SINGLETON_PACKAGES],
     },
+    server: {
+      allowedHosts: true,
+    },
     esbuild: esbuildOptions,
     optimizeDeps: {
       esbuildOptions,
+      include: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+        'react-router-dom',
+        'styled-components',
+        '@strapi/design-system',
+        '@strapi/icons',
+        '@strapi/strapi/admin',
+        '@strapi/plugin-cloud/strapi-admin',
+        '@strapi/plugin-users-permissions/strapi-admin',
+      ],
     },
   });
 };

@@ -119,6 +119,7 @@ services:
     volumes:
       - ./cms-api:/opt/app # Mount source for hot-reload
       - /opt/app/node_modules # Prevent host node_modules override
+      - /opt/app/src/plugins/filtered-articles/node_modules # Keep plugin deps in container
       - strapi-uploads:/opt/app/public/uploads
     depends_on:
       mysql:

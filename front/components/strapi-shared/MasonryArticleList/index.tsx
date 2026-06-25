@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -19,11 +19,39 @@ interface Post {
 
 
 //
-const H = { tall: 300, short: 200 } as const;
+const imageHeight = { tall: 300, short: 200 } as const;
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+const createImageHeightGetter = () => {
+  let count = 0;
+  let row = 1;
+
+  const tall = 300;
+  const short = 200;
+
+  return (id: number) => {
+    count++;
+
+    const height =
+      row % 2 === 0
+        ? id % 2 === 0
+          ? tall
+          : short
+        : id % 2 === 0
+          ? short
+          : tall;
+
+    if (count === 4) {
+      row++;
+      count = 0;
+    }
+
+    return height;
+  };
+};
+
+const getImageHeight = createImageHeightGetter();
+
 const POSTS: Post[] = [
-  // ── Row 1 ──────────────────────────────────────────────────────────────────
   {
     id: 1,
     category: "Announcement",
@@ -34,7 +62,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/1",
-    imageH: H.tall,   // col 0 → TALL
+    imageH: imageHeight.tall,
   },
   {
     id: 2,
@@ -46,7 +74,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/2",
-    imageH: H.short,  // col 1 → short
+    imageH: imageHeight.short,
   },
   {
     id: 3,
@@ -58,7 +86,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/3",
-    imageH: H.tall,   // col 2 → TALL
+    imageH: imageHeight.tall,
   },
   {
     id: 4,
@@ -70,7 +98,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/4",
-    imageH: H.short,  // col 3 → short
+    imageH: imageHeight.short,
   },
 
   // ── Row 2 — inverted ───────────────────────────────────────────────────────
@@ -84,7 +112,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/5",
-    imageH: H.short,  // col 0 → short  (inverted)
+    imageH: imageHeight.short,
   },
   {
     id: 6,
@@ -96,7 +124,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/6",
-    imageH: H.tall,   // col 1 → TALL  (inverted)
+    imageH: imageHeight.tall,
   },
   {
     id: 7,
@@ -108,7 +136,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/7",
-    imageH: H.short,  // col 2 → short (inverted)
+    imageH: imageHeight.short,
   },
   {
     id: 8,
@@ -120,7 +148,7 @@ const POSTS: Post[] = [
     excerpt:
       "The expansion, heavily focused on scaling operations in high-growth networks throughout Italy, Spain..",
     href: "/posts/8",
-    imageH: H.tall,   // col 3 → TALL  (inverted)
+    imageH: imageHeight.tall,
   },
 ];
 
@@ -161,7 +189,7 @@ const CategoryBadge = ({ category }: { category: Category }) => {
 }
 
 interface PostCardProps {
-  post: Post;
+  post: Post & { imageH: number };
 }
 
 const PostCard = ({ post }: PostCardProps) => {
@@ -186,7 +214,7 @@ const PostCard = ({ post }: PostCardProps) => {
         {/* ── Image — height driven by imageH ── */}
         <div
           className="relative w-full overflow-hidden rounded-2xl"
-          style={{ height: post.imageH }}
+          style={{ height: `${post.imageH}px` }}
         >
           <img
             src={post.image}
@@ -248,8 +276,13 @@ const PostCard = ({ post }: PostCardProps) => {
 
 // ─── Root ─────────────────────────────────────────────────────────────────────
 const MasonryPostList = () => {
+
+  const fixedPosts = useMemo(() => POSTS.map((post) => ({
+    ...post,
+    imageH: getImageHeight(post.id),
+  })), []);
   return (
-    <div className="min-h-screen p-3 sm:p-5 lg:p-8">
+    <div className="min-h-screen sm:p-5 lg:p-8">
       <section className="rounded-2xl p-3 sm:p-5" aria-labelledby="masonry-heading">
         <ul
           className="
@@ -260,7 +293,7 @@ const MasonryPostList = () => {
           role="list"
           aria-label="Latest posts"
         >
-          {POSTS.map((post) => (
+          {fixedPosts.map((post) => (
             <li key={post.id} className="list-none">
               <PostCard post={post} />
             </li>
