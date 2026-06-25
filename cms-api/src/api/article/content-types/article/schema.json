@@ -43,7 +43,7 @@
       },
       "maxLength": 150
     },
-    "thumbnail": {
+    "image": {
       "type": "media",
       "pluginOptions": {
         "i18n": {

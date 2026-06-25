@@ -45,7 +45,7 @@ const HeroSlider = (data: HeroSliderData) => {
 
   return (
     <section
-      className="relative left-1/2 -translate-x-1/2 w-screen"
+      className="relative w-full"
       data-company={theme.companyAttr}
     >
       <div

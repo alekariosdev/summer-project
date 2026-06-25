@@ -1,3 +1,34 @@
+export interface CategoryData {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface CompanyData {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface TagData {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface ArticleData {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  subtitle: string;
+  image: StrapiMedia;
+  featured: boolean;
+  categories: CategoryData[];
+  companies: CompanyData[];
+  tags: TagData[];
+}
+
 export type STRAPI_ROLE = {
   id: number;
   name: string;
@@ -74,13 +105,6 @@ export interface BadgeData {
   alignment?: string;
 }
 
-// ─── company.company ────────────────────────────────────────────────────────
-
-export interface CompanyData {
-  id: number;
-  name: 'Metlen' | 'Protergia' | 'Metka';
-}
-
 // ─── shared.carousel-item ───────────────────────────────────────────────────
 
 export interface CarouselItemData {
@@ -107,27 +131,6 @@ export interface CarouselData extends DynamicZoneBase {
   items?: CarouselItemData | CarouselItemData[] | null;
 }
 
-// ─── shared.hero-slider ──────────────────────────────────────────────────────
-
-export interface HeroSliderItemData {
-  id: number;
-  title: string;
-  subtitle?: string;
-  badgeLabel?: string;
-  image?: StrapiMedia | null;
-  ctaButton?: CtaButtonData | null;
-}
-
-export interface HeroSliderData extends DynamicZoneBase {
-  __component: 'shared.hero-slider';
-  slides: HeroSliderItemData[];
-  theme?: CompanyData | null;
-}
-
-// ─── Sections union — extend as you add more components ─────────────────────
-
-export type SectionData = CarouselData | HeroSliderData; // | HeroData | ...
-
 // ─── shared.cta-button ──────────────────────────────────────────────────────
 
 export interface CtaButtonData {
@@ -146,6 +149,27 @@ export interface BlockHeaderData {
   subtitle?: string;
   image?: StrapiMedia | null;
   ctaButton?: CtaButtonData | null;
+}
+
+export interface WithBlockHeader {
+  header?: BlockHeaderData | null;
+}
+
+// ─── shared.hero-slider ──────────────────────────────────────────────────────
+
+export interface HeroSliderItemData {
+  id: number;
+  title: string;
+  subtitle?: string;
+  badgeLabel?: string;
+  image?: StrapiMedia | null;
+  ctaButton?: CtaButtonData | null;
+}
+
+export interface HeroSliderData extends DynamicZoneBase {
+  __component: 'shared.hero-slider';
+  slides: HeroSliderItemData[];
+  theme?: CompanyData | null;
 }
 
 // ─── shared.seo ─────────────────────────────────────────────────────────────
@@ -173,17 +197,14 @@ export interface FilteredArticlesData {
   selected_ids: string[];
 }
 
-export interface MasonryListData extends DynamicZoneBase {
+export interface MasonryListData extends DynamicZoneBase, WithBlockHeader {
   __component: 'article.masonry-list';
-  header?: BlockHeaderData | null;
   articles?: FilteredArticlesData | null;
 }
 
-// ─── Dynamic page blocks union — extend as you add more components ──────────
+// ─── Dynamic zone blocks — extend as you add more components ────────────────
 
-export type BlockData = MasonryListData | HeroSliderData; // | HeroData | ...
-
-export type RenderableBlock = SectionData | BlockData;
+export type BlockData = CarouselData | HeroSliderData | MasonryListData;
 
 // ─── Dynamic page collection type ───────────────────────────────────────────
 
@@ -198,17 +219,4 @@ export interface DynamicPageEntry {
   updatedAt: string;
   publishedAt?: string | null;
   locale?: string;
-}
-
-// ─── Test collection type ───────────────────────────────────────────────────
-
-export interface TestEntry {
-  id: number;
-  documentId: string;
-  title: string;
-  slug: string;
-  sections: SectionData[];
-  createdAt: string;
-  updatedAt: string;
-  publishedAt?: string | null;
 }

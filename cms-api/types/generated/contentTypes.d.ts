@@ -444,6 +444,12 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<false>;
+    image: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
     original_published_at: Schema.Attribute.Date &
@@ -478,12 +484,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         maxLength: 150;
       }>;
     tags: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
-    thumbnail: Schema.Attribute.Media<'images'> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{

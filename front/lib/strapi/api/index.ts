@@ -1,2 +1,2 @@
-export * from './test';
+export * from './articles';
 export * from './dynamic-pages';

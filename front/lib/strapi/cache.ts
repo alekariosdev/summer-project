@@ -5,18 +5,20 @@ import { unstable_cache } from 'next/cache';
 
 export const CACHE_TAGS = {
   // Collection-level
-  test: 'test',
+  article: 'article',
   dynamicPage: 'dynamic-page',
   global: 'global',
 
   // Entry-level
-  testBySlug: (slug: string) => `test-slug-${slug}`,
-  testById: (id: string) => `test-id-${id}`,
   dynamicPageBySlug: (slug: string) => `dynamic-page-slug-${slug}`,
   dynamicPageById: (id: string) => `dynamic-page-id-${id}`,
+  articleByDocId: (docId: string) => `article-doc-id-${docId}`,
 
   // Component-level
   carousel: 'carousel',
+  heroSlider: 'hero-slider',
+  masonryList: 'masonry-list',
+  seo: 'seo',
 } as const;
 
 // ─── Revalidation helpers ────────────────────────────────────────────────────

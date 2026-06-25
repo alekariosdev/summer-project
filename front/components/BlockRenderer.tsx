@@ -1,30 +1,47 @@
-
+import { Fragment } from 'react';
 import Carousel from '@/components/strapi-shared/Carousel';
 import HeroSlider from '@/components/strapi-shared/HeroSlider';
-import type { RenderableBlock } from '@/lib/types';
+import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
+import type { BlockData } from '@/lib/types';
+
+const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider']);
+
+const PAGE_CONTAINER_CLASS = 'mx-auto w-full max-w-[1440px]';
 
 interface Props {
-  blocks: RenderableBlock[] | null | undefined;
+  blocks: BlockData[] | null | undefined;
 }
 
-function renderBlock(block: RenderableBlock, index: number) {
+function renderBlock(block: BlockData, index: number) {
   const key = `${block.__component}-${block.id ?? index}`;
+  let node: React.ReactNode;
 
   switch (block.__component) {
-    case 'shared.carousel': {
-      return <Carousel key={key} {...block} />;
-    }
+    case 'shared.carousel':
+      node = <Carousel {...block} />;
+      break;
     case 'shared.hero-slider':
-      return <HeroSlider key={key} {...block} />;
+      node = <HeroSlider {...block} />;
+      break;
     case 'article.masonry-list':
-      console.warn(`[BlockRenderer] Unimplemented component: ${block.__component}`);
-      return null;
+      node = <MasonryArticleList {...block} />;
+      break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;
       console.warn(`[BlockRenderer] Unknown component: ${unknownComponent}`);
       return null;
     }
   }
+
+  if (FULL_BLEED_COMPONENTS.has(block.__component)) {
+    return <Fragment key={key}>{node}</Fragment>;
+  }
+
+  return (
+    <div key={key} className={PAGE_CONTAINER_CLASS}>
+      {node}
+    </div>
+  );
 }
 
 const BlockRenderer = ({ blocks }: Props) => {
