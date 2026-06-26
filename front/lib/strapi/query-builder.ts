@@ -85,11 +85,28 @@ export const HERO_SLIDER_POPULATE = {
   },
 };
 
+// Granular populate for article.slideset-list blocks
+export const SLIDESET_LIST_POPULATE = {
+  'article.slideset-list': {
+    populate: {
+      header: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+          ctaButton: true,
+        },
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
       ...MASONRY_LIST_POPULATE,
       ...HERO_SLIDER_POPULATE,
+      ...SLIDESET_LIST_POPULATE,
     },
   },
 };

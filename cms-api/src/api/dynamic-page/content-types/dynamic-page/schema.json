@@ -41,7 +41,8 @@
       },
       "components": [
         "article.masonry-list",
-        "shared.hero-slider"
+        "shared.hero-slider",
+        "article.slideset-list"
       ]
     },
     "seo": {

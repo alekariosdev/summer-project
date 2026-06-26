@@ -23,6 +23,16 @@ export interface ArticleMasonryList extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleSlidesetList extends Struct.ComponentSchema {
+  collectionName: 'components_article_slideset_lists';
+  info: {
+    displayName: 'slideset-list';
+  };
+  attributes: {
+    header: Schema.Attribute.Component<'shared.block-header', true>;
+  };
+}
+
 export interface SharedBadge extends Struct.ComponentSchema {
   collectionName: 'components_shared_badges';
   info: {
@@ -195,6 +205,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'article.author': ArticleAuthor;
       'article.masonry-list': ArticleMasonryList;
+      'article.slideset-list': ArticleSlidesetList;
       'shared.badge': SharedBadge;
       'shared.block-header': SharedBlockHeader;
       'shared.cta-button': SharedCtaButton;

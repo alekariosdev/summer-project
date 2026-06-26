@@ -2,11 +2,12 @@ import { Fragment } from 'react';
 import Carousel from '@/components/strapi-shared/Carousel';
 import HeroSlider from '@/components/strapi-shared/HeroSlider';
 import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
+import { SlidesetAticleList } from '@/components/strapi-shared/SlidesetAticleList';
 import type { BLOCK_DATA } from '@/lib/types';
 
-const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider']);
+const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list']);
 
-const PAGE_CONTAINER_CLASS = 'mx-auto w-full max-w-[1440px]';
+export const PAGE_CONTAINER_CLASS = 'mx-auto w-full max-w-[1440px]';
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
@@ -25,6 +26,9 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       break;
     case 'article.masonry-list':
       node = <MasonryArticleList {...block} />;
+      break;
+    case 'article.slideset-list':
+      node = <SlidesetAticleList {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

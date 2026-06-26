@@ -19,7 +19,7 @@ export type AUTH_USER = {
   updatedAt: string;
 };
 
-export type BLOCK_DATA = CAROUSEL_DATA | HERO_SLIDER_DATA | MASONRY_LIST_DATA;
+export type BLOCK_DATA = CAROUSEL_DATA | HERO_SLIDER_DATA | MASONRY_LIST_DATA | SLIDESET_LIST_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -205,6 +205,12 @@ export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER 
   __component: 'article.masonry-list';
   articles?: FILTERED_ARTICLES_DATA | null;
   theme?: THEME | null;
+}
+
+// ─── article.slideset-list ───────────────────────────────────────────────────
+
+export interface SLIDESET_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
+  __component: 'article.slideset-list';
 }
 
 // ─── Dynamic page collection type ───────────────────────────────────────────

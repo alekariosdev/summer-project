@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_article_slideset_lists",
+  "info": {
+    "displayName": "slideset-list"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "component": "shared.block-header",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
