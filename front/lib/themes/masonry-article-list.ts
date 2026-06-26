@@ -2,7 +2,7 @@ import type { THEME } from '@/lib/types';
 import type { CompanySlug } from './companies';
 import { COMPANY_SLUGS } from './companies';
 
-export type MasonryArticleListTheme = {
+export type MASONRY_ARTICLE_LIST_THEME = {
   badge: string;
   companyAttr: CompanySlug;
   badgeText: string;
@@ -10,7 +10,7 @@ export type MasonryArticleListTheme = {
   articleSubtitle: string;
 };
 
-export const heroSliderThemes = {
+export const HERO_SLIDER_THEMEs = {
   metlen: {
     companyAttr: 'metlen',
     badge: 'border-metlen-secondary bg-metlen-secondary text-metlen-primary',
@@ -32,7 +32,7 @@ export const heroSliderThemes = {
     articleTitle: 'txt-h4 txt-color-metka font-weight-medium leading-[100%]',
     articleSubtitle: 'text-[#00000080] txt-medium font-weight-normal leading-[125%]',
   },
-} as const satisfies Record<CompanySlug, MasonryArticleListTheme>;
+} as const satisfies Record<CompanySlug, MASONRY_ARTICLE_LIST_THEME>;
 
 export function getCompanySlug(name?: string): CompanySlug {
   const slug = name?.toLowerCase();
@@ -42,6 +42,6 @@ export function getCompanySlug(name?: string): CompanySlug {
   return 'metlen';
 }
 
-export function getMasonryArticleListTheme(theme?: THEME | null): MasonryArticleListTheme {
-  return heroSliderThemes[theme ?? 'metlen'];
+export function getMASONRY_ARTICLE_LIST_THEME(theme?: THEME | null): MASONRY_ARTICLE_LIST_THEME {
+  return HERO_SLIDER_THEMEs[theme ?? 'metlen'];
 }

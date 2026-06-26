@@ -1,4 +1,3 @@
-// components/MetlenInsiderHub.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -11,6 +10,8 @@ import {
 import SlideCard from "./SlideCard";
 import DotIndicators from "./DotIndicators";
 import NewsCard from "./NewsCard";
+import SectionHeader from "@/components/strapi-shared/SectionHeader";
+import type { SLIDESET_LIST_DATA } from "@/lib/types";
 
 interface SlideItem {
   id: number;
@@ -78,29 +79,24 @@ const NEWS_ITEMS: NewsItem[] = [
 ];
 
 
-export function SlidesetAticleList() {
+const SlidesetAticleList = (data: SLIDESET_LIST_DATA) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     if (!api) return;
-
     api.on("select", () => setCurrent(api.selectedScrollSnap()));
-
     return () => {
       api.off("select", () => setCurrent(api.selectedScrollSnap()));
     };
   }, [api]);
 
   return (
-    <section className="bg-[#6B3FD4] w-full py-16">
+    <section className="w-full py-10 bg-brand-accent" data-company={data.theme}>
       <div className="section-container">
-        <header className="flex items-center gap-3 mb-8">
-          <span className="block w-[3px] h-7 rounded-sm bg-white" aria-hidden />
-          <h1 className="text-white text-2xl font-semibold tracking-wide">
-            METLEN Insider Hub
-          </h1>
-        </header>
+        {data.header &&
+          <SectionHeader {...data.header}
+            classNames={{ container: 'mb-10', title: 'txt-h3 md:txt-h2 text-white', divider: 'bg-brand-secondary' }} />}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[400px_1fr]">
           <div className="w-full shrink-0">
             <Carousel
@@ -140,3 +136,5 @@ export function SlidesetAticleList() {
     </section>
   );
 }
+
+export default SlidesetAticleList;

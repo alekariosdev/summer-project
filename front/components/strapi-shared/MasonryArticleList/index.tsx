@@ -2,7 +2,7 @@ import { MASONRY_LIST_DATA } from "@/lib/types";
 import { getArticlesByDocIds } from "@/lib/strapi/api/articles";
 import getImageHeight from "./helpers/getImageHeight";
 import ArticleCard from "./ArticleCard";
-import { getMasonryArticleListTheme } from "@/lib/themes/masonry-article-list";
+import { getMASONRY_ARTICLE_LIST_THEME } from "@/lib/themes/masonry-article-list";
 
 
 const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
@@ -16,7 +16,7 @@ const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
     imageH: getImageHeight(article.id),
   }));
 
-  const theme = getMasonryArticleListTheme(data.theme);
+  const theme = getMASONRY_ARTICLE_LIST_THEME(data.theme);
 
   return (
     <section className="rounded-2xl" aria-labelledby="masonry-heading">

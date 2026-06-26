@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import CtaBtn from "@/components/common/CtaBtn";
 import { HERO_SLIDER_DATA } from "@/lib/types";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
-import { getHeroSliderTheme } from "@/lib/themes/hero-slider";
+import { getHERO_SLIDER_THEME } from "@/lib/themes/hero-slider";
 
 const FADE_MS = 400;
 
@@ -16,7 +16,7 @@ const AUTO_PLAY_INTERVAL = 5000;
 const HeroSlider = (data: HERO_SLIDER_DATA) => {
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
-  const theme = getHeroSliderTheme(data.theme);
+  const theme = getHERO_SLIDER_THEME(data.theme);
 
   const goto = useCallback(
     (index: number) => {

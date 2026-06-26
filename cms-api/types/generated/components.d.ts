@@ -29,7 +29,8 @@ export interface ArticleSlidesetList extends Struct.ComponentSchema {
     displayName: 'slideset-list';
   };
   attributes: {
-    header: Schema.Attribute.Component<'shared.block-header', true>;
+    header: Schema.Attribute.Component<'shared.block-header', false>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
   };
 }
 

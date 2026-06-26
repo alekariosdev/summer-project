@@ -2,7 +2,7 @@ import type { THEME } from '@/lib/types';
 import type { CompanySlug } from './companies';
 import { COMPANY_SLUGS } from './companies';
 
-export type HeroSliderTheme = {
+export type HERO_SLIDER_THEME = {
   companyAttr: CompanySlug;
   panel: string;
   accentLine: string;
@@ -16,7 +16,7 @@ export type HeroSliderTheme = {
   ringOffset: string;
 };
 
-export const heroSliderThemes = {
+export const HERO_SLIDER_THEMEs = {
   metlen: {
     companyAttr: 'metlen',
     panel: 'bg-metlen-primary',
@@ -56,7 +56,7 @@ export const heroSliderThemes = {
     dotFocus: 'focus-visible:ring-white',
     ringOffset: 'focus-visible:ring-offset-metka-primary',
   },
-} as const satisfies Record<CompanySlug, HeroSliderTheme>;
+} as const satisfies Record<CompanySlug, HERO_SLIDER_THEME>;
 
 export function getCompanySlug(name?: string): CompanySlug {
   const slug = name?.toLowerCase();
@@ -66,6 +66,6 @@ export function getCompanySlug(name?: string): CompanySlug {
   return 'metlen';
 }
 
-export function getHeroSliderTheme(theme?: THEME | null): HeroSliderTheme {
-  return heroSliderThemes[theme ?? 'metlen'];
+export function getHERO_SLIDER_THEME(theme?: THEME | null): HERO_SLIDER_THEME {
+  return HERO_SLIDER_THEMEs[theme ?? 'metlen'];
 }

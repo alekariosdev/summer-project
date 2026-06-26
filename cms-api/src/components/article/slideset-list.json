@@ -8,7 +8,15 @@
     "header": {
       "type": "component",
       "component": "shared.block-header",
-      "repeatable": true
+      "repeatable": false
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
     }
   },
   "config": {}

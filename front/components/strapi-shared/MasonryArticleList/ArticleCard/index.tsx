@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 import Badge from "@/components/common/Badge";
 import ArrowNEIcon from "../ArrowNEIcon";
 import { ARTICLE_DATA } from "@/lib/types";
-import { MasonryArticleListTheme } from "@/lib/themes/masonry-article-list";
+import { MASONRY_ARTICLE_LIST_THEME } from "@/lib/themes/masonry-article-list";
 
-const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: number }, theme: MasonryArticleListTheme }) => {
+const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: number }, theme: MASONRY_ARTICLE_LIST_THEME }) => {
   return (
     <article
       className="group overflow-hidden rounded-2xl bg-white shadow-sm
