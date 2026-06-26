@@ -19,7 +19,12 @@ export type AUTH_USER = {
   updatedAt: string;
 };
 
-export type BLOCK_DATA = CAROUSEL_DATA | HERO_SLIDER_DATA | MASONRY_LIST_DATA | SLIDESET_LIST_DATA;
+export type BLOCK_DATA =
+  | CAROUSEL_DATA
+  | HERO_SLIDER_DATA
+  | MASONRY_LIST_DATA
+  | SLIDESET_LIST_DATA
+  | SEPARATOR_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -211,6 +216,20 @@ export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER 
 
 export interface SLIDESET_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.slideset-list';
+}
+
+// ─── Separator ───────────────────────────────────────────────────────────────
+export type SEPARATOR_STYLE = 'blank' | 'line' | 'dashed' | 'dotted';
+export type SEPARATOR_SIZE = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export interface SEPARATOR_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.seperator';
+  style: SEPARATOR_STYLE;
+  size: SEPARATOR_SIZE;
+  color: string;
+  label: string;
+  hideOnMobile: boolean;
+  hideOnDesktop: boolean;
 }
 
 // ─── Dynamic page collection type ───────────────────────────────────────────

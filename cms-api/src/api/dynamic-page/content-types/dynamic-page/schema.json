@@ -42,7 +42,8 @@
       "components": [
         "article.masonry-list",
         "shared.hero-slider",
-        "article.slideset-list"
+        "article.slideset-list",
+        "shared.seperator"
       ]
     },
     "seo": {

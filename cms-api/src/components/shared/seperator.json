@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_seperators",
+  "info": {
+    "displayName": "seperator"
+  },
+  "options": {},
+  "attributes": {
+    "style": {
+      "type": "enumeration",
+      "enum": [
+        "blank",
+        "line",
+        "dashed",
+        "dotted"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "color": {
+      "type": "string",
+      "default": "#e5e7eb"
+    },
+    "label": {
+      "type": "string"
+    },
+    "hideOnMobile": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideOnDesktop": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

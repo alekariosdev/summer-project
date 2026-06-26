@@ -101,12 +101,20 @@ export const SLIDESET_LIST_POPULATE = {
   },
 };
 
+// Granular populate for shared.seperator blocks
+export const SEPARATOR_POPULATE = {
+  'shared.seperator': {
+    fields: ['label', 'style', 'size', 'color', 'hideOnMobile', 'hideOnDesktop'],
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
       ...MASONRY_LIST_POPULATE,
       ...HERO_SLIDER_POPULATE,
       ...SLIDESET_LIST_POPULATE,
+      ...SEPARATOR_POPULATE,
     },
   },
 };

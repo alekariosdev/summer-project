@@ -3,10 +3,10 @@ import { CACHE_TAGS } from '../cache';
 import { DYNAMIC_PAGE_POPULATE } from '../query-builder';
 import type { DYNAMIC_PAGE_ENTRY, STRAPI_RESPONSE } from '@/lib/types';
 
-export async function getDynamicPageBySlug(
+export const getDynamicPageBySlug = async (
   slug: string,
   locale?: string
-): Promise<DYNAMIC_PAGE_ENTRY | null> {
+): Promise<DYNAMIC_PAGE_ENTRY | null> => {
   try {
     const { data } = await strapiGet<DYNAMIC_PAGE_ENTRY[]>('/dynamic-pages', {
       params: {
@@ -16,9 +16,7 @@ export async function getDynamicPageBySlug(
         ...(locale && { locale }),
       },
       cache: {
-        type: 'revalidate',
-        seconds: 60,
-        tags: [CACHE_TAGS.dynamicPage, CACHE_TAGS.dynamicPageBySlug(slug)],
+        type: 'no-store',
       },
     });
 
@@ -27,9 +25,9 @@ export async function getDynamicPageBySlug(
     console.error('[getDynamicPageBySlug]', err);
     return null;
   }
-}
+};
 
-export async function getDynamicPageSlugs(locale?: string): Promise<string[]> {
+export const getDynamicPageSlugs = async (locale?: string): Promise<string[]> => {
   try {
     const { data } = await strapiGet<DYNAMIC_PAGE_ENTRY[]>('/dynamic-pages', {
       params: {
@@ -49,13 +47,13 @@ export async function getDynamicPageSlugs(locale?: string): Promise<string[]> {
     console.error('[getDynamicPageSlugs]', err);
     return [];
   }
-}
+};
 
-export async function getDynamicPageList(
+export const getDynamicPageList = async (
   page = 1,
   pageSize = 10,
   locale?: string
-): Promise<STRAPI_RESPONSE<DYNAMIC_PAGE_ENTRY[]>> {
+): Promise<STRAPI_RESPONSE<DYNAMIC_PAGE_ENTRY[]>> => {
   return strapiGet<DYNAMIC_PAGE_ENTRY[]>('/dynamic-pages', {
     params: {
       fields: ['title', 'slug', 'createdAt'],
@@ -70,4 +68,4 @@ export async function getDynamicPageList(
       tags: [CACHE_TAGS.dynamicPage],
     },
   });
-}
+};

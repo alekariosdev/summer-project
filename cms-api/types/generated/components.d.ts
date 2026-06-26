@@ -187,6 +187,21 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSeperator extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seperators';
+  info: {
+    displayName: 'seperator';
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#e5e7eb'>;
+    hideOnDesktop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hideOnMobile: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']>;
+    style: Schema.Attribute.Enumeration<['blank', 'line', 'dashed', 'dotted']>;
+  };
+}
+
 export interface SharedSocialEmbed extends Struct.ComponentSchema {
   collectionName: 'components_shared_social_embeds';
   info: {
@@ -217,6 +232,7 @@ declare module '@strapi/strapi' {
       'shared.link': SharedLink;
       'shared.map': SharedMap;
       'shared.seo': SharedSeo;
+      'shared.seperator': SharedSeperator;
       'shared.social-embed': SharedSocialEmbed;
     }
   }

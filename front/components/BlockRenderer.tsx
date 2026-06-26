@@ -3,11 +3,10 @@ import Carousel from '@/components/strapi-shared/Carousel';
 import HeroSlider from '@/components/strapi-shared/HeroSlider';
 import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
 import { SlidesetAticleList } from '@/components/strapi-shared/SlidesetAticleList';
+import Separator from '@/components/strapi-shared/Seperator';
 import type { BLOCK_DATA } from '@/lib/types';
 
 const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list']);
-
-export const PAGE_CONTAINER_CLASS = 'mx-auto w-full max-w-[1440px]';
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
@@ -28,7 +27,10 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       node = <MasonryArticleList {...block} />;
       break;
     case 'article.slideset-list':
-      node = <SlidesetAticleList {...block} />;
+      node = <SlidesetAticleList />;
+      break;
+    case 'shared.seperator':
+      node = <Separator {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;
@@ -42,7 +44,7 @@ function renderBlock(block: BLOCK_DATA, index: number) {
   }
 
   return (
-    <div key={key} className={PAGE_CONTAINER_CLASS}>
+    <div key={key} className="section-container">
       {node}
     </div>
   );
