@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import CtaBtn from "@/components/common/CtaBtn";
 import { HERO_SLIDER_DATA } from "@/lib/types";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
-import { getHERO_SLIDER_THEME } from "@/lib/themes/hero-slider";
 
 const FADE_MS = 400;
 
@@ -16,7 +15,6 @@ const AUTO_PLAY_INTERVAL = 5000;
 const HeroSlider = (data: HERO_SLIDER_DATA) => {
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
-  const theme = getHERO_SLIDER_THEME(data.theme);
 
   const goto = useCallback(
     (index: number) => {
@@ -46,7 +44,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
   return (
     <section
       className="relative w-full"
-      data-company={theme.companyAttr}
+      data-company={data.theme}
     >
       <div
         className={cn(
@@ -56,8 +54,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
       >
         <div
           className={cn(
-            "h-full flex flex-col justify-center gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden",
-            theme.panel
+            "bg-brand-primary h-full flex flex-col justify-center gap-10 px-10 md:px-16 lg:px-24 py-14 lg:py-20 overflow-hidden",
           )}
         >
           <div
@@ -73,7 +70,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
               aria-hidden
               className={cn(
                 "hidden md:block w-[2px] shrink-0 self-stretch rounded-full",
-                theme.accentLine
+                data.theme === 'metlen' ? 'bg-white' : 'bg-black'
               )}
             />
             <div className="flex min-w-0 flex-1 flex-col gap-4 md:gap-7">
@@ -81,7 +78,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
                 <span
                   className={cn(
                     "inline-flex w-fit items-center rounded-md border px-3 py-1 text-xs md:text-sm",
-                    theme.badge
+                    data.theme === 'metlen' ? 'border-white/20 bg-white/5 text-white/80' : 'border-black/10 bg-black/5 text-black/80'
                   )}
                 >
                   {slide.badgeLabel}
@@ -90,7 +87,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
               <h1
                 className={cn(
                   "txt-h3 md:txt-h1 font-semibold leading-[1.15]",
-                  theme.heading
+                  data.theme === 'metlen' ? 'text-white' : 'text-black'
                 )}
               >
                 {slide.title}
@@ -99,14 +96,17 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
                 <p
                   className={cn(
                     "text-xs md:txt-medium font-normal leading-relaxed max-w-[440px] wrap-break-word",
-                    theme.subtitle
+                    data.theme === 'metlen' ? 'text-white/60' : 'text-black/70'
                   )}
                 >
                   {slide.subtitle}
                 </p>
               )}
               {slide.ctaButton && (
-                <CtaBtn {...slide.ctaButton} className={theme.cta} />
+                <CtaBtn {...slide.ctaButton}
+                  className={data.theme === 'metlen'
+                    ? 'border-transparent bg-white text-metlen-primary hover:bg-white/90 hover:text-metlen-primary'
+                    : 'border-transparent bg-black text-white hover:bg-black/90 hover:text-white'} />
               )}
             </div>
           </div>
@@ -122,11 +122,11 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
                   className={cn(
                     "rounded-full outline-none transition-all duration-300",
                     "focus-visible:ring-2 focus-visible:ring-offset-2",
-                    theme.dotFocus,
-                    theme.ringOffset,
+                    data.theme === 'metlen' ? 'focus-visible:ring-white' : 'focus-visible:ring-black',
+                    data.theme === 'metlen' ? 'focus-visible:ring-offset-metlen-primary' : 'focus-visible:ring-offset-protergia-primary',
                     i === active
-                      ? cn("h-2.5 w-2.5", theme.dotActive)
-                      : cn("h-2 w-2", theme.dotInactive)
+                      ? cn("h-2.5 w-2.5", data.theme === 'metlen' ? 'bg-white' : 'bg-black')
+                      : cn("h-2 w-2", data.theme === 'metlen' ? 'bg-white/30 hover:bg-white/55' : 'bg-black/30 hover:bg-black/55')
                   )}
                 />
               ))}
@@ -136,8 +136,8 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
         <div
           className={cn(
             "relative h-full overflow-hidden",
-            theme.panel,
             "transition-opacity ease-in-out",
+            "bg-brand-primary",
             fading ? "opacity-0" : "opacity-100"
           )}
           style={{ transitionDuration: `${FADE_MS}ms` }}

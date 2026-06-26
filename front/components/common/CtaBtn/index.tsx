@@ -4,11 +4,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type CtaBtnProps = CTA_BUTTON_DATA & {
+type CTA_BUTTON_PROPS = CTA_BUTTON_DATA & {
   className?: string;
 };
 
-const CtaBtn = ({ className, ...data }: CtaBtnProps) => {
+const CtaBtn = ({ className, ...data }: CTA_BUTTON_PROPS) => {
   return (
     <Button
       variant="outline"

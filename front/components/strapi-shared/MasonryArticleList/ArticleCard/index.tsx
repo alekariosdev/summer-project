@@ -4,9 +4,8 @@ import { cn } from "@/lib/utils";
 import Badge from "@/components/common/Badge";
 import ArrowNEIcon from "../ArrowNEIcon";
 import { ARTICLE_DATA } from "@/lib/types";
-import { MASONRY_ARTICLE_LIST_THEME } from "@/lib/themes/masonry-article-list";
 
-const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: number }, theme: MASONRY_ARTICLE_LIST_THEME }) => {
+const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }) => {
   return (
     <article
       className="group overflow-hidden rounded-2xl bg-white shadow-sm
@@ -45,7 +44,11 @@ const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: num
           <div className="pointer-events-none absolute left-3 top-3 z-10">
             <div className="flex gap-2">
               {article.tags.map((tag) => (
-                <Badge key={tag.id} label={tag.name} theme={theme} />
+                <Badge
+                  key={tag.id}
+                  label={tag.name}
+                  className="border-brand-secondary bg-brand-secondary"
+                  textClassName="txt-small font-weight-bold text-brand-text" />
               ))}
             </div>
           </div>
@@ -74,10 +77,10 @@ const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: num
         </div>
 
         <div className="p-4">
-          <h4 className={cn(theme.articleTitle, "mb-4")}>
+          <h4 className={cn("txt-h4 text-brand-text font-weight-medium leading-[100%]", "mb-4")}>
             {article.title}
           </h4>
-          <p className={cn(theme.articleSubtitle, "line-clamp-3 text-sm  text-gray-400")}>
+          <p className={cn("text-brand-text/70 txt-medium font-weight-normal leading-[125%]", "line-clamp-3 text-sm  text-gray-400")}>
             {article.subtitle}
           </p>
         </div>

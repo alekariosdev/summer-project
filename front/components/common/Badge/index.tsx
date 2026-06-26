@@ -1,12 +1,19 @@
 import { cn } from "@/lib/utils";
-import { MASONRY_ARTICLE_LIST_THEME } from "@/lib/themes/masonry-article-list";
 
-const Badge = ({ label, theme }: { label: string, theme: MASONRY_ARTICLE_LIST_THEME }) => {
+const Badge = ({ label, className, textClassName }: { label: string, className?: string, textClassName?: string }) => {
 
   return (
-    <span className={cn(theme.badge, theme.badgeText, 'px-3 py-[3px] rounded-lg')} role="note" aria-label={`Category: ${label}`}>
+    <div
+      className={cn(
+        "inline-flex items-center justify-center px-3 py-[3px] rounded-lg",
+        className,
+        textClassName,
+      )}
+      role="note"
+      aria-label={`Category: ${label}`}
+    >
       {label}
-    </span>
+    </div>
   );
 };
 
