@@ -1,34 +1,3 @@
-export interface CategoryData {
-  id: number;
-  documentId: string;
-  name: string;
-}
-
-export interface CompanyData {
-  id: number;
-  documentId: string;
-  name: string;
-}
-
-export interface TagData {
-  id: number;
-  documentId: string;
-  name: string;
-}
-
-export interface ArticleData {
-  id: number;
-  documentId: string;
-  title: string;
-  slug: string;
-  subtitle: string;
-  image: StrapiMedia;
-  featured: boolean;
-  categories: CategoryData[];
-  companies: CompanyData[];
-  tags: TagData[];
-}
-
 export type STRAPI_ROLE = {
   id: number;
   name: string;
@@ -50,9 +19,44 @@ export type AUTH_USER = {
   updatedAt: string;
 };
 
+export type BLOCK_DATA = CAROUSEL_DATA | HERO_SLIDER_DATA | MASONRY_LIST_DATA;
+
+export type THEME = 'metlen' | 'protergia' | 'metka';
+
+export interface CATEGORY_DATA {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface COMPANY_DATA {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface TAG_DATA {
+  id: number;
+  documentId: string;
+  name: string;
+}
+
+export interface ARTICLE_DATA {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  subtitle: string;
+  image: STRAPI_MEDIA;
+  featured: boolean;
+  categories: CATEGORY_DATA[];
+  companies: COMPANY_DATA[];
+  tags: TAG_DATA[];
+}
+
 // ─── Core Strapi ────────────────────────────────────────────────────────────
 
-export interface StrapiMeta {
+export interface STRAPI_META {
   pagination?: {
     page: number;
     pageSize: number;
@@ -61,12 +65,12 @@ export interface StrapiMeta {
   };
 }
 
-export interface StrapiResponse<T> {
+export interface STRAPI_RESPONSE<T> {
   data: T;
-  meta: StrapiMeta;
+  meta: STRAPI_META;
 }
 
-export interface StrapiMediaFormat {
+export interface STRAPI_MEDIA_FORMAT {
   url: string;
   width: number;
   height: number;
@@ -74,7 +78,7 @@ export interface StrapiMediaFormat {
   mime: string;
 }
 
-export interface StrapiMedia {
+export interface STRAPI_MEDIA {
   id: number;
   documentId: string;
   url: string;
@@ -82,23 +86,23 @@ export interface StrapiMedia {
   width?: number;
   height?: number;
   formats?: {
-    thumbnail?: StrapiMediaFormat;
-    small?: StrapiMediaFormat;
-    medium?: StrapiMediaFormat;
-    large?: StrapiMediaFormat;
+    thumbnail?: STRAPI_MEDIA_FORMAT;
+    small?: STRAPI_MEDIA_FORMAT;
+    medium?: STRAPI_MEDIA_FORMAT;
+    large?: STRAPI_MEDIA_FORMAT;
   };
 }
 
 // ─── Dynamic Zone base ──────────────────────────────────────────────────────
 
-export interface DynamicZoneBase {
+export interface DYNAMIC_ZONE_BASE {
   __component: string;
   id: number;
 }
 
 // ─── shared.badge ───────────────────────────────────────────────────────────
 
-export interface BadgeData {
+export interface BADGE_DATA {
   id: number;
   title: string;
   hex_color: string;
@@ -107,17 +111,17 @@ export interface BadgeData {
 
 // ─── shared.carousel-item ───────────────────────────────────────────────────
 
-export interface CarouselItemData {
+export interface CAROUSEL_ITEM_DATA {
   id: number;
-  badge?: BadgeData | null;
+  badge?: BADGE_DATA | null;
   title: string;
   subtitle?: string;
-  image?: StrapiMedia | null;
+  image?: STRAPI_MEDIA | null;
 }
 
 // ─── shared.carousel ────────────────────────────────────────────────────────
 
-export interface CarouselData extends DynamicZoneBase {
+export interface CAROUSEL_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'shared.carousel';
   title?: string;
   orientation: 'horizontal' | 'vertical';
@@ -128,12 +132,12 @@ export interface CarouselData extends DynamicZoneBase {
   showNavigation: boolean;
   showDots: boolean;
   slidesToScroll: number;
-  items?: CarouselItemData | CarouselItemData[] | null;
+  items?: CAROUSEL_ITEM_DATA | CAROUSEL_ITEM_DATA[] | null;
 }
 
 // ─── shared.cta-button ──────────────────────────────────────────────────────
 
-export interface CtaButtonData {
+export interface CTA_BUTTON_DATA {
   id: number;
   label?: string;
   icon?: string;
@@ -143,48 +147,48 @@ export interface CtaButtonData {
 
 // ─── shared.block-header ────────────────────────────────────────────────────
 
-export interface BlockHeaderData {
+export interface BLOCK_HEADER_DATA {
   id: number;
   title: string;
   subtitle?: string;
-  image?: StrapiMedia | null;
-  ctaButton?: CtaButtonData | null;
+  image?: STRAPI_MEDIA | null;
+  ctaButton?: CTA_BUTTON_DATA | null;
 }
 
-export interface WithBlockHeader {
-  header?: BlockHeaderData | null;
+export interface WITH_BLOCK_HEADER {
+  header?: BLOCK_HEADER_DATA | null;
 }
 
 // ─── shared.hero-slider ──────────────────────────────────────────────────────
 
-export interface HeroSliderItemData {
+export interface HERO_SLIDER_ITEM_DATA {
   id: number;
   title: string;
   subtitle?: string;
   badgeLabel?: string;
-  image?: StrapiMedia | null;
-  ctaButton?: CtaButtonData | null;
+  image?: STRAPI_MEDIA | null;
+  ctaButton?: CTA_BUTTON_DATA | null;
 }
 
-export interface HeroSliderData extends DynamicZoneBase {
+export interface HERO_SLIDER_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'shared.hero-slider';
-  slides: HeroSliderItemData[];
-  theme?: CompanyData | null;
+  slides: HERO_SLIDER_ITEM_DATA[];
+  theme?: THEME | null;
 }
 
 // ─── shared.seo ─────────────────────────────────────────────────────────────
 
-export interface SeoData {
+export interface SEO_DATA {
   id: number;
   meta_title?: string;
   meta_description?: string;
   canonical_url?: string;
-  og_image?: StrapiMedia | null;
+  og_image?: STRAPI_MEDIA | null;
 }
 
 // ─── article.masonry-list ───────────────────────────────────────────────────
 
-export interface ArticleFiltersData {
+export interface ARTICLE_FILTERS_DATA {
   featured_only: boolean;
   company_id: string;
   category_ids: string[];
@@ -192,29 +196,26 @@ export interface ArticleFiltersData {
   sort_by: 'newest' | 'oldest' | 'featured_first';
 }
 
-export interface FilteredArticlesData {
-  filters: ArticleFiltersData;
+export interface FILTERED_ARTICLES_DATA {
+  filters: ARTICLE_FILTERS_DATA;
   selected_ids: string[];
 }
 
-export interface MasonryListData extends DynamicZoneBase, WithBlockHeader {
+export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.masonry-list';
-  articles?: FilteredArticlesData | null;
+  articles?: FILTERED_ARTICLES_DATA | null;
+  theme?: THEME | null;
 }
-
-// ─── Dynamic zone blocks — extend as you add more components ────────────────
-
-export type BlockData = CarouselData | HeroSliderData | MasonryListData;
 
 // ─── Dynamic page collection type ───────────────────────────────────────────
 
-export interface DynamicPageEntry {
+export interface DYNAMIC_PAGE_ENTRY {
   id: number;
   documentId: string;
   title: string;
   slug: string;
-  blocks: BlockData[];
-  seo?: SeoData | null;
+  blocks: BLOCK_DATA[];
+  seo?: SEO_DATA | null;
   createdAt: string;
   updatedAt: string;
   publishedAt?: string | null;

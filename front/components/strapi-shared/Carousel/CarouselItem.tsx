@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { getStrapiImageProps } from '@/lib/strapi/normalize';
-import type { CarouselItemData } from './types';
+import type { CAROUSEL_ITEM_DATA } from './types';
 
 interface Props {
-  item: CarouselItemData;
+  item: CAROUSEL_ITEM_DATA;
 }
 
 const CarouselItem = ({ item }: Props) => {

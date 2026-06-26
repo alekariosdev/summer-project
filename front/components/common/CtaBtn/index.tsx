@@ -1,10 +1,10 @@
-import { CtaButtonData } from "@/lib/types";
+import { CTA_BUTTON_DATA } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type CtaBtnProps = CtaButtonData & {
+type CtaBtnProps = CTA_BUTTON_DATA & {
   className?: string;
 };
 

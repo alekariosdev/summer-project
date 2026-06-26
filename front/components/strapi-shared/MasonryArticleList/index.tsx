@@ -1,10 +1,11 @@
-import { MasonryListData } from "@/lib/types";
+import { MASONRY_LIST_DATA } from "@/lib/types";
 import { getArticlesByDocIds } from "@/lib/strapi/api/articles";
 import getImageHeight from "./helpers/getImageHeight";
 import ArticleCard from "./ArticleCard";
+import { getMasonryArticleListTheme } from "@/lib/themes/masonry-article-list";
 
 
-const MasonryPostList = async (data: MasonryListData) => {
+const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
 
   const articleDocIds = data.articles?.selected_ids ?? [];
 
@@ -14,6 +15,8 @@ const MasonryPostList = async (data: MasonryListData) => {
     ...article,
     imageH: getImageHeight(article.id),
   }));
+
+  const theme = getMasonryArticleListTheme(data.theme);
 
   return (
     <div className="min-h-screen sm:p-5 lg:p-8">
@@ -29,7 +32,7 @@ const MasonryPostList = async (data: MasonryListData) => {
         >
           {fixedHeightArticles.map((article) => (
             <li key={article.id} className="list-none">
-              <ArticleCard article={article} />
+              <ArticleCard article={article} theme={theme} />
             </li>
           ))}
         </ul>
@@ -38,4 +41,4 @@ const MasonryPostList = async (data: MasonryListData) => {
   );
 }
 
-export default MasonryPostList;
+export default MasonryArticleList;

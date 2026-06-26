@@ -1,17 +1,13 @@
-const Badge = ({ label }: { label: string }) => {
+import { cn } from "@/lib/utils";
+import { MasonryArticleListTheme } from "@/lib/themes/masonry-article-list";
+
+const Badge = ({ label, theme }: { label: string, theme: MasonryArticleListTheme }) => {
+
   return (
-    <span
-      className="
-        inline-flex items-center rounded-full
-        bg-cyan-400 px-3 py-[5px]
-        text-[11px] font-semibold tracking-wide text-white shadow-sm
-      "
-      role="note"
-      aria-label={`Category: ${label}`}
-    >
-      {label}
+    <span className={cn(theme.badge, 'px-3 py-[3px] rounded-lg')} role="note" aria-label={`Category: ${label}`}>
+      <span className={theme.badgeText}>{label}</span>
     </span>
   );
-}
+};
 
 export default Badge;

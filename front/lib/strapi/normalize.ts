@@ -1,4 +1,4 @@
-import type { StrapiMedia } from '@/lib/types';
+import type { STRAPI_MEDIA } from '@/lib/types';
 
 const STRAPI_MEDIA_PREFIX = '/strapi-media';
 
@@ -16,7 +16,7 @@ function toProxiedMediaPath(url: string): string {
   return `${STRAPI_MEDIA_PREFIX}/${path}`;
 }
 
-export function getStrapiMediaUrl(media?: StrapiMedia | null): string {
+export function getStrapiMediaUrl(media?: STRAPI_MEDIA | null): string {
   if (!media?.url) return '';
   return toProxiedMediaPath(media.url);
 }
@@ -26,7 +26,7 @@ export function getStrapiMediaUrl(media?: StrapiMedia | null): string {
 type FormatKey = 'thumbnail' | 'small' | 'medium' | 'large';
 
 export function getStrapiMediaFormat(
-  media?: StrapiMedia | null,
+  media?: STRAPI_MEDIA | null,
   preferred: FormatKey = 'medium'
 ): string {
   if (!media) return '';
@@ -36,7 +36,7 @@ export function getStrapiMediaFormat(
 
 // ─── Ready-to-use next/image props ──────────────────────────────────────────
 
-export function getStrapiImageProps(media?: StrapiMedia | null) {
+export function getStrapiImageProps(media?: STRAPI_MEDIA | null) {
   if (!media) return null;
   return {
     src: getStrapiMediaUrl(media),

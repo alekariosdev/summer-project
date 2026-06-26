@@ -1,14 +1,14 @@
-import { ArticleData } from '@/lib/types';
+import { ARTICLE_DATA } from '@/lib/types';
 import { strapiGet } from '../client';
 import { CACHE_TAGS } from '../cache';
 
-export async function getArticlesByDocIds(docIds: string[]): Promise<ArticleData[]> {
+export async function getArticlesByDocIds(docIds: string[]): Promise<ARTICLE_DATA[]> {
   if (docIds.length === 0) return [];
 
   const uniqueDocIds = [...new Set(docIds)];
 
   try {
-    const { data } = await strapiGet<ArticleData[]>('/articles', {
+    const { data } = await strapiGet<ARTICLE_DATA[]>('/articles', {
       params: {
         fields: ['documentId', 'title', 'slug', 'subtitle', 'featured'],
         populate: {
@@ -46,7 +46,7 @@ export async function getArticlesByDocIds(docIds: string[]): Promise<ArticleData
         return true;
       })
       .map(id => byDocId.get(id))
-      .filter((article): article is ArticleData => article != null);
+      .filter((article): article is ARTICLE_DATA => article != null);
   } catch (err) {
     console.error('[getArticlesByDocIds]', err);
     return [];

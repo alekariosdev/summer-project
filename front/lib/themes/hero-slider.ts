@@ -1,4 +1,4 @@
-import type { CompanyData } from '@/lib/types';
+import type { THEME } from '@/lib/types';
 import type { CompanySlug } from './companies';
 import { COMPANY_SLUGS } from './companies';
 
@@ -66,6 +66,6 @@ export function getCompanySlug(name?: string): CompanySlug {
   return 'metlen';
 }
 
-export function getHeroSliderTheme(theme?: CompanyData | null): HeroSliderTheme {
-  return heroSliderThemes[getCompanySlug(theme?.name)];
+export function getHeroSliderTheme(theme?: THEME | null): HeroSliderTheme {
+  return heroSliderThemes[theme ?? 'metlen'];
 }

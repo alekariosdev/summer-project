@@ -2,17 +2,17 @@ import { Fragment } from 'react';
 import Carousel from '@/components/strapi-shared/Carousel';
 import HeroSlider from '@/components/strapi-shared/HeroSlider';
 import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
-import type { BlockData } from '@/lib/types';
+import type { BLOCK_DATA } from '@/lib/types';
 
 const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider']);
 
 const PAGE_CONTAINER_CLASS = 'mx-auto w-full max-w-[1440px]';
 
 interface Props {
-  blocks: BlockData[] | null | undefined;
+  blocks: BLOCK_DATA[] | null | undefined;
 }
 
-function renderBlock(block: BlockData, index: number) {
+function renderBlock(block: BLOCK_DATA, index: number) {
   const key = `${block.__component}-${block.id ?? index}`;
   let node: React.ReactNode;
 

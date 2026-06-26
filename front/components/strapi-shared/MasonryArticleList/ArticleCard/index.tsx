@@ -3,9 +3,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Badge from "@/components/common/Badge";
 import ArrowNEIcon from "../ArrowNEIcon";
-import { ArticleData } from "@/lib/types";
+import { ARTICLE_DATA } from "@/lib/types";
+import { MasonryArticleListTheme } from "@/lib/themes/masonry-article-list";
 
-const ArticleCard = ({ article }: { article: ArticleData & { imageH: number } }) => {
+const ArticleCard = ({ article, theme }: { article: ARTICLE_DATA & { imageH: number }, theme: MasonryArticleListTheme }) => {
   return (
     <article
       className="group overflow-hidden rounded-2xl bg-white shadow-sm
@@ -19,8 +20,8 @@ const ArticleCard = ({ article }: { article: ArticleData & { imageH: number } })
                    focus-visible:ring-violet-500 focus-visible:ring-offset-2"
       >
         <div
-          className="relative w-full overflow-hidden rounded-2xl"
-          style={{ height: `${article.imageH}px` }}
+          className="relative h-[200px] w-full overflow-hidden rounded-2xl sm:h-(--image-h)"
+          style={{ "--image-h": `${article.imageH}px` } as React.CSSProperties}
         >
           <Image
             src={getStrapiMediaUrl(article.image)}
@@ -36,7 +37,6 @@ const ArticleCard = ({ article }: { article: ArticleData & { imageH: number } })
             )}
           />
 
-          {/* Scrim */}
           <div
             className="pointer-events-none absolute inset-0 from-black/25 via-transparent to-transparent"
             aria-hidden="true"
@@ -45,7 +45,7 @@ const ArticleCard = ({ article }: { article: ArticleData & { imageH: number } })
           <div className="pointer-events-none absolute left-3 top-3 z-10">
             <div className="flex gap-2">
               {article.tags.map((tag) => (
-                <Badge key={tag.id} label={tag.name} />
+                <Badge key={tag.id} label={tag.name} theme={theme} />
               ))}
             </div>
           </div>
@@ -73,12 +73,11 @@ const ArticleCard = ({ article }: { article: ArticleData & { imageH: number } })
           </div>
         </div>
 
-        {/* ── Text ── */}
         <div className="p-4">
-          <h2 className="mb-1.5 text-[15px] font-bold leading-snug text-gray-900">
+          <h4 className={cn(theme.articleTitle, "mb-4")}>
             {article.title}
-          </h2>
-          <p className="line-clamp-3 text-sm leading-relaxed text-gray-400">
+          </h4>
+          <p className={cn(theme.articleSubtitle, "line-clamp-3 text-sm  text-gray-400")}>
             {article.subtitle}
           </p>
         </div>

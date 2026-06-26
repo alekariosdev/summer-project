@@ -12,11 +12,11 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import CarouselCard from './CarouselItem';
-import type { CarouselItemData, CarouselProps } from './types';
+import type { CAROUSEL_ITEM_DATA, CarouselProps } from './types';
 
 function normalizeItems(
-  items?: CarouselItemData | CarouselItemData[] | null
-): CarouselItemData[] {
+  items?: CAROUSEL_ITEM_DATA | CAROUSEL_ITEM_DATA[] | null
+): CAROUSEL_ITEM_DATA[] {
   if (!items) return [];
   return Array.isArray(items) ? items : [items];
 }

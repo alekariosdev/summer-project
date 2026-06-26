@@ -13,13 +13,13 @@
   --color-metlen-primary: #0a2240;
   --color-metlen-text: #0a2240;
   --color-metlen-accent: #0a2240;
-  --color-metlen-secondary: #0a2240;
+  --color-metlen-secondary: #00e1ff;
   --color-protergia-primary: #ff9800;
-  --color-protergia-text: #000000;
+  --color-protergia-text: #002a47;
   --color-protergia-accent: #47008f;
-  --color-protergia-secondary: #47008f;
-  --color-metka-primary: #002a47;
-  --color-metka-text: #002a47;
+  --color-protergia-secondary: #d7cdb4;
+  --color-metka-primary: #ffedcc;
+  --color-metka-text: #000000;
   --color-metka-accent: #406680;
   --color-metka-secondary: #d7cdb4;
 
@@ -40,9 +40,11 @@
   --txt-h2: 2.5rem; /* 40px */
   --txt-h2--line-height: 1.2;
   --txt-h3: 2rem; /* 32px */
-  --txt-h3--line-height: 1.25;
+  --txt-h3--line-height: 1.2;
+  --txt-h4: 1.5rem; /* 24px */
+  --txt-h4--line-height: 1.2;
   --txt-h5: 1.125rem; /* 18px */
-  --txt-h5--line-height: 1.5;
+  --txt-h5--line-height: 1.2;
   --txt-large: 1rem; /* 16px */
   --txt-large--line-height: 1.5;
   --txt-medium: 0.875rem; /* 14px */
@@ -104,32 +106,54 @@
 
 @utility txt-h2 {
   font-size: var(--txt-h2);
-  line-height: var(--txt-h2--line-height);
 }
 
 @utility txt-h3 {
   font-size: var(--txt-h3);
-  line-height: var(--txt-h3--line-height);
+}
+
+@utility txt-h4 {
+  font-size: var(--txt-h4);
 }
 
 @utility txt-h5 {
   font-size: var(--txt-h5);
-  line-height: var(--txt-h5--line-height);
 }
 
 @utility txt-large {
   font-size: var(--txt-large);
-  line-height: var(--txt-large--line-height);
 }
 
 @utility txt-medium {
   font-size: var(--txt-medium);
-  line-height: var(--txt-medium--line-height);
 }
 
 @utility txt-small {
   font-size: var(--txt-small);
-  line-height: var(--txt-small--line-height);
+}
+
+@utility font-weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+@utility font-weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+@utility font-weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+@utility txt-color-metlen {
+  color: var(--color-metlen-text);
+}
+
+@utility txt-color-protergia {
+  color: var(--color-protergia-text);
+}
+
+@utility txt-color-metka {
+  color: var(--color-metka-text);
 }
 
 @layer base {

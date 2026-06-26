@@ -13,6 +13,15 @@
     "articles": {
       "type": "customField",
       "customField": "plugin::filtered-articles.filtered-articles"
+    },
+    "theme": {
+      "type": "enumeration",
+      "default": "metlen",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
     }
   },
   "config": {}

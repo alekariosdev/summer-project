@@ -11,9 +11,12 @@
       "repeatable": true
     },
     "theme": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::company.company"
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
     }
   },
   "config": {}

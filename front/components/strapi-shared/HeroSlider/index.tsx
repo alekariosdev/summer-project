@@ -5,7 +5,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import CtaBtn from "@/components/common/CtaBtn";
-import { HeroSliderData } from "@/lib/types";
+import { HERO_SLIDER_DATA } from "@/lib/types";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
 import { getHeroSliderTheme } from "@/lib/themes/hero-slider";
 
@@ -13,7 +13,7 @@ const FADE_MS = 400;
 
 const AUTO_PLAY_INTERVAL = 5000;
 
-const HeroSlider = (data: HeroSliderData) => {
+const HeroSlider = (data: HERO_SLIDER_DATA) => {
   const [active, setActive] = useState(0);
   const [fading, setFading] = useState(false);
   const theme = getHeroSliderTheme(data.theme);

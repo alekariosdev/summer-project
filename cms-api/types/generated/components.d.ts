@@ -19,6 +19,7 @@ export interface ArticleMasonryList extends Struct.ComponentSchema {
   attributes: {
     articles: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
     header: Schema.Attribute.Component<'shared.block-header', false>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
 
@@ -97,7 +98,7 @@ export interface SharedHeroSlider extends Struct.ComponentSchema {
   };
   attributes: {
     slides: Schema.Attribute.Component<'shared.hero-slider-item', true>;
-    theme: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
   };
 }
 

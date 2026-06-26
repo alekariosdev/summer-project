@@ -81,7 +81,6 @@ export const HERO_SLIDER_POPULATE = {
           ctaButton: true,
         },
       },
-      theme: true,
     },
   },
 };

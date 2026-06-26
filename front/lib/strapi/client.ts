@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { STRAPI_CONFIG } from './config';
-import type { StrapiResponse } from '@/lib/types';
+import type { STRAPI_RESPONSE } from '@/lib/types';
 import { getSessionToken } from '@/lib/auth';
 
 // ─── Error ──────────────────────────────────────────────────────────────────
@@ -57,7 +57,7 @@ function buildCacheInit(strategy?: CacheStrategy): RequestInit {
 export async function strapiGet<T>(
   path: string,
   { params, cache, headers = {} }: StrapiGetOptions = {}
-): Promise<StrapiResponse<T>> {
+): Promise<STRAPI_RESPONSE<T>> {
   const query = params ? `?${qs.stringify(params, { encodeValuesOnly: true })}` : '';
   const token = await getSessionToken();
   const url = `${STRAPI_CONFIG.url}${STRAPI_CONFIG.apiPrefix}${path}${query}`;
@@ -76,7 +76,7 @@ export async function strapiGet<T>(
     throw new StrapiError(res.status, `[Strapi] ${res.status} ${res.statusText}`, body);
   }
 
-  return res.json() as Promise<StrapiResponse<T>>;
+  return res.json() as Promise<STRAPI_RESPONSE<T>>;
 }
 
 // ─── POST/PUT/DELETE (mutations — always no-store) ──────────────────────────
@@ -85,7 +85,7 @@ export async function strapiMutate<T>(
   path: string,
   method: 'POST' | 'PUT' | 'DELETE',
   body?: unknown
-): Promise<StrapiResponse<T>> {
+): Promise<STRAPI_RESPONSE<T>> {
   const url = `${STRAPI_CONFIG.url}${STRAPI_CONFIG.apiPrefix}${path}`;
   const token = await getSessionToken();
   const res = await fetch(url, {
@@ -103,5 +103,5 @@ export async function strapiMutate<T>(
     throw new StrapiError(res.status, `[Strapi] ${res.status} ${res.statusText}`, err);
   }
 
-  return res.json() as Promise<StrapiResponse<T>>;
+  return res.json() as Promise<STRAPI_RESPONSE<T>>;
 }
