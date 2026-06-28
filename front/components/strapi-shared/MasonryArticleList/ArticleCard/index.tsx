@@ -6,6 +6,7 @@ import ArrowNEIcon from "../ArrowNEIcon";
 import { ARTICLE_DATA } from "@/lib/types";
 
 const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }) => {
+
   return (
     <article
       className="group overflow-hidden rounded-2xl bg-white shadow-sm
@@ -22,6 +23,7 @@ const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }
           className="relative h-[200px] w-full overflow-hidden rounded-2xl sm:h-(--image-h)"
           style={{ "--image-h": `${article.imageH}px` } as React.CSSProperties}
         >
+
           <Image
             src={getStrapiMediaUrl(article.image)}
             alt={article.image.alternativeText ?? ''}
@@ -78,7 +80,7 @@ const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }
 
         <div className="p-4">
           <h4 className={cn("txt-h4 text-brand-text font-weight-medium leading-[100%]", "mb-4")}>
-            {article.title}
+            {article.title} {article.imageH}px
           </h4>
           <p className={cn("text-brand-text/70 txt-medium font-weight-normal leading-[125%]", "line-clamp-3 text-sm  text-gray-400")}>
             {article.subtitle}

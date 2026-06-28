@@ -217,6 +217,8 @@ export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER 
 export interface SLIDESET_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.slideset-list';
   header?: BLOCK_HEADER_DATA | null;
+  slides?: FILTERED_ARTICLES_DATA | null;
+  cards?: FILTERED_ARTICLES_DATA | null;
   theme?: THEME | null;
 }
 

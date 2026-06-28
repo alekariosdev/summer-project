@@ -427,12 +427,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    author: Schema.Attribute.Component<'article.author', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     categories: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
     companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;

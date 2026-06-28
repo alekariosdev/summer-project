@@ -64,16 +64,6 @@
       },
       "default": false
     },
-    "author": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "article.author",
-      "repeatable": false
-    },
     "original_published_at": {
       "type": "date",
       "pluginOptions": {

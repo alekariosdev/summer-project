@@ -29,7 +29,9 @@ export interface ArticleSlidesetList extends Struct.ComponentSchema {
     displayName: 'slideset-list';
   };
   attributes: {
+    cards: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
     header: Schema.Attribute.Component<'shared.block-header', false>;
+    slides: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
     theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
   };
 }

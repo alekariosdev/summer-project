@@ -17,6 +17,14 @@
         "metka",
         "protergia"
       ]
+    },
+    "slides": {
+      "type": "customField",
+      "customField": "plugin::filtered-articles.filtered-articles"
+    },
+    "cards": {
+      "type": "customField",
+      "customField": "plugin::filtered-articles.filtered-articles"
     }
   },
   "config": {}

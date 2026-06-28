@@ -10,9 +10,9 @@ const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
 
   const articles = await getArticlesByDocIds(articleDocIds);
 
-  const fixedHeightArticles = articles.map((article) => ({
+  const fixedHeightArticles = articles.map((article, id) => ({
     ...article,
-    imageH: getImageHeight(article.id),
+    imageH: getImageHeight(id),
   }));
 
 

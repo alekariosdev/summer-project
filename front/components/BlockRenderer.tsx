@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import Carousel from '@/components/strapi-shared/Carousel';
 import HeroSlider from '@/components/strapi-shared/HeroSlider';
 import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
-import SlidesetAticleList from '@/components/strapi-shared/SlidesetAticleList';
+import SlidesetAticles from '@/components/strapi-shared/SlidesetAticles';
 import Separator from '@/components/strapi-shared/Seperator';
 import type { BLOCK_DATA } from '@/lib/types';
 
@@ -27,7 +27,7 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       node = <MasonryArticleList {...block} />;
       break;
     case 'article.slideset-list':
-      node = <SlidesetAticleList {...block} />;
+      node = <SlidesetAticles {...block} />;
       break;
     case 'shared.seperator':
       node = <Separator {...block} />;
