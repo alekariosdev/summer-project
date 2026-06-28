@@ -24,7 +24,8 @@ export type BLOCK_DATA =
   | HERO_SLIDER_DATA
   | MASONRY_LIST_DATA
   | SLIDESET_LIST_DATA
-  | SEPARATOR_DATA;
+  | SEPARATOR_DATA
+  | WIDGET_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -234,6 +235,17 @@ export interface SEPARATOR_DATA extends DYNAMIC_ZONE_BASE {
   label: string;
   hideOnMobile: boolean;
   hideOnDesktop: boolean;
+}
+
+// ─── shared.widget ────────────────────────────────────────────────────────────
+
+export interface WIDGET_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.widget';
+  title: string;
+  subtitle: string;
+  image: STRAPI_MEDIA;
+  cta: CTA_BUTTON_DATA;
+  theme?: THEME | null;
 }
 
 // ─── Dynamic page collection type ───────────────────────────────────────────

@@ -5,6 +5,7 @@ import MasonryArticleList from '@/components/strapi-shared/MasonryArticleList';
 import SlidesetAticles from '@/components/strapi-shared/SlidesetAticles';
 import Separator from '@/components/strapi-shared/Seperator';
 import type { BLOCK_DATA } from '@/lib/types';
+import Widget from './strapi-shared/Widget';
 
 const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list']);
 
@@ -31,6 +32,9 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       break;
     case 'shared.seperator':
       node = <Separator {...block} />;
+      break;
+    case 'shared.widget':
+      node = <Widget {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

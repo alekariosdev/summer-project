@@ -80,7 +80,7 @@ const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }
 
         <div className="p-4">
           <h4 className={cn("txt-h4 text-brand-text font-weight-medium leading-[100%]", "mb-4")}>
-            {article.title} {article.imageH}px
+            {article.title}
           </h4>
           <p className={cn("text-brand-text/70 txt-medium font-weight-normal leading-[125%]", "line-clamp-3 text-sm  text-gray-400")}>
             {article.subtitle}

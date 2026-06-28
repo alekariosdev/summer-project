@@ -43,7 +43,8 @@
         "article.masonry-list",
         "shared.hero-slider",
         "article.slideset-list",
-        "shared.seperator"
+        "shared.seperator",
+        "shared.widget"
       ]
     },
     "seo": {

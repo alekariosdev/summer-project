@@ -218,6 +218,19 @@ export interface SharedSocialEmbed extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedWidget extends Struct.ComponentSchema {
+  collectionName: 'components_shared_widgets';
+  info: {
+    displayName: 'widget';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'shared.cta-button', false>;
+    image: Schema.Attribute.Media<'images'>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -237,6 +250,7 @@ declare module '@strapi/strapi' {
       'shared.seo': SharedSeo;
       'shared.seperator': SharedSeperator;
       'shared.social-embed': SharedSocialEmbed;
+      'shared.widget': SharedWidget;
     }
   }
 }

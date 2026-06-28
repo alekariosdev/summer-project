@@ -108,6 +108,18 @@ export const SEPARATOR_POPULATE = {
   },
 };
 
+// Granular populate for shared.widget blocks
+export const WIDGET_POPULATE = {
+  'shared.widget': {
+    populate: {
+      image: {
+        fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+      },
+      cta: true,
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -115,6 +127,7 @@ export const BLOCKS_POPULATE = {
       ...HERO_SLIDER_POPULATE,
       ...SLIDESET_LIST_POPULATE,
       ...SEPARATOR_POPULATE,
+      ...WIDGET_POPULATE,
     },
   },
 };
