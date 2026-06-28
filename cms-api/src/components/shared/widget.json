@@ -23,6 +23,14 @@
       "type": "component",
       "component": "shared.cta-button",
       "repeatable": false
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
     }
   },
   "config": {}

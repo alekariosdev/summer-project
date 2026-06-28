@@ -227,6 +227,7 @@ export interface SharedWidget extends Struct.ComponentSchema {
     cta: Schema.Attribute.Component<'shared.cta-button', false>;
     image: Schema.Attribute.Media<'images'>;
     subtitle: Schema.Attribute.Text;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
