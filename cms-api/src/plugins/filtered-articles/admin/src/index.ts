@@ -1,46 +1,35 @@
 // admin/src/index.ts
 
-import { getTranslation } from './utils/getTranslation'
-import { PLUGIN_ID }      from './pluginId'
-import { Initializer }    from './components/Initializer'
-import { PluginIcon }     from './components/PluginIcon'
+import { getTranslation } from './utils/getTranslation';
+import { PLUGIN_ID } from './pluginId';
+import { Initializer } from './components/Initializer';
+import { PluginIcon } from './components/PluginIcon';
 
-import type { StrapiApp }     from '@strapi/strapi/admin'
-import type { ComponentType } from 'react'
+import type { StrapiApp } from '@strapi/strapi/admin';
+import type { ComponentType } from 'react';
 
 const plugin: StrapiApp['appPlugins'][string] = {
   register(app) {
-    app.addMenuLink({
-      to: `plugins/${PLUGIN_ID}`,
-      icon: PluginIcon,
-      intlLabel: {
-        id:             `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: PLUGIN_ID,
-      },
-      Component:   () => import('./pages/App'),
-      permissions: [],
-    })
-
     app.registerPlugin({
-      id:          PLUGIN_ID,
+      id: PLUGIN_ID,
       initializer: Initializer,
-      isReady:     false,
-      name:        PLUGIN_ID,
-    })
+      isReady: false,
+      name: PLUGIN_ID,
+    });
 
     app.customFields.register({
-      name:     'filtered-articles',
+      name: 'filtered-articles',
       pluginId: PLUGIN_ID,
-      type:     'json',
+      type: 'json',
       intlLabel: {
-        id:             `${PLUGIN_ID}.filtered-articles.label`,
+        id: `${PLUGIN_ID}.filtered-articles.label`,
         defaultMessage: 'Filtered Articles',
       },
       intlDescription: {
-        id:             `${PLUGIN_ID}.filtered-articles.description`,
+        id: `${PLUGIN_ID}.filtered-articles.description`,
         defaultMessage: 'Filtered Articles',
       },
-      icon:       PluginIcon,
+      icon: PluginIcon,
       components: {
         Input: async (): Promise<{ default: ComponentType }> =>
           import('./components/FilteredArticles').then((mod) => ({
@@ -48,7 +37,7 @@ const plugin: StrapiApp['appPlugins'][string] = {
           })),
       },
       options: {},
-    })
+    });
   },
 
   registerTrads({ locales }) {
@@ -56,23 +45,23 @@ const plugin: StrapiApp['appPlugins'][string] = {
       locales.map(async (locale) => {
         try {
           const { default: data } = (await import(`./translations/${locale}.json`)) as {
-            default: Record<string, string>
-          }
+            default: Record<string, string>;
+          };
 
-          const newData: Record<string, string> = {}
-          const keys = Object.keys(data)
+          const newData: Record<string, string> = {};
+          const keys = Object.keys(data);
 
           for (const key of keys) {
-            newData[getTranslation(key)] = data[key]
+            newData[getTranslation(key)] = data[key];
           }
 
-          return { data: newData, locale }
+          return { data: newData, locale };
         } catch {
-          return { data: {}, locale }
+          return { data: {}, locale };
         }
       })
-    )
+    );
   },
-}
+};
 
-export default plugin
+export default plugin;
