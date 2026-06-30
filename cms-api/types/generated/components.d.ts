@@ -36,6 +36,18 @@ export interface ArticleSlidesetList extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleVerticalList extends Struct.ComponentSchema {
+  collectionName: 'components_article_vertical_lists';
+  info: {
+    displayName: 'vertical-list';
+  };
+  attributes: {
+    articles: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    header: Schema.Attribute.Component<'shared.block-header', false>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+  };
+}
+
 export interface SharedBadge extends Struct.ComponentSchema {
   collectionName: 'components_shared_badges';
   info: {
@@ -264,6 +276,7 @@ declare module '@strapi/strapi' {
       'article.author': ArticleAuthor;
       'article.masonry-list': ArticleMasonryList;
       'article.slideset-list': ArticleSlidesetList;
+      'article.vertical-list': ArticleVerticalList;
       'shared.badge': SharedBadge;
       'shared.block-header': SharedBlockHeader;
       'shared.cta-button': SharedCtaButton;

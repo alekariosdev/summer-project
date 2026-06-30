@@ -45,7 +45,8 @@
         "article.slideset-list",
         "shared.seperator",
         "shared.widget",
-        "shared.widget-grid"
+        "shared.widget-grid",
+        "article.vertical-list"
       ]
     },
     "seo": {

@@ -6,10 +6,11 @@ import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
 
 export function BannerCard({ data }: { data: WIDGET_CARD_GRID_DATA }) {
   return (
-    <div className="mx-auto w-full md:max-w-[300px] relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[20px]">
+    <div className="mx-auto w-full md:max-w-[300px] relative flex h-full min-h-[340px] flex-col 
+      overflow-hidden rounded-[20px] cursor-pointer hover:shadow-brand-accent-bottom transition-shadow duration-300">
       <Image
         src={getStrapiMediaUrl(data.image)}
-        alt={`${data.title} background`}
+        alt={`${data.image.alternativeText ?? ''}`}
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         className="object-cover"

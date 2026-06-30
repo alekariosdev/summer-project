@@ -8,7 +8,7 @@ import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
 export function ContentCard({ data }: { data: WIDGET_CARD_GRID_DATA }) {
   return (
     <div className="mx-auto w-full md:max-w-[300px] flex flex-col h-full overflow-hidden rounded-[20px] 
-    border border-gray-100/80 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+      border border-gray-100/80 bg-white shadow-sm hover:shadow-brand-accent-bottom transition-shadow duration-300 cursor-pointer">
       <div className="relative flex h-[200px] shrink-0 items-center justify-center overflow-hidden">
         <Image
           src={getStrapiMediaUrl(data.image)}

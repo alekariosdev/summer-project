@@ -26,7 +26,8 @@ export type BLOCK_DATA =
   | SLIDESET_LIST_DATA
   | SEPARATOR_DATA
   | WIDGET_DATA
-  | WIDGET_GRID_DATA;
+  | WIDGET_GRID_DATA
+  | VERTICAL_ARTICLE_LIST_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -265,6 +266,15 @@ export interface WIDGET_CARD_GRID_DATA extends DYNAMIC_ZONE_BASE {
 export interface WIDGET_GRID_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'shared.widget-grid';
   widgets: WIDGET_CARD_GRID_DATA[];
+  theme?: THEME | null;
+}
+
+// ─── article.vertical-list ───────────────────────────────────────────────────
+
+export interface VERTICAL_ARTICLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'article.vertical-list';
+  header?: BLOCK_HEADER_DATA | null;
+  articles: FILTERED_ARTICLES_DATA[];
   theme?: THEME | null;
 }
 

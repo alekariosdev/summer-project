@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_article_vertical_lists",
+  "info": {
+    "displayName": "vertical-list"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "component": "shared.block-header",
+      "repeatable": false
+    },
+    "articles": {
+      "type": "customField",
+      "customField": "plugin::filtered-articles.filtered-articles"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}

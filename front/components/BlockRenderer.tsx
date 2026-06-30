@@ -7,8 +7,9 @@ import Separator from '@/components/strapi-shared/Seperator';
 import type { BLOCK_DATA } from '@/lib/types';
 import Widget from './strapi-shared/Widget';
 import WidgetGrid from './strapi-shared/WidgetGrid';
+import VerticalArticleList from './strapi-shared/VerticalArticleList';
 
-const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list']);
+const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list', 'article.vertical-list']);
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
@@ -39,6 +40,9 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       break;
     case 'shared.widget-grid':
       node = <WidgetGrid {...block} />;
+      break;
+    case 'article.vertical-list':
+      node = <VerticalArticleList {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

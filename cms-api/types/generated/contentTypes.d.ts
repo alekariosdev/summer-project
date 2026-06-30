@@ -581,7 +581,15 @@ export interface ApiDynamicPageDynamicPage extends Struct.CollectionTypeSchema {
   };
   attributes: {
     blocks: Schema.Attribute.DynamicZone<
-      ['article.masonry-list', 'shared.hero-slider', 'article.slideset-list', 'shared.seperator', 'shared.widget', 'shared.widget-grid']
+      [
+        'article.masonry-list',
+        'shared.hero-slider',
+        'article.slideset-list',
+        'shared.seperator',
+        'shared.widget',
+        'shared.widget-grid',
+        'article.vertical-list',
+      ]
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

@@ -136,6 +136,22 @@ export const WIDGET_GRID_POPULATE = {
   },
 };
 
+// Granular populate for article.vertical-list blocks
+export const VERTICAL_ARTICLE_LIST_POPULATE = {
+  'article.vertical-list': {
+    populate: {
+      header: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+          ctaButton: true,
+        },
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -145,6 +161,7 @@ export const BLOCKS_POPULATE = {
       ...SEPARATOR_POPULATE,
       ...WIDGET_POPULATE,
       ...WIDGET_GRID_POPULATE,
+      ...VERTICAL_ARTICLE_LIST_POPULATE,
     },
   },
 };
