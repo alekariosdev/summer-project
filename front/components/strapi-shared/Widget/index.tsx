@@ -42,14 +42,14 @@ const Widget: React.FC<WIDGET_DATA> = ({
       <div className="flex-1 min-w-0 w-full text-center md:text-left">
         <div className="flex items-center justify-center gap-2.5 sm:gap-3 md:justify-start">
           <span className="shrink-0 inline-block w-[3px] h-6 sm:h-7 rounded-full " />
-          <h2 className="txt-h3 md:txt-h2 font-bold text-brand-text leading-tight md:truncate">
+          <h2 className="txt-headline font-bold text-brand-text leading-tight md:truncate">
             {title}
           </h2>
         </div>
         <p
           className="
             mt-1.5
-            txt-h5 md:txt-h4
+            txt-subtitle
             text-brand-text
             leading-snug
             font-weight-normal
@@ -69,7 +69,7 @@ const Widget: React.FC<WIDGET_DATA> = ({
           bg-brand-accent hover:bg-brand-accent/80 active:bg-brand-accent/90
           transition-colors duration-200
           text-white font-bold
-          txt-medium md:txt-large
+          txt-body
           px-4 md:px-5
           py-3 md:py-3.5
           md:mr-16

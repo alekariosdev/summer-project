@@ -18,11 +18,11 @@ export function BannerCard({ data }: { data: WIDGET_CARD_GRID_DATA }) {
       />
       <div className="relative z-10 flex flex-1 flex-col p-6">
         <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
-          <h3 className="whitespace-pre-line txt-h5 font-bold leading-tight text-brand-text">
+          <h3 className="whitespace-pre-line txt-lead font-bold leading-tight text-brand-text">
             {data.title}
           </h3>
           {data.subtitle && (
-            <p className="txt-h3 font-weight-bold text-brand-text">{data.subtitle}</p>
+            <p className="txt-title font-weight-bold text-brand-text">{data.subtitle}</p>
           )}
         </div>
         {data.cta && <Link

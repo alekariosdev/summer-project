@@ -86,7 +86,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
               )}
               <h1
                 className={cn(
-                  "txt-h3 md:txt-h1 font-semibold leading-[1.15]",
+                  "txt-display font-semibold leading-[1.15]",
                   data.theme === 'metlen' ? 'text-white' : 'text-black'
                 )}
               >
@@ -95,7 +95,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
               {slide.subtitle && (
                 <p
                   className={cn(
-                    "text-xs md:txt-medium font-normal leading-relaxed max-w-[440px] wrap-break-word",
+                    "txt-caption font-normal leading-relaxed max-w-[440px] wrap-break-word",
                     data.theme === 'metlen' ? 'text-white/60' : 'text-black/70'
                   )}
                 >

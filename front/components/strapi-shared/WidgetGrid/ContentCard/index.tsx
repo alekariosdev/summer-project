@@ -20,10 +20,10 @@ export function ContentCard({ data }: { data: WIDGET_CARD_GRID_DATA }) {
         />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-3">
-        <h3 className="txt-h5 font-bold leading-snug text-brand-text">
+        <h3 className="txt-lead font-bold leading-snug text-brand-text">
           {data.title}
         </h3>
-        <p className="flex-1 txt-medium font-weight-normal leading-[120%] text-brand-text">
+        <p className="flex-1 txt-caption font-weight-normal leading-[120%] text-brand-text">
           {data.description}
         </p>
         {data.cta && <Link

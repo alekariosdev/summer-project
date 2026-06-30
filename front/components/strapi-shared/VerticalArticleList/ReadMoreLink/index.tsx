@@ -8,9 +8,9 @@ const ReadMoreLink = ({ href }: { href: string }) => {
       href={href}
       className={cn(
         "group inline-flex items-center gap-1 whitespace-nowrap",
-        "text-sm font-medium text-violet-600 underline underline-offset-4",
-        "decoration-violet-400 transition-colors",
-        "hover:text-violet-800 hover:decoration-violet-600"
+        "txt-body font-weight-bold text-brand-accent underline underline-offset-4",
+        "decoration-brand-accent transition-colors",
+        "hover:text-brand-accent/80 hover:decoration-brand-accent/60"
       )}
     >
       <ArrowUpRight

@@ -274,7 +274,7 @@ export interface WIDGET_GRID_DATA extends DYNAMIC_ZONE_BASE {
 export interface VERTICAL_ARTICLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'article.vertical-list';
   header?: BLOCK_HEADER_DATA | null;
-  articles: FILTERED_ARTICLES_DATA[];
+  articles: FILTERED_ARTICLES_DATA;
   theme?: THEME | null;
 }
 

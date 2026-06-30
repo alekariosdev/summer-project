@@ -29,7 +29,7 @@ const SlidesetAticleLists = ({ data, slides, cards }: { data: SLIDESET_LIST_DATA
     <div className="section-container">
       {data.header &&
         <SectionHeader {...data.header}
-          classNames={{ container: 'mb-10', title: 'txt-h3 md:txt-h2 text-white', divider: 'bg-brand-secondary' }} />}
+          classNames={{ container: 'mb-10', title: 'txt-headline text-white', divider: 'bg-brand-secondary' }} />}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[400px_1fr]">
         <div className="w-full shrink-0">
           <Carousel
