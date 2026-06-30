@@ -26,8 +26,14 @@ const SectionHeader = ({
     <div className={cn("w-full flex items-center justify-between", classNames?.container)}>
       <div className="flex items-center gap-5">
         {image && (
-          <div className={cn('shrink-0', classNames?.image)}>
-            <Image src={image.url} alt={image.alternativeText ?? ''} fill />
+          <div className={cn('relative h-12 w-12 shrink-0', classNames?.image)}>
+            <Image
+              src={image.url}
+              alt={image.alternativeText ?? ''}
+              fill
+              sizes="48px"
+              className="object-contain"
+            />
           </div>
         )}
         <div className="flex items-stretch gap-3">

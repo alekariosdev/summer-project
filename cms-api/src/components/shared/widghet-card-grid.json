@@ -1,0 +1,60 @@
+{
+  "collectionName": "components_shared_widghet_card_grids",
+  "info": {
+    "displayName": "widghet-card-grid"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "banner"
+          ]
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "type"
+            },
+            "banner"
+          ]
+        }
+      }
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "cta": {
+      "type": "component",
+      "component": "shared.cta-button",
+      "repeatable": false
+    },
+    "type": {
+      "type": "enumeration",
+      "default": "content",
+      "enum": [
+        "content",
+        "banner"
+      ]
+    }
+  },
+  "config": {}
+}

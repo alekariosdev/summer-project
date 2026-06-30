@@ -25,7 +25,8 @@ export type BLOCK_DATA =
   | MASONRY_LIST_DATA
   | SLIDESET_LIST_DATA
   | SEPARATOR_DATA
-  | WIDGET_DATA;
+  | WIDGET_DATA
+  | WIDGET_GRID_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -245,6 +246,25 @@ export interface WIDGET_DATA extends DYNAMIC_ZONE_BASE {
   subtitle: string;
   image: STRAPI_MEDIA;
   cta: CTA_BUTTON_DATA;
+  theme?: THEME | null;
+}
+
+// ─── shared.widget-grid ──────────────────────────────────────────────────────
+
+export interface WIDGET_CARD_GRID_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.widghet-card-grid';
+  type: 'content' | 'banner';
+  title: string;
+  subtitle?: string;
+  description?: string;
+  image: STRAPI_MEDIA;
+  cta: CTA_BUTTON_DATA;
+  theme?: THEME | null;
+}
+
+export interface WIDGET_GRID_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.widget-grid';
+  widgets: WIDGET_CARD_GRID_DATA[];
   theme?: THEME | null;
 }
 

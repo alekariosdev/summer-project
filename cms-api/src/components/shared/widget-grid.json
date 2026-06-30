@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_widget_grids",
+  "info": {
+    "displayName": "widget-grid"
+  },
+  "options": {},
+  "attributes": {
+    "widgets": {
+      "type": "component",
+      "component": "shared.widghet-card-grid",
+      "repeatable": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}

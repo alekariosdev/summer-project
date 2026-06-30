@@ -232,6 +232,32 @@ export interface SharedWidget extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedWidgetGrid extends Struct.ComponentSchema {
+  collectionName: 'components_shared_widget_grids';
+  info: {
+    displayName: 'widget-grid';
+  };
+  attributes: {
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    widgets: Schema.Attribute.Component<'shared.widghet-card-grid', true>;
+  };
+}
+
+export interface SharedWidghetCardGrid extends Struct.ComponentSchema {
+  collectionName: 'components_shared_widghet_card_grids';
+  info: {
+    displayName: 'widghet-card-grid';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'shared.cta-button', false>;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['content', 'banner']> & Schema.Attribute.DefaultTo<'content'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -252,6 +278,8 @@ declare module '@strapi/strapi' {
       'shared.seperator': SharedSeperator;
       'shared.social-embed': SharedSocialEmbed;
       'shared.widget': SharedWidget;
+      'shared.widget-grid': SharedWidgetGrid;
+      'shared.widghet-card-grid': SharedWidghetCardGrid;
     }
   }
 }

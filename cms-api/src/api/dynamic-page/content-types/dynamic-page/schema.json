@@ -44,7 +44,8 @@
         "shared.hero-slider",
         "article.slideset-list",
         "shared.seperator",
-        "shared.widget"
+        "shared.widget",
+        "shared.widget-grid"
       ]
     },
     "seo": {

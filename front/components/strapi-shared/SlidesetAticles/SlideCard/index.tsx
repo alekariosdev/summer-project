@@ -12,6 +12,7 @@ const SlideCard = ({ slide }: { slide: ARTICLE_DATA }) => {
           loading="lazy"
           decoding="async"
           fill
+          sizes="(max-width: 1024px) 100vw, 400px"
           className="object-cover"
         />
       </div>

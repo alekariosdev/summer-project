@@ -120,6 +120,22 @@ export const WIDGET_POPULATE = {
   },
 };
 
+// Granular populate for shared.widget-grid blocks
+export const WIDGET_GRID_POPULATE = {
+  'shared.widget-grid': {
+    populate: {
+      widgets: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+          cta: true,
+        },
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -128,6 +144,7 @@ export const BLOCKS_POPULATE = {
       ...SLIDESET_LIST_POPULATE,
       ...SEPARATOR_POPULATE,
       ...WIDGET_POPULATE,
+      ...WIDGET_GRID_POPULATE,
     },
   },
 };

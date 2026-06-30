@@ -61,7 +61,7 @@ const Widget: React.FC<WIDGET_DATA> = ({
           {subtitle}
         </p>
       </div>
-      <Link
+      {cta && <Link
         href={cta.url ?? '#'}
         className="
           max-w-[200px] md:w-auto md:shrink-0
@@ -81,7 +81,7 @@ const Widget: React.FC<WIDGET_DATA> = ({
       >
         <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
         <span>{cta.label}</span>
-      </Link>
+      </Link>}
     </div>
   );
 };

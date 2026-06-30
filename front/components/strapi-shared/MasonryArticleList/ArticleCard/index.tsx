@@ -30,6 +30,7 @@ const ArticleCard = ({ article }: { article: ARTICLE_DATA & { imageH: number } }
             loading="lazy"
             decoding="async"
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className={cn(
               "absolute inset-0 h-full w-full object-cover",
               "scale-100 transition-transform duration-500 ease-out",

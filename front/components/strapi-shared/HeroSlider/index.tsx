@@ -49,7 +49,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
       <div
         className={cn(
           "grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_650px]",
-          "h-[500px] md:h-[560px] lg:h-[640px]"
+          "lg:h-[640px]"
         )}
       >
         <div
@@ -135,7 +135,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
         </div>
         <div
           className={cn(
-            "relative h-full overflow-hidden",
+            "relative h-[280px] shrink-0 overflow-hidden lg:h-full lg:min-h-0",
             "transition-opacity ease-in-out",
             "bg-brand-primary",
             fading ? "opacity-0" : "opacity-100"
@@ -147,6 +147,7 @@ const HeroSlider = (data: HERO_SLIDER_DATA) => {
             src={getStrapiMediaUrl(slide.image)}
             alt={slide.image.alternativeText ?? slide.title}
             fill
+            sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 400px, 650px"
             className="object-cover object-center"
             priority
           />}

@@ -126,6 +126,13 @@ services:
         condition: service_healthy # Wait for DB to be ready
     networks:
       - strapi-network
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:1337/_health || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+
     profiles:
       - dev # Only starts with --profile dev
 
@@ -149,6 +156,13 @@ services:
         condition: service_healthy
     networks:
       - strapi-network
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://127.0.0.1:1337/_health || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+
     profiles:
       - prod # Only starts with --profile prod
 
@@ -170,7 +184,8 @@ services:
       - /opt/app/node_modules # Prevent host node_modules override
       - /opt/app/.next # Keep build cache inside container
     depends_on:
-      - strapi-dev
+      strapi-dev:
+        condition: service_healthy
     networks:
       - strapi-network
     profiles:
@@ -195,7 +210,8 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - strapi-prod
+      strapi-prod:
+        condition: service_healthy
     networks:
       - strapi-network
     profiles:
