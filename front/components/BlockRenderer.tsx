@@ -13,7 +13,6 @@ const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-l
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
-  page?: number;
 }
 
 function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
@@ -63,10 +62,10 @@ function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
   );
 }
 
-const BlockRenderer = ({ blocks, page }: Props) => {
+const BlockRenderer = ({ blocks }: Props) => {
   if (!blocks?.length) return null;
 
-  return <>{blocks.map((block, index) => renderBlock(block, index, page))}</>;
+  return <>{blocks.map((block, index) => renderBlock(block, index))}</>;
 };
 
 export default BlockRenderer;

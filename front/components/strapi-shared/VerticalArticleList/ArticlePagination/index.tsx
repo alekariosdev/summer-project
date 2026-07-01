@@ -37,14 +37,14 @@ const ArticlePagination = ({
   const items = buildPageItems(currentPage, totalPages);
 
   const navBtnBase =
-    "flex h-9 w-9 items-center justify-center rounded-full text-gray-500 \
-     transition-colors hover:bg-violet-50 hover:text-violet-600 \
+    "h-9 w-9 rounded-none text-brand-text hover:bg-transparent hover:text-brand-text \
      disabled:pointer-events-none disabled:opacity-30";
 
   return (
     <nav aria-label="Events pagination" className="flex items-center justify-center gap-1 py-6">
       <Button
         type="button"
+        variant="ghost"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         aria-label="Previous page"
@@ -59,7 +59,7 @@ const ArticlePagination = ({
             key={`ellipsis-${index}`}
             aria-hidden="true"
             className="flex h-9 w-9 select-none items-center justify-center
-                       text-sm text-gray-400"
+                       text-sm font-medium text-brand-text"
           >
             ..
           </span>
@@ -67,14 +67,15 @@ const ArticlePagination = ({
           <Button
             key={item}
             type="button"
+            variant="ghost"
             onClick={() => onPageChange(item)}
             aria-label={`Page ${item}`}
             aria-current={currentPage === item ? "page" : undefined}
             className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-full text-sm font-medium transition-colors",
+              "h-9 w-9 rounded-none text-sm font-medium",
               currentPage === item
-                ? "bg-violet-600 text-white shadow-sm"
-                : "text-gray-600 hover:bg-violet-50 hover:text-violet-600"
+                ? "bg-brand-accent text-white hover:bg-brand-accent hover:text-white"
+                : "text-brand-text hover:bg-transparent hover:text-brand-text"
             )}
           >
             {item}
@@ -84,6 +85,7 @@ const ArticlePagination = ({
 
       <Button
         type="button"
+        variant="ghost"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         aria-label="Next page"
