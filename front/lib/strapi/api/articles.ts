@@ -10,7 +10,7 @@ export async function getArticlesByDocIds(docIds: string[]): Promise<ARTICLE_DAT
   try {
     const { data } = await strapiGet<ARTICLE_DATA[]>('/articles', {
       params: {
-        fields: ['documentId', 'title', 'slug', 'subtitle', 'featured'],
+        fields: ['documentId', 'title', 'slug', 'subtitle', 'featured', 'original_published_at'],
         populate: {
           image: {
             fields: ['url', 'alternativeText', 'width', 'height', 'formats'],

@@ -446,7 +446,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    original_published_at: Schema.Attribute.Date &
+    original_published_at: Schema.Attribute.DateTime &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

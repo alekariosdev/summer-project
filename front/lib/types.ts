@@ -55,6 +55,7 @@ export interface ARTICLE_DATA {
   title: string;
   slug: string;
   subtitle: string;
+  original_published_at: string;
   image: STRAPI_MEDIA;
   featured: boolean;
   categories: CATEGORY_DATA[];

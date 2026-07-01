@@ -65,7 +65,7 @@
       "default": false
     },
     "original_published_at": {
-      "type": "date",
+      "type": "datetime",
       "pluginOptions": {
         "i18n": {
           "localized": true

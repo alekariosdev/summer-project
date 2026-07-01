@@ -2,13 +2,10 @@ import Image from "next/image";
 import TagList from "../ArticleTags";
 import ReadMoreLink from "../ReadMoreLink";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
+import { formatPublishedDate } from "@/utils";
 import { ARTICLE_DATA } from "@/lib/types";
 
-
-
-
 const ArticleCard = ({ data }: { data: ARTICLE_DATA }) => {
-
   return (
     <article className="py-5 sm:py-6">
       <div className="space-y-3 md:hidden">
@@ -22,21 +19,21 @@ const ArticleCard = ({ data }: { data: ARTICLE_DATA }) => {
               sizes="(max-width: 768px) 100vw, 84px"
             />
           </div>
-          <h2 className="flex-1 text-[15px] font-semibold leading-snug text-gray-800">
+          <h2 className="flex-1 txt-subtitle font-semibold leading-snug text-brand-text">
             {data.title}
           </h2>
         </div>
-        {/* <p className="txt-caption font-weight-bold leading-[120%] text-brand-text">{data.date}</p> */}
+        <p className="txt-caption font-weight-bold leading-[120%] text-brand-text">{formatPublishedDate(data.original_published_at)}</p>
         <TagList tags={data.tags} />
-        <p className="line-clamp-2 text-sm leading-relaxed text-gray-500">
+        <p className="txt-body leading-[150%] text-brand-text/50">
           {data.subtitle}
         </p>
         <div className="flex justify-end pt-1">
           <ReadMoreLink href={data.slug} />
         </div>
       </div>
-      <div className="hidden md:flex items-center justify-between">
-        <div className="flex items-center gap-4 shrink-0 space-y-2 w-full max-w-[250px]">
+      <div className="hidden md:flex items-center">
+        <div className="flex items-center gap-4 shrink-0 space-y-2 w-full max-w-[400px]">
           <div className="relative h-[120px] w-[120px] overflow-hidden rounded-2xl">
             <Image
               src={getStrapiMediaUrl(data.image)}
@@ -46,8 +43,8 @@ const ArticleCard = ({ data }: { data: ARTICLE_DATA }) => {
               sizes="(max-width: 768px) 100vw, 120px"
             />
           </div>
-          <div >
-            {/* <p className="txt-caption font-weight-bold leading-[120%] text-brand-text">{event.date}</p> */}
+          <div>
+            <p className="txt-caption font-weight-bold leading-[120%] text-brand-text mb-2">{formatPublishedDate(data.original_published_at)}</p>
             <TagList tags={data.tags} />
           </div>
         </div>
@@ -55,11 +52,11 @@ const ArticleCard = ({ data }: { data: ARTICLE_DATA }) => {
           <h2 className="txt-subtitle text-brand-text font-semibold leading-snug">
             {data.title}
           </h2>
-          <p className="max-w-[480px] txt-body leading-[150%] text-brand-text/70">
+          <p className="max-w-[480px] txt-body leading-[150%] text-brand-text/50">
             {data.subtitle}
           </p>
         </div>
-        <div className="shrink-0 pt-0.5">
+        <div className="shrink-0 pt-0.5 ml-auto">
           <ReadMoreLink href={data.slug} />
         </div>
       </div>
