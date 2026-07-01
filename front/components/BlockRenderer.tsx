@@ -13,9 +13,10 @@ const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-l
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
+  page?: number;
 }
 
-function renderBlock(block: BLOCK_DATA, index: number) {
+function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
   const key = `${block.__component}-${block.id ?? index}`;
   let node: React.ReactNode;
 
@@ -42,7 +43,7 @@ function renderBlock(block: BLOCK_DATA, index: number) {
       node = <WidgetGrid {...block} />;
       break;
     case 'article.vertical-list':
-      node = <VerticalArticleList {...block} />;
+      node = <VerticalArticleList {...block} page={page} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;
@@ -62,10 +63,10 @@ function renderBlock(block: BLOCK_DATA, index: number) {
   );
 }
 
-const BlockRenderer = ({ blocks }: Props) => {
+const BlockRenderer = ({ blocks, page }: Props) => {
   if (!blocks?.length) return null;
 
-  return <>{blocks.map(renderBlock)}</>;
+  return <>{blocks.map((block, index) => renderBlock(block, index, page))}</>;
 };
 
 export default BlockRenderer;

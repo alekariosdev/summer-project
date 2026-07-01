@@ -1,10 +1,27 @@
-import { getArticlesByDocIds } from "@/lib/strapi/api/articles";
+import {
+  DEFAULT_ARTICLE_PAGE_SIZE,
+  getArticlesByDocIds,
+} from "@/lib/strapi/api/articles";
 import ArticleCard from "./ArticleCard";
+import ArticlePaginationNav from "./ArticlePaginationNav";
 import { VERTICAL_ARTICLE_LIST_DATA } from "@/lib/types";
 
+interface VerticalArticleListProps extends VERTICAL_ARTICLE_LIST_DATA {
+  page?: number;
+}
 
-const VerticalArticleList = async (data: VERTICAL_ARTICLE_LIST_DATA) => {
-  const articlesData = await getArticlesByDocIds(data.articles.selected_ids);
+const VerticalArticleList = async ({
+  page = 1,
+  ...data
+}: VerticalArticleListProps) => {
+  const { data: articlesData, meta } = await getArticlesByDocIds(
+    data.articles.selected_ids,
+    { page, pageSize: DEFAULT_ARTICLE_PAGE_SIZE }
+  );
+
+  const pagination = meta.pagination;
+  const currentPage = pagination?.page ?? 1;
+  const totalPages = pagination?.pageCount ?? 1;
 
   return (
     <section
@@ -22,13 +39,12 @@ const VerticalArticleList = async (data: VERTICAL_ARTICLE_LIST_DATA) => {
           )}
         </div>
       ))}
-      {/* <ArticlePagination
+      <ArticlePaginationNav
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      /> */}
+      />
     </section>
   );
-}
+};
 
 export default VerticalArticleList;

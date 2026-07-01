@@ -3,13 +3,15 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { PageItem } from "../types";
+
+type PageItem = number | "ellipsis";
 
 interface ArticlePaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
 }
+
 
 function buildPageItems(current: number, total: number): PageItem[] {
   if (total <= 7) {

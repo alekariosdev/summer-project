@@ -8,7 +8,7 @@ const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
 
   const articleDocIds = data.articles?.selected_ids ?? [];
 
-  const articles = await getArticlesByDocIds(articleDocIds);
+  const { data: articles } = await getArticlesByDocIds(articleDocIds);
 
   const fixedHeightArticles = articles.map((article, id) => ({
     ...article,
