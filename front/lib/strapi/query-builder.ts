@@ -152,6 +152,17 @@ export const VERTICAL_ARTICLE_LIST_POPULATE = {
   },
 };
 
+// Granular populate for shared.images-mosaic blocks
+export const IMAGES_MOSAIC_POPULATE = {
+  'shared.images-mosaic': {
+    populate: {
+      images: {
+        fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -162,6 +173,7 @@ export const BLOCKS_POPULATE = {
       ...WIDGET_POPULATE,
       ...WIDGET_GRID_POPULATE,
       ...VERTICAL_ARTICLE_LIST_POPULATE,
+      ...IMAGES_MOSAIC_POPULATE,
     },
   },
 };

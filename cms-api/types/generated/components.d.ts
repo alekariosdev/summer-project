@@ -156,6 +156,16 @@ export interface SharedImageTextGrid extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedImagesMosaic extends Struct.ComponentSchema {
+  collectionName: 'components_shared_images_mosaics';
+  info: {
+    displayName: 'images-mosaic';
+  };
+  attributes: {
+    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -285,6 +295,7 @@ declare module '@strapi/strapi' {
       'shared.hero-slider': SharedHeroSlider;
       'shared.hero-slider-item': SharedHeroSliderItem;
       'shared.image-text-grid': SharedImageTextGrid;
+      'shared.images-mosaic': SharedImagesMosaic;
       'shared.link': SharedLink;
       'shared.map': SharedMap;
       'shared.seo': SharedSeo;

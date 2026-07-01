@@ -46,7 +46,8 @@
         "shared.seperator",
         "shared.widget",
         "shared.widget-grid",
-        "article.vertical-list"
+        "article.vertical-list",
+        "shared.images-mosaic"
       ]
     },
     "seo": {

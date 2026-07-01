@@ -8,8 +8,9 @@ import type { BLOCK_DATA } from '@/lib/types';
 import Widget from './strapi-shared/Widget';
 import WidgetGrid from './strapi-shared/WidgetGrid';
 import VerticalArticleList from './strapi-shared/VerticalArticleList';
+import ImagesMosaic from './strapi-shared/ImagesMosaic';
 
-const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list', 'article.vertical-list']);
+const FULL_BLEED_COMPONENTS = new Set(['shared.hero-slider', 'article.slideset-list', 'article.vertical-list', 'shared.images-mosaic']);
 
 interface Props {
   blocks: BLOCK_DATA[] | null | undefined;
@@ -43,6 +44,9 @@ function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
       break;
     case 'article.vertical-list':
       node = <VerticalArticleList {...block} page={page} />;
+      break;
+    case 'shared.images-mosaic':
+      node = <ImagesMosaic {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

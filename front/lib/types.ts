@@ -21,6 +21,7 @@ export type AUTH_USER = {
 
 export type BLOCK_DATA =
   | CAROUSEL_DATA
+  | IMAGES_MOSAIC_DATA
   | HERO_SLIDER_DATA
   | MASONRY_LIST_DATA
   | SLIDESET_LIST_DATA
@@ -277,6 +278,13 @@ export interface VERTICAL_ARTICLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
   header?: BLOCK_HEADER_DATA | null;
   articles: FILTERED_ARTICLES_DATA;
   theme?: THEME | null;
+}
+
+// ─── shared.images-mosaic ───────────────────────────────────────────────────
+
+export interface IMAGES_MOSAIC_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.images-mosaic';
+  images: STRAPI_MEDIA[];
 }
 
 // ─── Dynamic page collection type ───────────────────────────────────────────

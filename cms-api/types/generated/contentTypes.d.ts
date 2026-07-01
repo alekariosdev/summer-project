@@ -589,6 +589,7 @@ export interface ApiDynamicPageDynamicPage extends Struct.CollectionTypeSchema {
         'shared.widget',
         'shared.widget-grid',
         'article.vertical-list',
+        'shared.images-mosaic',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
