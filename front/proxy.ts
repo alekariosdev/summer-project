@@ -44,7 +44,7 @@ function withLocale(locale: string, path: string): string {
   return locale === routing.defaultLocale ? path : `/${locale}${path}`;
 }
 
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export async function proxy(request: NextRequest): Promise<NextResponse> {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get(COOKIE_NAME)?.value;
 

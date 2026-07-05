@@ -23,7 +23,7 @@ const ImagesMosaic = ({ images }: IMAGES_MOSAIC_DATA) => {
 
   return (
     <div className="flex w-full flex-col gap-3 section-container">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {topRow.map((img, i) => (
           <MosaicTile
             key={img.id ?? `top-${i}`}
@@ -33,7 +33,7 @@ const ImagesMosaic = ({ images }: IMAGES_MOSAIC_DATA) => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {bottomRow.map((img, i) => (
           <MosaicTile
             key={img.id ?? `bot-${i}`}
