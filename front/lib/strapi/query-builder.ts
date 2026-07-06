@@ -184,6 +184,21 @@ export const EXTERNAL_LINKS_SLIDER_POPULATE = {
   },
 };
 
+// Granular populate for shared.people-list blocks
+export const PEOPLE_LIST_POPULATE = {
+  'event.people-list': {
+    populate: {
+      people: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+        },
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -196,6 +211,7 @@ export const BLOCKS_POPULATE = {
       ...VERTICAL_ARTICLE_LIST_POPULATE,
       ...IMAGES_MOSAIC_POPULATE,
       ...EXTERNAL_LINKS_SLIDER_POPULATE,
+      ...PEOPLE_LIST_POPULATE,
     },
   },
 };

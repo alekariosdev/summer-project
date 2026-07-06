@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_event_people_lists",
+  "info": {
+    "displayName": "people-list"
+  },
+  "options": {},
+  "attributes": {
+    "people": {
+      "type": "component",
+      "component": "event.person",
+      "repeatable": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -10,6 +10,7 @@ import WidgetGrid from './strapi-shared/WidgetGrid';
 import VerticalArticleList from './strapi-shared/VerticalArticleList';
 import ImagesMosaic from './strapi-shared/ImagesMosaic';
 import SliderExternalLinks from './strapi-shared/SliderExternalLinks';
+import PeopleList from './strapi-shared/PeopleList';
 
 const FULL_BLEED_COMPONENTS = new Set([
   'shared.hero-slider',
@@ -56,6 +57,9 @@ function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
       break;
     case 'article.external-links-slider':
       node = <SliderExternalLinks {...block} />;
+      break;
+    case 'event.people-list':
+      node = <PeopleList {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

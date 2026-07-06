@@ -29,7 +29,8 @@ export type BLOCK_DATA =
   | WIDGET_DATA
   | WIDGET_GRID_DATA
   | VERTICAL_ARTICLE_LIST_DATA
-  | EXTERNAL_LINKS_SLIDER_DATA;
+  | EXTERNAL_LINKS_SLIDER_DATA
+  | PEOPLE_LIST_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -311,6 +312,22 @@ export interface EXTERNAL_ARTICLES_CONFIG_DATA {
 export interface EXTERNAL_LINKS_SLIDER_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.external-links-slider';
   articles?: EXTERNAL_ARTICLES_CONFIG_DATA | null;
+  theme?: THEME | null;
+}
+
+// ─── shared.people-list ──────────────────────────────────────────────────────
+
+export interface PERSON_DATA {
+  id: number;
+  name: string;
+  title: string;
+  subtitle: string;
+  image: STRAPI_MEDIA;
+}
+
+export interface PEOPLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'event.people-list';
+  people: PERSON_DATA[];
   theme?: THEME | null;
 }
 

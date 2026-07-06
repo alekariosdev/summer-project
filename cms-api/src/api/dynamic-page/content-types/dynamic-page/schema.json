@@ -48,7 +48,8 @@
         "shared.widget-grid",
         "article.vertical-list",
         "shared.images-mosaic",
-        "article.external-links-slider"
+        "article.external-links-slider",
+        "event.people-list"
       ]
     },
     "seo": {

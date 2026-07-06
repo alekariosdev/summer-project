@@ -102,6 +102,30 @@ export interface ArticleVerticalList extends Struct.ComponentSchema {
   };
 }
 
+export interface EventPeopleList extends Struct.ComponentSchema {
+  collectionName: 'components_event_people_lists';
+  info: {
+    displayName: 'people-list';
+  };
+  attributes: {
+    people: Schema.Attribute.Component<'event.person', true>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+  };
+}
+
+export interface EventPerson extends Struct.ComponentSchema {
+  collectionName: 'components_event_people';
+  info: {
+    displayName: 'person';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedBadge extends Struct.ComponentSchema {
   collectionName: 'components_shared_badges';
   info: {
@@ -192,21 +216,6 @@ export interface SharedHeroSliderItem extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images'>;
     subtitle: Schema.Attribute.Text;
     title: Schema.Attribute.String;
-  };
-}
-
-export interface SharedImageTextGrid extends Struct.ComponentSchema {
-  collectionName: 'components_shared_image_text_grids';
-  info: {
-    displayName: 'image-text-grid';
-  };
-  attributes: {
-    alignment: Schema.Attribute.Enumeration<
-      ['row-left-image-right-text', 'row-left-text-right-image', 'column-top-image-bottom-text', 'column-top-text-bottom-image']
-    > &
-      Schema.Attribute.DefaultTo<'row-left-image-right-text'>;
-    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    text: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
@@ -344,6 +353,8 @@ declare module '@strapi/strapi' {
       'article.masonry-list': ArticleMasonryList;
       'article.slideset-list': ArticleSlidesetList;
       'article.vertical-list': ArticleVerticalList;
+      'event.people-list': EventPeopleList;
+      'event.person': EventPerson;
       'shared.badge': SharedBadge;
       'shared.block-header': SharedBlockHeader;
       'shared.cta-button': SharedCtaButton;
@@ -351,7 +362,6 @@ declare module '@strapi/strapi' {
       'shared.hero': SharedHero;
       'shared.hero-slider': SharedHeroSlider;
       'shared.hero-slider-item': SharedHeroSliderItem;
-      'shared.image-text-grid': SharedImageTextGrid;
       'shared.images-mosaic': SharedImagesMosaic;
       'shared.link': SharedLink;
       'shared.map': SharedMap;
