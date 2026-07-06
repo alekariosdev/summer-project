@@ -1,7 +1,4 @@
-import {
-  DEFAULT_ARTICLE_PAGE_SIZE,
-  getArticlesByDocIds,
-} from "@/lib/strapi/api/articles";
+import { DEFAULT_ARTICLE_PAGE_SIZE } from "@/lib/strapi/api/articles";
 import ArticleCard from "./ArticleCard";
 import ArticlePaginationNav from "./ArticlePaginationNav";
 import { VERTICAL_ARTICLE_LIST_DATA } from "@/lib/types";
@@ -10,18 +7,19 @@ interface VerticalArticleListProps extends VERTICAL_ARTICLE_LIST_DATA {
   page?: number;
 }
 
-const VerticalArticleList = async ({
+const VerticalArticleList = ({
   page = 1,
   ...data
 }: VerticalArticleListProps) => {
-  const { data: articlesData, meta } = await getArticlesByDocIds(
-    data.articles.selected_ids,
-    { page, pageSize: DEFAULT_ARTICLE_PAGE_SIZE }
-  );
+  const allArticles = data.articles?.articles ?? [];
+  const pageSize = DEFAULT_ARTICLE_PAGE_SIZE;
+  const total = allArticles.length;
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(Math.max(1, page), pageCount);
+  const start = (currentPage - 1) * pageSize;
+  const articlesData = allArticles.slice(start, start + pageSize);
 
-  const pagination = meta.pagination;
-  const currentPage = pagination?.page ?? 1;
-  const totalPages = pagination?.pageCount ?? 1;
+  if (!articlesData.length) return null;
 
   return (
     <section
@@ -41,7 +39,7 @@ const VerticalArticleList = async ({
       ))}
       <ArticlePaginationNav
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={pageCount}
       />
     </section>
   );

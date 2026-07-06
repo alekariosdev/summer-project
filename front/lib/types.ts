@@ -197,24 +197,22 @@ export interface SEO_DATA {
   og_image?: STRAPI_MEDIA | null;
 }
 
+// ─── article.articles-config ────────────────────────────────────────────────
+
+export interface ARTICLES_CONFIG_DATA {
+  id: number;
+  limit?: number | null;
+  articleScope?: 'featured' | 'all';
+  sortBy?: 'createdAt' | 'original_published_at';
+  sortDirection?: 'asc' | 'desc';
+  articles: ARTICLE_DATA[];
+}
+
 // ─── article.masonry-list ───────────────────────────────────────────────────
-
-export interface ARTICLE_FILTERS_DATA {
-  featured_only: boolean;
-  company_id: string;
-  category_ids: string[];
-  tag_ids: string[];
-  sort_by: 'newest' | 'oldest' | 'featured_first';
-}
-
-export interface FILTERED_ARTICLES_DATA {
-  filters: ARTICLE_FILTERS_DATA;
-  selected_ids: string[];
-}
 
 export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.masonry-list';
-  articles?: FILTERED_ARTICLES_DATA | null;
+  articles?: ARTICLES_CONFIG_DATA | null;
   theme?: THEME | null;
 }
 
@@ -223,8 +221,8 @@ export interface MASONRY_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER 
 export interface SLIDESET_LIST_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.slideset-list';
   header?: BLOCK_HEADER_DATA | null;
-  slides?: FILTERED_ARTICLES_DATA | null;
-  cards?: FILTERED_ARTICLES_DATA | null;
+  slides?: ARTICLES_CONFIG_DATA | null;
+  cards?: ARTICLES_CONFIG_DATA | null;
   theme?: THEME | null;
 }
 
@@ -277,7 +275,7 @@ export interface WIDGET_GRID_DATA extends DYNAMIC_ZONE_BASE {
 export interface VERTICAL_ARTICLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'article.vertical-list';
   header?: BLOCK_HEADER_DATA | null;
-  articles: FILTERED_ARTICLES_DATA;
+  articles?: ARTICLES_CONFIG_DATA | null;
   theme?: THEME | null;
 }
 
@@ -288,7 +286,7 @@ export interface IMAGES_MOSAIC_DATA extends DYNAMIC_ZONE_BASE {
   images: STRAPI_MEDIA[];
 }
 
-// ─── article.external-links-slider ──────────────────────────────────────────
+// ─── article.external-articles-config ───────────────────────────────────────
 
 export interface EXTERNAL_ARTICLE_DATA {
   id: number;
@@ -299,10 +297,20 @@ export interface EXTERNAL_ARTICLE_DATA {
   publishedAt?: string | null;
 }
 
+export interface EXTERNAL_ARTICLES_CONFIG_DATA {
+  id: number;
+  limit?: number | null;
+  articleScope?: 'featured' | 'all';
+  sortBy?: 'createdAt' | 'publishedAt';
+  sortDirection?: 'asc' | 'desc';
+  articles: EXTERNAL_ARTICLE_DATA[];
+}
+
+// ─── article.external-links-slider ──────────────────────────────────────────
+
 export interface EXTERNAL_LINKS_SLIDER_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
   __component: 'article.external-links-slider';
-  limit?: number;
-  articles: EXTERNAL_ARTICLE_DATA[];
+  articles?: EXTERNAL_ARTICLES_CONFIG_DATA | null;
   theme?: THEME | null;
 }
 

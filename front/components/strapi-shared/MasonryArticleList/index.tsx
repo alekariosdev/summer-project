@@ -1,23 +1,23 @@
 import { MASONRY_LIST_DATA } from "@/lib/types";
-import { getArticlesByDocIds } from "@/lib/strapi/api/articles";
 import getImageHeight from "./helpers/getImageHeight";
 import ArticleCard from "./ArticleCard";
 
 
-const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
+const MasonryArticleList = ({
+  articles,
+  theme,
+}: MASONRY_LIST_DATA) => {
+  const resolvedArticles = articles?.articles ?? [];
 
-  const articleDocIds = data.articles?.selected_ids ?? [];
+  if (!resolvedArticles.length) return null;
 
-  const { data: articles } = await getArticlesByDocIds(articleDocIds);
-
-  const fixedHeightArticles = articles.map((article, id) => ({
+  const fixedHeightArticles = resolvedArticles.map((article, id) => ({
     ...article,
     imageH: getImageHeight(id),
   }));
 
-
   return (
-    <section className="rounded-2xl" aria-labelledby="masonry-heading" data-company={data.theme}>
+    <section className="rounded-2xl" aria-labelledby="masonry-heading" data-company={theme}>
       <ul
         className="
             grid grid-cols-1 gap-x-4 gap-y-4
@@ -35,6 +35,6 @@ const MasonryArticleList = async (data: MASONRY_LIST_DATA) => {
       </ul>
     </section>
   );
-}
+};
 
 export default MasonryArticleList;

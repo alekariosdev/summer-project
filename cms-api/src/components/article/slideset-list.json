@@ -19,12 +19,16 @@
       ]
     },
     "slides": {
-      "type": "customField",
-      "customField": "plugin::filtered-articles.filtered-articles"
+      "type": "component",
+      "component": "article.articles-config",
+      "repeatable": false,
+      "required": true
     },
     "cards": {
-      "type": "customField",
-      "customField": "plugin::filtered-articles.filtered-articles"
+      "type": "component",
+      "component": "article.articles-config",
+      "repeatable": false,
+      "required": true
     }
   },
   "config": {}

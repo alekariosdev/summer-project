@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_article_external_articles_configs",
+  "info": {
+    "displayName": "external-articles-config"
+  },
+  "options": {},
+  "attributes": {
+    "limit": {
+      "type": "integer",
+      "min": 1,
+      "max": 50
+    },
+    "articleScope": {
+      "type": "enumeration",
+      "enum": [
+        "featured",
+        "all"
+      ],
+      "default": "all"
+    },
+    "sortBy": {
+      "type": "enumeration",
+      "enum": [
+        "createdAt",
+        "publishedAt"
+      ],
+      "default": "publishedAt"
+    },
+    "sortDirection": {
+      "type": "enumeration",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "default": "desc"
+    },
+    "excludedArticles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::external-article.external-article"
+    }
+  },
+  "config": {}
+}

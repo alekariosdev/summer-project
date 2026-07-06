@@ -65,6 +65,7 @@ export const MASONRY_LIST_POPULATE = {
           ctaButton: true,
         },
       },
+      articles: true,
     },
   },
 };
@@ -97,6 +98,8 @@ export const SLIDESET_LIST_POPULATE = {
           ctaButton: true,
         },
       },
+      slides: true,
+      cards: true,
     },
   },
 };
@@ -148,6 +151,7 @@ export const VERTICAL_ARTICLE_LIST_POPULATE = {
           ctaButton: true,
         },
       },
+      articles: true,
     },
   },
 };
@@ -175,6 +179,7 @@ export const EXTERNAL_LINKS_SLIDER_POPULATE = {
           ctaButton: true,
         },
       },
+      articles: true,
     },
   },
 };

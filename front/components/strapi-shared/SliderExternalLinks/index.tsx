@@ -6,9 +6,10 @@ import ExternalLinksCarousel from "./ExternalLinksCarousel";
 
 const SliderExternalLinks = ({
   header,
-  articles = [],
+  articles,
   theme,
 }: EXTERNAL_LINKS_SLIDER_DATA) => {
+  const resolvedArticles = articles?.articles ?? [];
   const title = header?.title ?? "METLEN in the news";
   const cta = header?.ctaButton;
 
@@ -54,7 +55,7 @@ const SliderExternalLinks = ({
       </div>
 
       <div className="overflow-x-auto pl-8 md:pl-[max(0px,calc((100vw-1440px)/2))]">
-        <ExternalLinksCarousel articles={articles} />
+        <ExternalLinksCarousel articles={resolvedArticles} />
       </div>
     </section>
   );

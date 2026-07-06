@@ -1,5 +1,26 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ArticleArticlesConfig extends Struct.ComponentSchema {
+  collectionName: 'components_article_articles_configs';
+  info: {
+    displayName: 'articles-config';
+  };
+  attributes: {
+    articleScope: Schema.Attribute.Enumeration<['featured', 'all']> & Schema.Attribute.DefaultTo<'all'>;
+    excludedArticles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    limit: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 1;
+        },
+        number
+      >;
+    sortBy: Schema.Attribute.Enumeration<['createdAt', 'original_published_at']> & Schema.Attribute.DefaultTo<'original_published_at'>;
+    sortDirection: Schema.Attribute.Enumeration<['asc', 'desc']> & Schema.Attribute.DefaultTo<'desc'>;
+  };
+}
+
 export interface ArticleAuthor extends Struct.ComponentSchema {
   collectionName: 'components_article_authors';
   info: {
@@ -11,14 +32,14 @@ export interface ArticleAuthor extends Struct.ComponentSchema {
   };
 }
 
-export interface ArticleExternalLinksSlider extends Struct.ComponentSchema {
-  collectionName: 'components_article_external_links_sliders';
+export interface ArticleExternalArticlesConfig extends Struct.ComponentSchema {
+  collectionName: 'components_article_external_articles_configs';
   info: {
-    displayName: 'external-links-slider';
+    displayName: 'external-articles-config';
   };
   attributes: {
+    articleScope: Schema.Attribute.Enumeration<['featured', 'all']> & Schema.Attribute.DefaultTo<'all'>;
     excludedArticles: Schema.Attribute.Relation<'oneToMany', 'api::external-article.external-article'>;
-    header: Schema.Attribute.Component<'shared.block-header', false>;
     limit: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
@@ -26,9 +47,20 @@ export interface ArticleExternalLinksSlider extends Struct.ComponentSchema {
           min: 1;
         },
         number
-      > &
-      Schema.Attribute.DefaultTo<10>;
-    pinnedArticles: Schema.Attribute.Relation<'oneToMany', 'api::external-article.external-article'>;
+      >;
+    sortBy: Schema.Attribute.Enumeration<['createdAt', 'publishedAt']> & Schema.Attribute.DefaultTo<'publishedAt'>;
+    sortDirection: Schema.Attribute.Enumeration<['asc', 'desc']> & Schema.Attribute.DefaultTo<'desc'>;
+  };
+}
+
+export interface ArticleExternalLinksSlider extends Struct.ComponentSchema {
+  collectionName: 'components_article_external_links_sliders';
+  info: {
+    displayName: 'external-links-slider';
+  };
+  attributes: {
+    articles: Schema.Attribute.Component<'article.external-articles-config', false> & Schema.Attribute.Required;
+    header: Schema.Attribute.Component<'shared.block-header', false>;
     theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
@@ -39,7 +71,7 @@ export interface ArticleMasonryList extends Struct.ComponentSchema {
     displayName: 'masonry-list';
   };
   attributes: {
-    articles: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    articles: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     header: Schema.Attribute.Component<'shared.block-header', false>;
     theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
@@ -51,9 +83,9 @@ export interface ArticleSlidesetList extends Struct.ComponentSchema {
     displayName: 'slideset-list';
   };
   attributes: {
-    cards: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    cards: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     header: Schema.Attribute.Component<'shared.block-header', false>;
-    slides: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    slides: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
   };
 }
@@ -64,7 +96,7 @@ export interface ArticleVerticalList extends Struct.ComponentSchema {
     displayName: 'vertical-list';
   };
   attributes: {
-    articles: Schema.Attribute.JSON & Schema.Attribute.CustomField<'plugin::filtered-articles.filtered-articles'>;
+    articles: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     header: Schema.Attribute.Component<'shared.block-header', false>;
     theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
   };
@@ -305,7 +337,9 @@ export interface SharedWidghetCardGrid extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'article.articles-config': ArticleArticlesConfig;
       'article.author': ArticleAuthor;
+      'article.external-articles-config': ArticleExternalArticlesConfig;
       'article.external-links-slider': ArticleExternalLinksSlider;
       'article.masonry-list': ArticleMasonryList;
       'article.slideset-list': ArticleSlidesetList;

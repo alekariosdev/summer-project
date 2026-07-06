@@ -10,21 +10,11 @@
       "component": "shared.block-header",
       "repeatable": false
     },
-    "limit": {
-      "type": "integer",
-      "default": 10,
-      "min": 1,
-      "max": 50
-    },
-    "pinnedArticles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::external-article.external-article"
-    },
-    "excludedArticles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::external-article.external-article"
+    "articles": {
+      "type": "component",
+      "component": "article.external-articles-config",
+      "repeatable": false,
+      "required": true
     },
     "theme": {
       "type": "enumeration",
