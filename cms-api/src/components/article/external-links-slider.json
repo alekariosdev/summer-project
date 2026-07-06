@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_article_external_links_sliders",
+  "info": {
+    "displayName": "external-links-slider"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "component": "shared.block-header",
+      "repeatable": false
+    },
+    "limit": {
+      "type": "integer",
+      "default": 10,
+      "min": 1,
+      "max": 50
+    },
+    "pinnedArticles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::external-article.external-article"
+    },
+    "excludedArticles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::external-article.external-article"
+    },
+    "theme": {
+      "type": "enumeration",
+      "default": "metlen",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}

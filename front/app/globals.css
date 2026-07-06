@@ -178,7 +178,7 @@
     @apply bg-background text-foreground font-sans;
   }
   .section-container {
-    @apply mx-auto w-full max-w-[1440px] px-8 md:px-12;
+    @apply mx-auto w-full max-w-[1440px] px-8 md:px-16;
   }
 }
 

@@ -11,6 +11,28 @@ export interface ArticleAuthor extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleExternalLinksSlider extends Struct.ComponentSchema {
+  collectionName: 'components_article_external_links_sliders';
+  info: {
+    displayName: 'external-links-slider';
+  };
+  attributes: {
+    excludedArticles: Schema.Attribute.Relation<'oneToMany', 'api::external-article.external-article'>;
+    header: Schema.Attribute.Component<'shared.block-header', false>;
+    limit: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 50;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+    pinnedArticles: Schema.Attribute.Relation<'oneToMany', 'api::external-article.external-article'>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
+  };
+}
+
 export interface ArticleMasonryList extends Struct.ComponentSchema {
   collectionName: 'components_article_masonry_lists';
   info: {
@@ -284,6 +306,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'article.author': ArticleAuthor;
+      'article.external-links-slider': ArticleExternalLinksSlider;
       'article.masonry-list': ArticleMasonryList;
       'article.slideset-list': ArticleSlidesetList;
       'article.vertical-list': ArticleVerticalList;

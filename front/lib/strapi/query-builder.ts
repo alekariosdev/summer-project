@@ -163,6 +163,22 @@ export const IMAGES_MOSAIC_POPULATE = {
   },
 };
 
+// Granular populate for article.external-links-slider blocks
+export const EXTERNAL_LINKS_SLIDER_POPULATE = {
+  'article.external-links-slider': {
+    populate: {
+      header: {
+        populate: {
+          image: {
+            fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+          },
+          ctaButton: true,
+        },
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -174,6 +190,7 @@ export const BLOCKS_POPULATE = {
       ...WIDGET_GRID_POPULATE,
       ...VERTICAL_ARTICLE_LIST_POPULATE,
       ...IMAGES_MOSAIC_POPULATE,
+      ...EXTERNAL_LINKS_SLIDER_POPULATE,
     },
   },
 };

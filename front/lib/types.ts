@@ -28,7 +28,8 @@ export type BLOCK_DATA =
   | SEPARATOR_DATA
   | WIDGET_DATA
   | WIDGET_GRID_DATA
-  | VERTICAL_ARTICLE_LIST_DATA;
+  | VERTICAL_ARTICLE_LIST_DATA
+  | EXTERNAL_LINKS_SLIDER_DATA;
 
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
@@ -285,6 +286,24 @@ export interface VERTICAL_ARTICLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
 export interface IMAGES_MOSAIC_DATA extends DYNAMIC_ZONE_BASE {
   __component: 'shared.images-mosaic';
   images: STRAPI_MEDIA[];
+}
+
+// ─── article.external-links-slider ──────────────────────────────────────────
+
+export interface EXTERNAL_ARTICLE_DATA {
+  id: number;
+  documentId: string;
+  title: string;
+  source?: string | null;
+  url?: string | null;
+  publishedAt?: string | null;
+}
+
+export interface EXTERNAL_LINKS_SLIDER_DATA extends DYNAMIC_ZONE_BASE, WITH_BLOCK_HEADER {
+  __component: 'article.external-links-slider';
+  limit?: number;
+  articles: EXTERNAL_ARTICLE_DATA[];
+  theme?: THEME | null;
 }
 
 // ─── Dynamic page collection type ───────────────────────────────────────────

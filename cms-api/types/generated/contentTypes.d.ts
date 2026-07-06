@@ -590,6 +590,7 @@ export interface ApiDynamicPageDynamicPage extends Struct.CollectionTypeSchema {
         'shared.widget-grid',
         'article.vertical-list',
         'shared.images-mosaic',
+        'article.external-links-slider',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -695,6 +696,53 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+  };
+}
+
+export interface ApiExternalArticleExternalArticle extends Struct.CollectionTypeSchema {
+  collectionName: 'external_articles';
+  info: {
+    displayName: 'external-article';
+    pluralName: 'external-articles';
+    singularName: 'external-article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::external-article.external-article'>;
+    publishedAt: Schema.Attribute.DateTime;
+    source: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    strapi_assignee: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    strapi_stage: Schema.Attribute.Relation<'oneToOne', 'plugin::review-workflows.workflow-stage'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+    url: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -1150,6 +1198,7 @@ declare module '@strapi/strapi' {
       'api::company.company': ApiCompanyCompany;
       'api::dynamic-page.dynamic-page': ApiDynamicPageDynamicPage;
       'api::event.event': ApiEventEvent;
+      'api::external-article.external-article': ApiExternalArticleExternalArticle;
       'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
