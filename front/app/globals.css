@@ -23,11 +23,16 @@
   --color-metka-accent: #406680;
   --color-metka-secondary: #d7cdb4;
 
+  --color-metlen-video: #0a224080;
+  --color-protergia-video: #ff980080;
+  --color-metka-video: #6cacbc80;
+
   /* Active brand (resolved via data-company or :root default) */
   --color-brand-primary: var(--brand-primary);
   --color-brand-text: var(--brand-text);
   --color-brand-accent: var(--brand-accent);
   --color-brand-secondary: var(--brand-secondary);
+  --color-brand-video: var(--brand-video);
 
   /* Font weights */
   --font-weight-normal: 300;
@@ -187,6 +192,7 @@
   --brand-text: var(--color-metlen-text);
   --brand-accent: var(--color-metlen-accent);
   --brand-secondary: var(--color-metlen-secondary);
+  --brand-video: var(--color-metlen-video);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -260,6 +266,7 @@
   --brand-text: var(--color-metlen-text);
   --brand-accent: var(--color-metlen-accent);
   --brand-secondary: var(--color-metlen-secondary);
+  --brand-video: var(--color-metlen-video);
 }
 
 [data-company='protergia'] {
@@ -267,6 +274,7 @@
   --brand-text: var(--color-protergia-text);
   --brand-accent: var(--color-protergia-accent);
   --brand-secondary: var(--color-protergia-secondary);
+  --brand-video: var(--color-protergia-video);
 }
 
 [data-company='metka'] {
@@ -274,4 +282,5 @@
   --brand-text: var(--color-metka-text);
   --brand-accent: var(--color-metka-accent);
   --brand-secondary: var(--color-metka-secondary);
+  --brand-video: var(--color-metka-video);
 }

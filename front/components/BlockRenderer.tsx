@@ -11,6 +11,7 @@ import VerticalArticleList from './strapi-shared/VerticalArticleList';
 import ImagesMosaic from './strapi-shared/ImagesMosaic';
 import SliderExternalLinks from './strapi-shared/SliderExternalLinks';
 import PeopleList from './strapi-shared/PeopleList';
+import Video from './strapi-shared/Video';
 
 const FULL_BLEED_COMPONENTS = new Set([
   'shared.hero-slider',
@@ -60,6 +61,9 @@ function renderBlock(block: BLOCK_DATA, index: number, page?: number) {
       break;
     case 'event.people-list':
       node = <PeopleList {...block} />;
+      break;
+    case 'shared.video':
+      node = <Video {...block} />;
       break;
     default: {
       const unknownComponent = (block as { __component: string }).__component;

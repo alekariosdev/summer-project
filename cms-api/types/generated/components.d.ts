@@ -86,7 +86,7 @@ export interface ArticleSlidesetList extends Struct.ComponentSchema {
     cards: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     header: Schema.Attribute.Component<'shared.block-header', false>;
     slides: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
 
@@ -98,7 +98,7 @@ export interface ArticleVerticalList extends Struct.ComponentSchema {
   attributes: {
     articles: Schema.Attribute.Component<'article.articles-config', false> & Schema.Attribute.Required;
     header: Schema.Attribute.Component<'shared.block-header', false>;
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
 
@@ -109,7 +109,7 @@ export interface EventPeopleList extends Struct.ComponentSchema {
   };
   attributes: {
     people: Schema.Attribute.Component<'event.person', true>;
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
 
@@ -201,7 +201,7 @@ export interface SharedHeroSlider extends Struct.ComponentSchema {
   };
   attributes: {
     slides: Schema.Attribute.Component<'shared.hero-slider-item', true>;
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
   };
 }
 
@@ -281,12 +281,12 @@ export interface SharedSeperator extends Struct.ComponentSchema {
     displayName: 'seperator';
   };
   attributes: {
-    color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#e5e7eb'>;
+    color: Schema.Attribute.String;
     hideOnDesktop: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hideOnMobile: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
     size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']>;
-    style: Schema.Attribute.Enumeration<['blank', 'line', 'dashed', 'dotted']>;
+    style: Schema.Attribute.Enumeration<['blank', 'line', 'dashed', 'dotted']> & Schema.Attribute.DefaultTo<'blank'>;
   };
 }
 
@@ -303,6 +303,22 @@ export interface SharedSocialEmbed extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedVideo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_videos';
+  info: {
+    displayName: 'video';
+  };
+  attributes: {
+    duration: Schema.Attribute.String;
+    source: Schema.Attribute.Enumeration<['youtube', 'strapi']> & Schema.Attribute.Required & Schema.Attribute.DefaultTo<'youtube'>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    uploadedVideo: Schema.Attribute.Media<'videos'>;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedWidget extends Struct.ComponentSchema {
   collectionName: 'components_shared_widgets';
   info: {
@@ -312,7 +328,7 @@ export interface SharedWidget extends Struct.ComponentSchema {
     cta: Schema.Attribute.Component<'shared.cta-button', false>;
     image: Schema.Attribute.Media<'images'>;
     subtitle: Schema.Attribute.Text;
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -323,7 +339,7 @@ export interface SharedWidgetGrid extends Struct.ComponentSchema {
     displayName: 'widget-grid';
   };
   attributes: {
-    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']>;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
     widgets: Schema.Attribute.Component<'shared.widghet-card-grid', true>;
   };
 }
@@ -368,6 +384,7 @@ declare module '@strapi/strapi' {
       'shared.seo': SharedSeo;
       'shared.seperator': SharedSeperator;
       'shared.social-embed': SharedSocialEmbed;
+      'shared.video': SharedVideo;
       'shared.widget': SharedWidget;
       'shared.widget-grid': SharedWidgetGrid;
       'shared.widghet-card-grid': SharedWidghetCardGrid;

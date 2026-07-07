@@ -1,0 +1,83 @@
+{
+  "collectionName": "components_shared_videos",
+  "info": {
+    "displayName": "video"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "source": {
+      "type": "enumeration",
+      "required": true,
+      "default": "youtube",
+      "enum": [
+        "youtube",
+        "strapi"
+      ]
+    },
+    "url": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "source"
+            },
+            "youtube"
+          ]
+        }
+      },
+      "required": true
+    },
+    "duration": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "source"
+            },
+            "strapi"
+          ]
+        }
+      }
+    },
+    "uploadedVideo": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "source"
+            },
+            "strapi"
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "enumeration",
+      "default": "metlen",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}

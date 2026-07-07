@@ -19,19 +19,6 @@ export type AUTH_USER = {
   updatedAt: string;
 };
 
-export type BLOCK_DATA =
-  | CAROUSEL_DATA
-  | IMAGES_MOSAIC_DATA
-  | HERO_SLIDER_DATA
-  | MASONRY_LIST_DATA
-  | SLIDESET_LIST_DATA
-  | SEPARATOR_DATA
-  | WIDGET_DATA
-  | WIDGET_GRID_DATA
-  | VERTICAL_ARTICLE_LIST_DATA
-  | EXTERNAL_LINKS_SLIDER_DATA
-  | PEOPLE_LIST_DATA;
-
 export type THEME = 'metlen' | 'protergia' | 'metka';
 
 export interface CATEGORY_DATA {
@@ -330,6 +317,35 @@ export interface PEOPLE_LIST_DATA extends DYNAMIC_ZONE_BASE {
   people: PERSON_DATA[];
   theme?: THEME | null;
 }
+
+// ─── shared.video ────────────────────────────────────────────────────────────
+
+export interface VIDEO_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.video';
+  title: string;
+  source: 'youtube' | 'strapi';
+  url: string;
+  thumbnail?: STRAPI_MEDIA | null;
+  duration: string;
+  uploadedVideo?: STRAPI_MEDIA | null;
+  theme?: THEME | null;
+}
+
+// ─── Block data type ──────────────────────────────────────────────────────────
+
+export type BLOCK_DATA =
+  | CAROUSEL_DATA
+  | IMAGES_MOSAIC_DATA
+  | HERO_SLIDER_DATA
+  | MASONRY_LIST_DATA
+  | SLIDESET_LIST_DATA
+  | SEPARATOR_DATA
+  | WIDGET_DATA
+  | WIDGET_GRID_DATA
+  | VERTICAL_ARTICLE_LIST_DATA
+  | EXTERNAL_LINKS_SLIDER_DATA
+  | PEOPLE_LIST_DATA
+  | VIDEO_DATA;
 
 // ─── Dynamic page collection type ───────────────────────────────────────────
 

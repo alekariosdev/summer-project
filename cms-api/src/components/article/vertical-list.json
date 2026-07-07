@@ -18,6 +18,7 @@
     },
     "theme": {
       "type": "enumeration",
+      "default": "metlen",
       "enum": [
         "metlen",
         "metka",

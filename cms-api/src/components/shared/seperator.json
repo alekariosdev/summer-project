@@ -7,6 +7,7 @@
   "attributes": {
     "style": {
       "type": "enumeration",
+      "default": "blank",
       "enum": [
         "blank",
         "line",
@@ -25,8 +26,7 @@
       ]
     },
     "color": {
-      "type": "string",
-      "default": "#e5e7eb"
+      "type": "string"
     },
     "label": {
       "type": "string"

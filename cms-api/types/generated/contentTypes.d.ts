@@ -592,6 +592,7 @@ export interface ApiDynamicPageDynamicPage extends Struct.CollectionTypeSchema {
         'shared.images-mosaic',
         'article.external-links-slider',
         'event.people-list',
+        'shared.video',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{

@@ -199,6 +199,20 @@ export const PEOPLE_LIST_POPULATE = {
   },
 };
 
+// Granular populate for shared.video blocks
+export const VIDEO_POPULATE = {
+  'shared.video': {
+    populate: {
+      thumbnail: {
+        fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+      },
+      uploadedVideo: {
+        fields: ['url', 'alternativeText', 'width', 'height', 'formats'],
+      },
+    },
+  },
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -212,6 +226,7 @@ export const BLOCKS_POPULATE = {
       ...IMAGES_MOSAIC_POPULATE,
       ...EXTERNAL_LINKS_SLIDER_POPULATE,
       ...PEOPLE_LIST_POPULATE,
+      ...VIDEO_POPULATE,
     },
   },
 };

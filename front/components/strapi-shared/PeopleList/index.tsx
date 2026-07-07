@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PERSON_DATA, THEME } from "@/lib/types";
+import { PERSON_DATA, PEOPLE_LIST_DATA } from "@/lib/types";
 import { getStrapiMediaUrl } from "@/lib/strapi/normalize";
 
 
@@ -33,7 +33,7 @@ const PersonCard = ({ person }: { person: PERSON_DATA }) => {
   );
 }
 
-const PeopleList = ({ people, theme }: { people: PERSON_DATA[], theme: THEME }) => {
+const PeopleList = ({ people, theme }: PEOPLE_LIST_DATA) => {
   return (
     <section className="px-6 py-12" data-company={theme}>
       <div className="max-w-6xl mx-auto">
