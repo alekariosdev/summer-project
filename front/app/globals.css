@@ -172,6 +172,99 @@
   color: var(--color-metka-text);
 }
 
+@layer components {
+  .strapi-content {
+    @apply txt-body font-weight-normal text-brand-text leading-[150%];
+
+    & > * + * {
+      @apply mt-4;
+    }
+
+    & h1 {
+      @apply txt-display font-weight-bold text-brand-text leading-[120%];
+    }
+
+    & h2 {
+      @apply txt-headline font-weight-bold text-brand-text leading-[120%];
+    }
+
+    & h3 {
+      @apply txt-title font-weight-bold text-brand-text leading-[120%];
+    }
+
+    & h4 {
+      @apply txt-subtitle font-weight-semibold text-brand-text leading-[120%];
+    }
+
+    & h5 {
+      @apply txt-lead font-weight-semibold text-brand-text leading-[120%];
+    }
+
+    & h6 {
+      @apply txt-body font-weight-bold text-brand-text leading-[150%];
+    }
+
+    & p {
+      @apply txt-body font-weight-normal text-brand-text leading-[150%];
+    }
+
+    & a {
+      @apply font-weight-bold text-brand-accent underline underline-offset-4 transition-colors;
+    }
+
+    & a:hover {
+      @apply text-brand-accent/80;
+    }
+
+    & strong,
+    & b {
+      @apply font-weight-bold;
+    }
+
+    & em,
+    & i {
+      @apply italic;
+    }
+
+    & ul {
+      @apply list-disc pl-6;
+    }
+
+    & ol {
+      @apply list-decimal pl-6;
+    }
+
+    & li + li {
+      @apply mt-1;
+    }
+
+    & blockquote {
+      @apply txt-lead font-weight-semibold border-l-[3px] border-brand-accent pl-4 text-brand-text/70 italic;
+    }
+
+    & hr {
+      @apply my-6 border-border;
+    }
+
+    & img {
+      @apply max-w-full rounded-lg;
+    }
+
+    & table {
+      @apply w-full border-collapse txt-caption;
+    }
+
+    & th,
+    & td {
+      @apply border border-border px-3 py-2 text-left;
+    }
+
+    & th {
+      @apply font-weight-semibold bg-muted;
+    }
+  }
+}
+
 @layer base {
   html {
     @apply antialiased font-sans;

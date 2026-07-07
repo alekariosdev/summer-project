@@ -331,6 +331,14 @@ export interface VIDEO_DATA extends DYNAMIC_ZONE_BASE {
   theme?: THEME | null;
 }
 
+// ─── shared.content ────────────────────────────────────────────────────────────
+
+export interface CONTENT_DATA extends DYNAMIC_ZONE_BASE {
+  __component: 'shared.content';
+  body: string;
+  theme?: THEME | null;
+}
+
 // ─── Block data type ──────────────────────────────────────────────────────────
 
 export type BLOCK_DATA =
@@ -345,7 +353,8 @@ export type BLOCK_DATA =
   | VERTICAL_ARTICLE_LIST_DATA
   | EXTERNAL_LINKS_SLIDER_DATA
   | PEOPLE_LIST_DATA
-  | VIDEO_DATA;
+  | VIDEO_DATA
+  | CONTENT_DATA;
 
 // ─── Dynamic page collection type ───────────────────────────────────────────
 

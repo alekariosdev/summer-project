@@ -154,6 +154,24 @@ export interface SharedBlockHeader extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedContent extends Struct.ComponentSchema {
+  collectionName: 'components_shared_contents';
+  info: {
+    displayName: 'content';
+  };
+  attributes: {
+    body: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    theme: Schema.Attribute.Enumeration<['metlen', 'metka', 'protergia']> & Schema.Attribute.DefaultTo<'metlen'>;
+  };
+}
+
 export interface SharedCtaButton extends Struct.ComponentSchema {
   collectionName: 'components_shared_cta_buttons';
   info: {
@@ -373,6 +391,7 @@ declare module '@strapi/strapi' {
       'event.person': EventPerson;
       'shared.badge': SharedBadge;
       'shared.block-header': SharedBlockHeader;
+      'shared.content': SharedContent;
       'shared.cta-button': SharedCtaButton;
       'shared.full-image': SharedFullImage;
       'shared.hero': SharedHero;

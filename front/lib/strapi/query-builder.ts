@@ -213,6 +213,11 @@ export const VIDEO_POPULATE = {
   },
 };
 
+// Granular populate for shared.content blocks
+export const CONTENT_POPULATE = {
+  'shared.content': true,
+};
+
 export const BLOCKS_POPULATE = {
   blocks: {
     on: {
@@ -227,6 +232,7 @@ export const BLOCKS_POPULATE = {
       ...EXTERNAL_LINKS_SLIDER_POPULATE,
       ...PEOPLE_LIST_POPULATE,
       ...VIDEO_POPULATE,
+      ...CONTENT_POPULATE,
     },
   },
 };

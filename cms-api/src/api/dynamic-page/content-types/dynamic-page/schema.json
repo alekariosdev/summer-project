@@ -50,7 +50,8 @@
         "shared.images-mosaic",
         "article.external-links-slider",
         "event.people-list",
-        "shared.video"
+        "shared.video",
+        "shared.content"
       ]
     },
     "seo": {

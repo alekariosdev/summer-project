@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_contents",
+  "info": {
+    "displayName": "content"
+  },
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true
+    },
+    "theme": {
+      "type": "enumeration",
+      "default": "metlen",
+      "enum": [
+        "metlen",
+        "metka",
+        "protergia"
+      ]
+    }
+  },
+  "config": {}
+}
