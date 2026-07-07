@@ -6,7 +6,9 @@ export interface ArticleArticlesConfig extends Struct.ComponentSchema {
     displayName: 'articles-config';
   };
   attributes: {
-    articleScope: Schema.Attribute.Enumeration<['featured', 'all']> & Schema.Attribute.DefaultTo<'all'>;
+    articleScope: Schema.Attribute.Enumeration<['all', 'featured']> & Schema.Attribute.DefaultTo<'all'>;
+    categories: Schema.Attribute.Relation<'oneToMany', 'api::category.category'>;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     excludedArticles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
     limit: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<

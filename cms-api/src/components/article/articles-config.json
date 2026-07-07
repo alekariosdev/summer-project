@@ -12,27 +12,37 @@
     },
     "articleScope": {
       "type": "enumeration",
+      "default": "all",
       "enum": [
-        "featured",
-        "all"
-      ],
-      "default": "all"
+        "all",
+        "featured"
+      ]
     },
     "sortBy": {
       "type": "enumeration",
+      "default": "original_published_at",
       "enum": [
         "createdAt",
         "original_published_at"
-      ],
-      "default": "original_published_at"
+      ]
     },
     "sortDirection": {
       "type": "enumeration",
+      "default": "desc",
       "enum": [
         "asc",
         "desc"
-      ],
-      "default": "desc"
+      ]
+    },
+    "companies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company.company"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
     },
     "excludedArticles": {
       "type": "relation",

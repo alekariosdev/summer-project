@@ -69,11 +69,16 @@ export type ArticlesConfig = {
   articleScope?: 'featured' | 'all';
   sortBy?: 'createdAt' | 'original_published_at';
   sortDirection?: 'asc' | 'desc';
+  companies?: Array<{ id: number; documentId?: string }>;
+  categories?: Array<{ id: number; documentId?: string }>;
   excludedArticles?: Array<{ id: number; documentId?: string }>;
   articles?: ArticleRecord[];
 };
 
-export type ResolvedArticlesConfig = Omit<ArticlesConfig, 'excludedArticles'> & {
+export type ResolvedArticlesConfig = Omit<
+  ArticlesConfig,
+  'companies' | 'categories' | 'excludedArticles'
+> & {
   articles: ArticleRecord[];
 };
 
@@ -151,9 +156,15 @@ const resolveArticlesConfig = async (
 
   const componentRow = await strapi.db.query(ARTICLES_CONFIG_UID).findOne({
     where: { id: config.id },
-    populate: ['excludedArticles'],
+    populate: ['companies', 'categories', 'excludedArticles'],
   });
 
+  const companyIds = ((componentRow?.companies ?? []) as Array<{ id: number }>).map(
+    (company) => company.id,
+  );
+  const categoryIds = ((componentRow?.categories ?? []) as Array<{ id: number }>).map(
+    (category) => category.id,
+  );
   const excluded = (componentRow?.excludedArticles ?? []) as Array<{ id: number }>;
   const excludedIds = excluded.map((article) => article.id);
 
@@ -161,6 +172,14 @@ const resolveArticlesConfig = async (
 
   if (articleScope === 'featured') {
     filters.featured = { $eq: true };
+  }
+
+  if (companyIds.length > 0) {
+    filters.companies = { id: { $in: companyIds } };
+  }
+
+  if (categoryIds.length > 0) {
+    filters.categories = { id: { $in: categoryIds } };
   }
 
   if (excludedIds.length > 0) {
@@ -176,7 +195,13 @@ const resolveArticlesConfig = async (
     ...(limit != null ? { limit } : {}),
   })) as ArticleRecord[];
 
-  const { excludedArticles: _excluded, articles: _articles, ...rest } = config;
+  const {
+    companies: _companies,
+    categories: _categories,
+    excludedArticles: _excluded,
+    articles: _articles,
+    ...rest
+  } = config;
 
   return {
     ...rest,
