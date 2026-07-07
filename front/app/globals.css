@@ -205,7 +205,7 @@
     }
 
     & p {
-      @apply txt-body font-weight-normal text-brand-text leading-[150%];
+      @apply txt-body font-weight-normal text-brand-text leading-[200%];
     }
 
     & a {
@@ -227,27 +227,27 @@
     }
 
     & ul {
-      @apply list-disc pl-6;
+      @apply list-disc pl-6 leading-[200%] text-brand-text;
     }
 
     & ol {
-      @apply list-decimal pl-6;
+      @apply list-decimal pl-6 leading-[200%] text-brand-text;
     }
 
     & li + li {
-      @apply mt-1;
+      @apply mt-1 leading-[200%] text-brand-text;
     }
 
     & blockquote {
-      @apply txt-lead font-weight-semibold border-l-[3px] border-brand-accent pl-4 text-brand-text/70 italic;
+      @apply txt-lead font-weight-semibold border-l-[3px] leading-[200%] border-brand-accent pl-4 text-brand-text/70 italic;
     }
 
     & hr {
-      @apply my-6 border-border;
+      @apply my-6 border-brand-text border-b-2;
     }
 
     & img {
-      @apply max-w-full rounded-lg;
+      @apply max-w-full;
     }
 
     & table {
