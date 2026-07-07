@@ -12,13 +12,12 @@
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry",
-    "postinstall": "patch-package && node scripts/patch-elliptic-version.js"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "^5.48.0",
-    "@strapi/plugin-users-permissions": "^5.48.0",
-    "@strapi/strapi": "^5.48.0",
+    "@strapi/plugin-cloud": "^5.50.0",
+    "@strapi/plugin-users-permissions": "^5.50.0",
+    "@strapi/strapi": "^5.50.0",
     "jsonwebtoken": "^9.0.3",
     "mysql2": "3.20.0",
     "passport-azure-ad-oauth2": "^0.0.4",
@@ -30,7 +29,6 @@
     "styled-components": "^6.4.2"
   },
   "devDependencies": {
-    "patch-package": "^8.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -50,13 +48,14 @@
     "@ai-sdk/react": "^3.0.208",
     "ai": "^6.0.206",
     "ajv": "^8.17.2",
-    "elliptic": "^6.6.0",
+    "jwk-to-pem": "npm:@mn4367/jwk-to-pem",
     "esbuild": "^0.28.1",
     "form-data": "^4.0.6",
     "js-yaml": "^4.1.2",
     "lodash": "^4.17.24",
     "markdown-it": "^14.1.2",
-    "nodemailer": "^8.0.9",
+    "nodemailer": "^9.0.3",
+    "undici": "^6.27.0",
     "tar": "^7.5.16",
     "uuid": "^11.1.1",
     "vite": "^6.4.3",

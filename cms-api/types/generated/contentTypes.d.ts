@@ -253,6 +253,7 @@ export interface AdminSession extends Struct.CollectionTypeSchema {
     expiresAt: Schema.Attribute.DateTime & Schema.Attribute.Required & Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'admin::session'> & Schema.Attribute.Private;
+    metadata: Schema.Attribute.JSON & Schema.Attribute.Private;
     origin: Schema.Attribute.String & Schema.Attribute.Required & Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sessionId: Schema.Attribute.String & Schema.Attribute.Required & Schema.Attribute.Private & Schema.Attribute.Unique;
@@ -567,7 +568,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
 export interface ApiDynamicPageDynamicPage extends Struct.CollectionTypeSchema {
   collectionName: 'dynamic_pages';
   info: {
-    displayName: 'dynamic-page';
+    displayName: 'page';
     pluralName: 'dynamic-pages';
     singularName: 'dynamic-page';
   };
