@@ -18,50 +18,13 @@ volumes:
 # Shared Strapi environment block
 # =============================================================================
 x-strapi-env: &strapi-env
-  env_file: .env
-  environment:
-    # --- Node Environment ---
-    NODE_ENV: ${NODE_ENV}
-    # --- Strapi Server ---
-    HOST: ${STRAPI_HOST}
-    PORT: ${STRAPI_PORT}
-    # --- Database ---
-    DATABASE_CLIENT: ${DATABASE_CLIENT}
-    DATABASE_HOST: mysql
-    DATABASE_PORT: ${DATABASE_PORT}
-    DATABASE_NAME: ${DATABASE_NAME}
-    DATABASE_USERNAME: ${DATABASE_USERNAME}
-    DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-    # --- Database Pool ---
-    DATABASE_POOL_MIN: ${DATABASE_POOL_MIN}
-    DATABASE_POOL_MAX: ${DATABASE_POOL_MAX}
-    # --- Database Misc ---
-    DATABASE_CONNECTION_TIMEOUT: ${DATABASE_CONNECTION_TIMEOUT}
-    # --- Strapi Secrets ---
-    APP_KEYS: ${APP_KEYS}
-    API_TOKEN_SALT: ${API_TOKEN_SALT}
-    ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-    JWT_SECRET: ${JWT_SECRET}
+  env_file: ./cms-api/.env
 
 # =============================================================================
 # Shared Frontend environment block
 # =============================================================================
 x-front-env: &front-env
-  env_file: .env
-  environment:
-    # --- Node Environment ---
-    NODE_ENV: ${NODE_ENV}
-    # --- Frontend Server ---
-    HOST: ${FRONTEND_HOST}
-    PORT: ${FRONTEND_PORT}
-    # --- Strapi connection (server-side, container-to-container) ---
-    STRAPI_URL: ${STRAPI_URL}
-    STRAPI_INTERNAL_URL: ${STRAPI_INTERNAL_URL}
-    # --- Public vars (exposed to the browser) ---
-    NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
-    NEXT_PUBLIC_STRAPI_API_TOKEN: ${NEXT_PUBLIC_STRAPI_API_TOKEN}
-    # --- App config ---
-    NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+  env_file: ./front/.env
 
 # =============================================================================
 # Services
@@ -74,12 +37,12 @@ services:
     image: mysql:latest
     container_name: strapi_mysql
     restart: unless-stopped
-    env_file: .env
+    env_file: ./cms-api/.env
     environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USERNAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: rootsecret
+      MYSQL_DATABASE: pulse_db
+      MYSQL_USER: pulse_user
+      MYSQL_PASSWORD: pulse_password
     ports:
       - '3306:3306'
     volumes:
@@ -87,17 +50,7 @@ services:
     networks:
       - strapi-network
     healthcheck:
-      test:
-        [
-          'CMD',
-          'mysqladmin',
-          'ping',
-          '-h',
-          'localhost',
-          '-u',
-          'root',
-          '-p${DATABASE_ROOT_PASSWORD}',
-        ]
+      test: ['CMD-SHELL', 'mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1']
       interval: 10s
       timeout: 5s
       retries: 5

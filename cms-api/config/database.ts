@@ -1,17 +1,43 @@
 import path from 'path';
 import type { Core } from '@strapi/strapi';
 
+type MySqlConnection = {
+  host: string;
+  port: number;
+  database: string;
+  user: string;
+  password: string;
+};
+
+const parseMySqlUrl = (connectionString: string | undefined): MySqlConnection | null => {
+  if (!connectionString) return null;
+
+  try {
+    const url = new URL(connectionString);
+    return {
+      host: url.hostname,
+      port: url.port ? Number(url.port) : 3306,
+      database: url.pathname.replace(/^\//, ''),
+      user: decodeURIComponent(url.username),
+      password: decodeURIComponent(url.password),
+    };
+  } catch {
+    return null;
+  }
+};
+
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database => {
   const client = env('DATABASE_CLIENT', 'sqlite');
+  const mysqlFromUrl = parseMySqlUrl(env('DATABASE_URL'));
 
   const connections = {
     mysql: {
       connection: {
-        host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 3306),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
-        password: env('DATABASE_PASSWORD', 'strapi'),
+        host: mysqlFromUrl?.host ?? env('DATABASE_HOST', 'localhost'),
+        port: mysqlFromUrl?.port ?? env.int('DATABASE_PORT', 3306),
+        database: mysqlFromUrl?.database ?? env('DATABASE_NAME', 'strapi'),
+        user: mysqlFromUrl?.user ?? env('DATABASE_USERNAME', 'strapi'),
+        password: mysqlFromUrl?.password ?? env('DATABASE_PASSWORD', 'strapi'),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),
           cert: env('DATABASE_SSL_CERT', undefined),
